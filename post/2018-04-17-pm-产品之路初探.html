@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="产品,PM," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文是记录某位程序猿走向产品之路的一些探索和心得。因为是刚开始接触，仅有一些初步的认知，后续会对产品之路中所见所闻进行持续的补充。  如何成为一只产品狗之前身份还是一只纯种程序猿的时候，产品狗简直一生之敌：不考虑产品设计大环境，产品设计没有逻辑性，不考虑实现难易程度以及时间成本，随意改需求，甚至部分产品🐶做出来的东西用户体验也跟💩一样，当然以上内容是来自敌军猿族的吐槽，各位产品大神请忽略。那">
+<meta name="keywords" content="产品,PM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="产品之路初探">
+<meta property="og:url" content="https://sanchips.github.io/post/2018-04-17-pm-产品之路初探.html">
+<meta property="og:site_name" content="Sanchi">
+<meta property="og:description" content="本文是记录某位程序猿走向产品之路的一些探索和心得。因为是刚开始接触，仅有一些初步的认知，后续会对产品之路中所见所闻进行持续的补充。  如何成为一只产品狗之前身份还是一只纯种程序猿的时候，产品狗简直一生之敌：不考虑产品设计大环境，产品设计没有逻辑性，不考虑实现难易程度以及时间成本，随意改需求，甚至部分产品🐶做出来的东西用户体验也跟💩一样，当然以上内容是来自敌军猿族的吐槽，各位产品大神请忽略。那">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://segmentfault.com/image?src=http://www.9553.com/upload/2015/0909/20150909032616544.gif&objectId=1190000004498884&token=aabc5cdbaaf0d865fdbb81792aa12177">
+<meta property="og:updated_time" content="2019-05-05T11:57:29.480Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="产品之路初探">
+<meta name="twitter:description" content="本文是记录某位程序猿走向产品之路的一些探索和心得。因为是刚开始接触，仅有一些初步的认知，后续会对产品之路中所见所闻进行持续的补充。  如何成为一只产品狗之前身份还是一只纯种程序猿的时候，产品狗简直一生之敌：不考虑产品设计大环境，产品设计没有逻辑性，不考虑实现难易程度以及时间成本，随意改需求，甚至部分产品🐶做出来的东西用户体验也跟💩一样，当然以上内容是来自敌军猿族的吐槽，各位产品大神请忽略。那">
+<meta name="twitter:image" content="https://segmentfault.com/image?src=http://www.9553.com/upload/2015/0909/20150909032616544.gif&objectId=1190000004498884&token=aabc5cdbaaf0d865fdbb81792aa12177">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sanchips.github.io/post/2018-04-17-pm-产品之路初探.html"/>
+
+
+
+
+
+  <title>产品之路初探 | Sanchi</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-119399604-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e1ba02a87e61313527f791faf68d650c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sanchi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">老三的毒圈儿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sanchips.github.io/post/2018-04-17-pm-产品之路初探.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sanchi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sanchi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">产品之路初探</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T22:00:18+08:00">
+                2018-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/产品/" itemprop="url" rel="index">
+                    <span itemprop="name">产品</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文是记录某位程序猿走向产品之路的一些探索和心得。因为是刚开始接触，仅有一些初步的认知，后续会对产品之路中所见所闻进行持续的补充。</p>
+</blockquote>
+<h2 id="如何成为一只产品狗"><a href="#如何成为一只产品狗" class="headerlink" title="如何成为一只产品狗"></a>如何成为一只产品狗</h2><p>之前身份还是一只纯种程序猿的时候，产品狗简直一生之敌：不考虑产品设计大环境，产品设计没有逻辑性，不考虑实现难易程度以及时间成本，随意改需求，甚至部分产品🐶做出来的东西用户体验也跟💩一样，当然以上内容是来自敌军猿族的吐槽，各位产品大神请忽略。那么作为一直猿打入敌军的时候应该具备哪些素质，我们基于以上几条吐槽开始逐条分析。</p>
+<ol>
+<li><p><strong>产品大环境</strong>：作为产品要对整个市场具有敏感性。什么方向可以做，有哪些爆点，当前所负责的产品在整个大环境中处于什么位置，主要竞争力是什么，同时有什么风险。基于这一点可以扩散出很多内容，当然也是一个产品🐶最基本的素养</p>
+</li>
+<li><p><strong>产品逻辑关联性</strong>：所负责设计的产品不应该存在逻辑漏洞以及前后功能存在冲突的地方，这个问题经常出现在有多个产品经理负责同一个产品但没有互相了解对方动机及设计理念的时候。及时有效的部门内沟通方式可避免此问题的出现。但要是只有一个人在负责这个项目，那么在设计完成的时候尽量多做几遍检查，可以避免大部分的漏洞。如果公司的工作流包含需求评审阶段，这步流程也能发现一些隐藏的问题。如果以上都没有做到，并且程序猿在执行的时候没有发现或者提出异议，那么我替他们的老板感到担心… 希望线上不会造成什么损失😓。最后还有一点，在设计一个功能的时候不要为了设计而设计，要考虑到后续功能扩展，能发散扩展到什么程度就看你的本事了。（参考微信，从公众号/订阅号-&gt;小程序-&gt;小游戏，这一套很令人叹服）</p>
+</li>
+<li><p><strong>用户体验</strong>：很多产品都在讲用户体验，其实这一点是很难去主观评判的，很多时候要辅以一定的用户反馈以及数据分析才能得出结论，这些我们下条再讲，这里先对一些主流意义上的用户体验做一个简要的分析。这个按钮放在这个地方好不好点，用户会不会手滑产生一个误操作？我们的主要功能用户在使用的时候是否过程太过繁琐？这些内容感兴趣的话可以自行查阅，很多公开分享的内容。总的来说在做一个产品的时候首先要做到主要功能的易用性，吸引人用你的东西才是正经，不然其他都是白扯。</p>
+</li>
+<li><p><strong>数据汇总分析</strong>：个人觉得这部分的素养决定了一个产品经理的发展，从入门到大神，必然要经历数据的洗炼。上一条也提到了需要通过数据去分析用户体验改良产品，在实际操作过程中，可以通过漏斗模型分析，或者转化、留存等一系列指标进行判断，其他更高级或者更加适用于自家产品的指标需要根据当前产品类别来进行判断选用。总之一句话，自家的产品肯定是自家人最清楚，需要什么指标来分析自己判断就行了。市面上的数据分析sdk千千万，最适合自己的还是自建的分析模组，有这个开发能力的话可以自己来做，没有的话先用三方的凑合下，后续根据发展情况再说。关于三方sdk的选用分析见下文。</p>
+</li>
+<li><p><strong>产品进度把控</strong>：比如改需求，这个是最头疼的一点，产品🐶们乐此不疲，程序猿们深恶痛绝。出现的原因有很多，但归根结底就三条：一是来自领导层的压力，尤其是不懂开发流程乱指挥的部分领导（关于协同开发流程可以参见<a href="./manage-不同驱动型公司协同开发工作流.md">我的上次分享</a>）；二是来源于线上数据的压力，有可能线上的产品出了紧急状况，需要加急进行产品逻辑调整；三是产品经理的素养，很多时候一个逻辑没理清楚就扔出去进入开发流程了，等回过神来发现这个地方要改，发现已经开发一半了。那么这三条内容除了第二条无法避免，第一条可以找领导进行沟通，讲清楚利害关系，看改动能否延后到下个版本。一切理解都建立在良好的沟通基础上嘛，沟通都做不好还做什么产品经理，万一人老板通情达理或者有自己的考虑呢？如果实在是独断专行的老板，连你的建议都不听，那么考虑跳槽吧。第三条内容只能各位在工作过程中逐步地去改善，人总有粗心的时候，仔细检查能够避免的。</p>
+</li>
+</ol>
+<p>以上这些基本素养是我按照自己理解的主次程度进行排序的，各位可以进行简单的参考。除此之外，再来一些内容推荐吧。</p>
+<h2 id="产品经理相关资源推荐"><a href="#产品经理相关资源推荐" class="headerlink" title="产品经理相关资源推荐"></a>产品经理相关资源推荐</h2><h3 id="常见数据收集sdk分析比对"><a href="#常见数据收集sdk分析比对" class="headerlink" title="常见数据收集sdk分析比对"></a>常见数据收集sdk分析比对</h3><p>常用产品分析，排名不分先后，没有最好的，只有最适合自己的，还是那句话，根据自家的情况进行选用就行。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">sdk</th>
+<th>简要分析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://www.umeng.com/" target="_blank" rel="noopener">友盟</a></td>
+<td>老牌数据分析工具，免费，自从跟CNZZ合并之后感觉越来越差，部分页面报错且打开缓慢，不推荐使用</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://tongji.baidu.com/" target="_blank" rel="noopener">百度统计</a></td>
+<td>除一些高级功能如漏斗分析等需要收费使用外，其他基本功能都是免费的，足够使用了。并且如果是在百度进行广告投放等，肯定是他们自家的统计最有优势了</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.growingio.com/" target="_blank" rel="noopener">GorwingIO</a></td>
+<td>数据面板比较好看，用户体验比较好，支持线上圈选事件指标等。基础版本收费6w/年，根据DAU数据阶梯收费，高级版本支持数据导出分析</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.shujike.com/" target="_blank" rel="noopener">数极客</a></td>
+<td>cookie有效期有点短，动不动就要重新登录。支持可视化埋点。基础版本收费4w/年，根据DAU数据阶梯收费。支持数据导出分析</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.talkingdata.com/" target="_blank" rel="noopener">TalkingData</a></td>
+<td>分析功能免费，不过没有ip黑白名单功能，有一些想被排除在外的ip会对数据产生影响，沟通之后说会添加这些功能</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://zhugeio.com/" target="_blank" rel="noopener">诸葛IO</a></td>
+<td>无可视化埋点功能。支持数据导出及在线SQL查询。基础版本8w/年</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.sensorsdata.cn/" target="_blank" rel="noopener">神策数据</a></td>
+<td>没有体验过暂时不做评价</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.analysys.cn/" target="_blank" rel="noopener">易观数据</a></td>
+<td>没有体验过暂时不做评价</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.google.com/analytics/" target="_blank" rel="noopener">Google Analytics</a></td>
+<td>查看报告的时候需要翻出去，该博客使用的就是GA统计，可分析的维度比较广</td>
+</tr>
+</tbody>
+</table>
+<p>其他更多的分析sdk参考<a href="https://www.jianshu.com/p/601e9644a51e" target="_blank" rel="noopener">这篇文章</a>或者自行检索。</p>
+<h3 id="用户体验及设计相关推荐"><a href="#用户体验及设计相关推荐" class="headerlink" title="用户体验及设计相关推荐"></a>用户体验及设计相关推荐</h3><p>作为产品经理，提高自己的审美还是很有必要的。现根据我的收集列举如下，其他自行检索</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">网站</th>
+<th>简要分析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://www.pinterest.com/" target="_blank" rel="noopener">pinterest</a></td>
+<td>最好用的素材收集、设计参考网站，不过被墙，需带梯</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://huaban.com/" target="_blank" rel="noopener">花瓣网</a></td>
+<td>国内最好使的素材收集、设计参考网站</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.uplabs.com/" target="_blank" rel="noopener">uplabs</a></td>
+<td>非常好的一个ui交互设计参考网站</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://shijue.me/" target="_blank" rel="noopener">视觉中国设计师社区</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.uisdc.com/" target="_blank" rel="noopener">优设</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.shejipi.com/" target="_blank" rel="noopener">设计癖</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://arting365.com/" target="_blank" rel="noopener">arting365</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.xiusheji.com/" target="_blank" rel="noopener">秀设计</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.iamue.com/" target="_blank" rel="noopener">IAMUE</a></td>
+<td>UE设计社区</td>
+</tr>
+</tbody>
+</table>
+<h3 id="产品知识储备"><a href="#产品知识储备" class="headerlink" title="产品知识储备"></a>产品知识储备</h3><p>列出一些产品经理相关的社区。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">网站</th>
+<th>简要分析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="http://www.woshipm.com/" target="_blank" rel="noopener">人人都是产品经理</a></td>
+<td>问答分享类，现在是个人都能做产品经理😂</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://36kr.com/" target="_blank" rel="noopener">36氪</a></td>
+<td>资讯类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.geekpark.net/" target="_blank" rel="noopener">极客公园</a></td>
+<td>资讯类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.huxiu.com/" target="_blank" rel="noopener">虎嗅网</a></td>
+<td>资讯类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.zaodula.com/" target="_blank" rel="noopener">互联网早读课</a></td>
+<td>资讯类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.pmcaff.com/" target="_blank" rel="noopener">pmcaff社区</a></td>
+<td>问答分享类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.chanpin100.com/" target="_blank" rel="noopener">产品壹佰</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.yixieshi.com/" target="_blank" rel="noopener">互联网的一些事</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://index.baidu.com/" target="_blank" rel="noopener">百度指数</a></td>
+<td>数据观测类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://index.1688.com/" target="_blank" rel="noopener">阿里指数</a></td>
+<td>数据观测类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://compass.umeng.com/" target="_blank" rel="noopener">友盟全域罗盘</a></td>
+<td>数据观测类</td>
+</tr>
+</tbody>
+</table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>刚成为产品狗一个月，以上是我的初步总结。当然每个人对一件事的认知不同，同一个人对某件事的认知也会随时间进行变化，如有谬误，欢迎指出，希望大家共同沟通进步。<br><img src="https://segmentfault.com/image?src=http://www.9553.com/upload/2015/0909/20150909032616544.gif&amp;objectId=1190000004498884&amp;token=aabc5cdbaaf0d865fdbb81792aa12177" alt="doge"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/产品/" rel="tag"># 产品</a>
+          
+            <a href="/tags/PM/" rel="tag"># PM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/2018-04-11-manage-不同驱动型公司协同开发工作流.html" rel="next" title="不同驱动型公司协同开发工作流">
+                <i class="fa fa-chevron-left"></i> 不同驱动型公司协同开发工作流
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/2018-05-18-manage-浅谈企业管理.html" rel="prev" title="浅谈企业管理">
+                浅谈企业管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDk0Ny8xNzQ3Mg"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="Sanchi" />
+            
+              <p class="site-author-name" itemprop="name">Sanchi</p>
+              <p class="site-description motion-element" itemprop="description">记录一些工作上的历程</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sanchips" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:sanchi.zhang@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://segmentfault.com/u/sanchi" target="_blank" title="Segmentfault">
+                      
+                        <i class="fa fa-fw fa-user"></i>Segmentfault</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何成为一只产品狗"><span class="nav-number">1.</span> <span class="nav-text">如何成为一只产品狗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#产品经理相关资源推荐"><span class="nav-number">2.</span> <span class="nav-text">产品经理相关资源推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见数据收集sdk分析比对"><span class="nav-number">2.1.</span> <span class="nav-text">常见数据收集sdk分析比对</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户体验及设计相关推荐"><span class="nav-number">2.2.</span> <span class="nav-text">用户体验及设计相关推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#产品知识储备"><span class="nav-number">2.3.</span> <span class="nav-text">产品知识储备</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sanchi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ffmpeg," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="调整视频的尺寸和缩放（ Resizing and Scaling Video ）调整视频尺寸（resize）在FFmpeg中表示调整它的宽高，缩放（scale）表示使用缩放滤镜调整帧的尺寸。这些操作提供了高级特性。  我们使用-s命令去调整输出视频的宽高，分辨率使用wxh的输入格式，例如想要调整初始分辨率为320*240，可以使用命令：ffmpeg -i input_file -s 320x240">
+<meta name="keywords" content="ffmpeg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[3][使用] FFmpeg调整文件尺寸">
+<meta property="og:url" content="https://sanchips.github.io/post/2018-03-27-ffmpeg-3-使用-FFmpeg调整文件尺寸.html">
+<meta property="og:site_name" content="Sanchi">
+<meta property="og:description" content="调整视频的尺寸和缩放（ Resizing and Scaling Video ）调整视频尺寸（resize）在FFmpeg中表示调整它的宽高，缩放（scale）表示使用缩放滤镜调整帧的尺寸。这些操作提供了高级特性。  我们使用-s命令去调整输出视频的宽高，分辨率使用wxh的输入格式，例如想要调整初始分辨率为320*240，可以使用命令：ffmpeg -i input_file -s 320x240">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://sanchips.github.io/assets/ffmpeg/ff_3_1.png">
+<meta property="og:image" content="https://sanchips.github.io/assets/ffmpeg/ff_3_2.png">
+<meta property="og:image" content="https://sanchips.github.io/assets/ffmpeg/ff_3_3.png">
+<meta property="og:updated_time" content="2019-05-05T11:57:29.474Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[3][使用] FFmpeg调整文件尺寸">
+<meta name="twitter:description" content="调整视频的尺寸和缩放（ Resizing and Scaling Video ）调整视频尺寸（resize）在FFmpeg中表示调整它的宽高，缩放（scale）表示使用缩放滤镜调整帧的尺寸。这些操作提供了高级特性。  我们使用-s命令去调整输出视频的宽高，分辨率使用wxh的输入格式，例如想要调整初始分辨率为320*240，可以使用命令：ffmpeg -i input_file -s 320x240">
+<meta name="twitter:image" content="https://sanchips.github.io/assets/ffmpeg/ff_3_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sanchips.github.io/post/2018-03-27-ffmpeg-3-使用-FFmpeg调整文件尺寸.html"/>
+
+
+
+
+
+  <title>[3][使用] FFmpeg调整文件尺寸 | Sanchi</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-119399604-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e1ba02a87e61313527f791faf68d650c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sanchi</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">老三的毒圈儿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sanchips.github.io/post/2018-03-27-ffmpeg-3-使用-FFmpeg调整文件尺寸.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sanchi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sanchi">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[3][使用] FFmpeg调整文件尺寸</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T20:02:18+08:00">
+                2018-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ffmpeg/" itemprop="url" rel="index">
+                    <span itemprop="name">ffmpeg</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="调整视频的尺寸和缩放（-Resizing-and-Scaling-Video-）"><a href="#调整视频的尺寸和缩放（-Resizing-and-Scaling-Video-）" class="headerlink" title="调整视频的尺寸和缩放（ Resizing and Scaling Video ）"></a>调整视频的尺寸和缩放（ Resizing and Scaling Video ）</h2><p>调整视频尺寸（resize）在FFmpeg中表示调整它的宽高，缩放（scale）表示使用缩放滤镜调整帧的尺寸。这些操作提供了高级特性。</p>
+<ul>
+<li><p>我们使用<code>-s</code>命令去调整输出视频的宽高，分辨率使用<strong><code>w</code>x<code>h</code></strong>的输入格式，例如想要调整初始分辨率为320*240，可以使用命令：<code>ffmpeg -i input_file -s 320x240 output_file</code>。</p>
+</li>
+<li><p>预定义的帧尺寸<br>  FFmpeg提供了一些预定义的尺寸，来避免每次都需要输入确切的尺寸值。<br>  <img src="../assets/ffmpeg/ff_3_1.png" alt="视频尺寸"><br>  按照这些预定义参数，如下两条命令就是等效的：<code>ffmpeg -i input.avi -s 640x480 output.avi</code>和<code>ffmpeg -i input.avi -s vga output.avi</code>。</p>
+</li>
+<li><p>尺寸调节时需要考虑的问题：<strong>奈奎斯特采样定理</strong>（Nyquist sampling theorem）<br>  视频通常调整为比源文件更小的尺寸，方便移动设备和网络传输等使用。我们需要着重考虑的一点就是：小尺寸通常会丢失一些细节，这就是采样定理。为了不失真地恢复模拟信号，采样频率应该不小于模拟信号频谱中最高频率的2倍。这表示为了保持降阶视频的细节，它的源文件大小必须比缩放比例除以2更高。（这段网上找的定理翻译，英文太专业，看得不是太懂）<br>  那么举个栗子，我们有一个800x600 (SVGA)分辨率的视频，它有一个2px宽的细节，当转换成640x480(VGA)分辨率时，缩放比率是0.8，这个2px的细节再次被转换成2px，计算过程如下：<code>640 pixels / 800 pixels = 0.8，2 pixels * 0.8 = 1.6 ≈ 2 pixels</code>。但是当这个视频转换成160x120 (QQVGA)分辨率时，这个2px的细节就丢失了：<code>160 pixels / 800 pixels = 0.2，2 pixels * 0.2 = 0.4 ≈ 0 pixels</code>。这意味着降阶之后与源文件有着至少3px的可见差。</p>
+</li>
+</ul>
+<h2 id="一些尺寸调整的滤镜"><a href="#一些尺寸调整的滤镜" class="headerlink" title="一些尺寸调整的滤镜"></a>一些尺寸调整的滤镜</h2><ul>
+<li>特别的放大滤镜（super2xsai）<br>  将视频帧尺寸调大的需求相对较少，因为这个函数支持几乎所有的媒体播放器，但是返回的帧图像有时候不清晰，尤其是当源文件的分辨率非常小的时候。这个能平滑放大源文件的特殊滤镜就是：<code>super2xsai</code>滤镜。<br>  <img src="../assets/ffmpeg/ff_3_2.png" alt="super2xsai"><br>  例如，要将一个128x96的视频放大为256x192像素分辨率，可以使用如下命令：<code>ffmpeg -i phone_video.3gp -vf super2xsai output.mp4</code></li>
+<li>缩放的特性<br>  当使用<code>-s</code>命令用来调整视频帧尺寸时，实际上一个<code>scale</code>滤镜被插入到相关的滤镜视图之后。为了位置管理，当一个缩放进程开始的时候，<code>scale</code>滤镜能被直接使用。<br>  <img src="../assets/ffmpeg/ff_3_3.png" alt="scale"><br>  直接使用缩放滤镜的优势是能够使用上表中的额外描述参数。 如下的两条命令就是等效的：<code>ffmpeg -i input.mpg -s 320x240 output.mp4</code>和<code>ffmpeg -i input.mpg -vf scale=320:240 output.mp4</code></li>
+<li><p>等比缩放视频<br>  不必知道输入文件帧的大小，我们能通过<code>scale</code>滤镜的<code>iw</code>和<code>ih</code>参数来直接等比缩放输入视频。 例如以下几条缩放指令：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mpg -vf scale=iw/2:ih/2 output.mp4    //等比缩放1/2</span><br><span class="line">ffmpeg -i input.mpg -vf scale=iw*0.9:ih*0.9 output.mp4    //等比缩放90%</span><br><span class="line">ffmpeg -i input.mpg -vf scale=iw/PHI:ih/PHI output.mp4    //以黄金比例缩放：PHI=1.61803398874989484820...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>缩放成预定义的宽或高<br>  当输出视频需要确定的宽或高，且输入视频的尺寸和比例未知的时候，第二个参数能够通过<code>aspect</code>参数指定。 例如，如下指令指定输出宽度为400px，高度等比缩放：<code>ffmpeg -i input.mpg -vf scale=400:400/a</code>；如下指令指定输出高度为300px，宽度等比缩放：<code>ffmpeg -i input.mpg -vf scale=300/a:300 output.mp4</code>。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ffmpeg/" rel="tag"># ffmpeg</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/2018-03-27-ffmpeg-2-概念-帧率比特率文件大小.html" rel="next" title="[2][概念] FFmpeg比特率帧率文件大小">
+                <i class="fa fa-chevron-left"></i> [2][概念] FFmpeg比特率帧率文件大小
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/2018-03-27-ffmpeg-4-使用-FFmpeg视频裁剪.html" rel="prev" title="[4][使用] FFmpeg视频裁剪">
+                [4][使用] FFmpeg视频裁剪 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDk0Ny8xNzQ3Mg"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="Sanchi" />
+            
+              <p class="site-author-name" itemprop="name">Sanchi</p>
+              <p class="site-description motion-element" itemprop="description">记录一些工作上的历程</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sanchips" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:sanchi.zhang@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://segmentfault.com/u/sanchi" target="_blank" title="Segmentfault">
+                      
+                        <i class="fa fa-fw fa-user"></i>Segmentfault</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#调整视频的尺寸和缩放（-Resizing-and-Scaling-Video-）"><span class="nav-number">1.</span> <span class="nav-text">调整视频的尺寸和缩放（ Resizing and Scaling Video ）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些尺寸调整的滤镜"><span class="nav-number">2.</span> <span class="nav-text">一些尺寸调整的滤镜</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sanchi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
