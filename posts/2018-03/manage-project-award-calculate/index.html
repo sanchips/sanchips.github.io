@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">一个项目奖金计算方案 - Sanchi</title><meta name="Description" content="记录一些工作上的历程"><meta property="og:title" content="一个项目奖金计算方案" />
+<meta property="og:description" content="在部门内构思了一个项目奖金分配方案，实行记录如下。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sanchips.github.io/posts/2018-03/manage-project-award-calculate/" /><meta property="og:image" content="https://sanchips.github.io/logo.svg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-03-19T00:00:00+08:00" />
+<meta property="article:modified_time" content="2018-03-19T00:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sanchips.github.io/logo.svg"/>
+
+<meta name="twitter:title" content="一个项目奖金计算方案"/>
+<meta name="twitter:description" content="在部门内构思了一个项目奖金分配方案，实行记录如下。"/>
+<meta name="application-name" content="Sanchi">
+<meta name="apple-mobile-web-app-title" content="Sanchi">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://sanchips.github.io/posts/2018-03/manage-project-award-calculate/" /><link rel="prev" href="https://sanchips.github.io/posts/2018-03/manage-thinking-of-parallel-develop/" /><link rel="next" href="https://sanchips.github.io/posts/2018-03/jekyll-hello-world/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "一个项目奖金计算方案",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sanchips.github.io\/posts\/2018-03\/manage-project-award-calculate\/"
+        },"genre": "posts","keywords": "管理","wordcount":  380 ,
+        "url": "https:\/\/sanchips.github.io\/posts\/2018-03\/manage-project-award-calculate\/","datePublished": "2018-03-19T00:00:00+08:00","dateModified": "2018-03-19T00:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Sanchi","logo": "https:\/\/sanchips.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Sanchi"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fas fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/posts/"><i class='fas fa-archive fa-fw'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fas fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fas fa-th-list fa-fw'></i> 分类 </a><a class="menu-item" href="/tools/"><i class='fas fa-globe fa-fw'></i> 工具 </a><a class="menu-item" href="/about/"><i class='fas fa-user-secret fa-fw'></i> 关于 </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/" title=""><i class='fas fa-home fa-fw'></i>首页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-archive fa-fw'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fas fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fas fa-th-list fa-fw'></i>分类</a><a class="menu-item" href="/tools/" title=""><i class='fas fa-globe fa-fw'></i>工具</a><a class="menu-item" href="/about/" title=""><i class='fas fa-user-secret fa-fw'></i>关于</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">一个项目奖金计算方案</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sanchi</a>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/%E7%AE%A1%E7%90%86/"><i class="far fa-folder fa-fw"></i>管理</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-03-19">2018-03-19</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2018-03-19">2018-03-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 380 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#参数说明">参数说明</a></li>
+    <li><a href="#计算说明">计算说明</a></li>
+    <li><a href="#计算公式">计算公式</a></li>
+    <li><a href="#计算内容">计算内容</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>在部门内构思了一个项目奖金分配方案，实行记录如下。</p>
+<h2 id="参数说明">参数说明</h2>
+<ol>
+<li>总额w，个人所得Wp</li>
+<li>权重：
+<ol>
+<li>分组系数f：当前所有分组的权重系数，如当前有三个分组业务组，构建组和共通组</li>
+<li>项目系数x：对当前并行开发项目进行难度及人数分组系数，以每位成员负责的项目数目为准</li>
+<li>开发系数k：针对与开发组开发人员，对代码质量及完成程度进行评估，对所有成员进行横向比对</li>
+<li>管理系数g：对所有管理人员管理效果的系数</li>
+<li>减/增益系数b：适用于特殊性情况，对以上系数减/增益效果，减益必须对应等值增益，以达到平衡</li>
+</ol>
+</li>
+</ol>
+<h2 id="计算说明">计算说明</h2>
+<ol>
+<li>管理奖金为总金额的20%，所有管理成员根据管理系数g共享管理奖金</li>
+<li>开发奖金针对所有人，管理奖金可与开发奖金叠加</li>
+<li>如重大失误引起损失，减益效果最大可移除以上所有系数效果并对应产生增益效果，可进行叠加</li>
+</ol>
+<h2 id="计算公式">计算公式</h2>
+<p><code>Wp = w*(1-0.2)*f1/(f1+f2+f3)[*x1/(x1+x2+x3+x4)]*k1/(k1+k2+..+k16)[ + w*(1-0.2)*g1/(g1+g2+..+g7) ][ ± b ]</code></p>
+<h2 id="计算内容">计算内容</h2>
+<p><a href="/files/award_android.xlsx" rel="">将部门奖金评选情况汇总成excel</a>，具体奖金信息见日期命名sheet。</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2018-03-19</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AE%A1%E7%90%86/">管理</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2018-03/manage-thinking-of-parallel-develop/" class="prev" rel="prev" title="关于技术部门并行开发的几点思考"><i class="fas fa-angle-left fa-fw"></i>关于技术部门并行开发的几点思考</a>
+            <a href="/posts/2018-03/jekyll-hello-world/" class="next" rel="next" title="Jekyll Hello world!">Jekyll Hello world!<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sanchi</a></span>&nbsp;|&nbsp;<span class="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/css/custom.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-119399604-2', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-119399604-2" async></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["sanchips"],"clientID":"2ede82b0a7198c45ce3e","clientSecret":"52dffb46d64ec3b2d5a6e6586b759ac9a70965c2","id":"2018-03-19T00:00:00+08:00","owner":"sanchips","repo":"sanchips.github.io","title":"一个项目奖金计算方案"}}};</script><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"></div>
+</body>
+
+</html>

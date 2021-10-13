@@ -1,0 +1,83 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>所有文章 - Sanchi</title>
+        <link>https://sanchips.github.io/posts/</link>
+        <description>所有文章 | Sanchi</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sanchi.zhang@gmail.com (Sanchi)</managingEditor>
+            <webMaster>sanchi.zhang@gmail.com (Sanchi)</webMaster><lastBuildDate>Tue, 12 Oct 2021 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://sanchips.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Hugo hello world!</title>
+    <link>https://sanchips.github.io/posts/2021-10/hugo-hello-world/</link>
+    <pubDate>Tue, 12 Oct 2021 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2021-10/hugo-hello-world/</guid>
+    <description><![CDATA[<p>Hello world!</p>]]></description>
+</item><item>
+    <title>有效的会议</title>
+    <link>https://sanchips.github.io/posts/2019-05/manage-effective-meeting/</link>
+    <pubDate>Sat, 11 May 2019 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2019-05/manage-effective-meeting/</guid>
+    <description><![CDATA[<p>之所以有这篇文章，是因为有段时间开了一堆拖沓无用的会议：目标不明确，讨论无意义，未得出有效结论，占用了大量时间。对这种会议方式深恶痛绝，正好看到<a href="https://36kr.com/p/5137083.html" target="_blank" rel="noopener noreffer">这篇文章</a>，于是思考了一下如何改进现有的会议进程。从流程上避免冗余，拖沓，推诿的会议。</p>]]></description>
+</item><item>
+    <title>SpringMVC&#43;Swagger配置使用踩坑</title>
+    <link>https://sanchips.github.io/posts/2018-07/backend-springmvc-swagger-setting/</link>
+    <pubDate>Fri, 20 Jul 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-07/backend-springmvc-swagger-setting/</guid>
+    <description><![CDATA[背景 接口写完之后手写接口文档太痛苦了，于是搜索一番自动生成api文档的工具，最后get到了神器Swagger和它的图形化工具Swagger-]]></description>
+</item><item>
+    <title>一些后端问题解决方案整理</title>
+    <link>https://sanchips.github.io/posts/2018-07/backend-solution-collection/</link>
+    <pubDate>Fri, 20 Jul 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-07/backend-solution-collection/</guid>
+    <description><![CDATA[<p>一些后端问题解决方案整理。</p>]]></description>
+</item><item>
+    <title>hexo资源引用</title>
+    <link>https://sanchips.github.io/posts/2018-07/hexo-resource-reference/</link>
+    <pubDate>Thu, 19 Jul 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-07/hexo-resource-reference/</guid>
+    <description><![CDATA[<p>四个月前用Jekyll搭建了第一版的GitHub Pages博客，后来也没怎么上传过博客了，最近稍微闲下来打算补充几篇近期踩坑的文章。</p>]]></description>
+</item><item>
+    <title>一些前端问题解决方案整理</title>
+    <link>https://sanchips.github.io/posts/2018-06/front-solution-collection/</link>
+    <pubDate>Sat, 16 Jun 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-06/front-solution-collection/</guid>
+    <description><![CDATA[<p>一些前端问题解决方案整理。</p>]]></description>
+</item><item>
+    <title>浅谈企业管理</title>
+    <link>https://sanchips.github.io/posts/2018-05/manage-company-simple-talk/</link>
+    <pubDate>Fri, 18 May 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-05/manage-company-simple-talk/</guid>
+    <description><![CDATA[<blockquote>
+<p>五月中旬的时候boss抛给我一个问题：<code>给你安排家庭作业，认真阅读调查内容，然后总结分析，谈你个人的观念，假如你是他们的领导者，针对各自的思维方式及个性，你如何去施展管理？能让这批成员在快乐中去奋斗，创造价值实现梦想？</code></p>
+</blockquote>]]></description>
+</item><item>
+    <title>产品之路初探</title>
+    <link>https://sanchips.github.io/posts/2018-04/pm-find-the-way-of-pm/</link>
+    <pubDate>Tue, 17 Apr 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-04/pm-find-the-way-of-pm/</guid>
+    <description><![CDATA[<blockquote>
+<p>本文是记录某位程序猿走向产品之路的一些探索和心得。因为是刚开始接触，仅有一些初步的认知，后续会对产品之路中所见所闻进行持续的补充。</p>
+</blockquote>]]></description>
+</item><item>
+    <title>不同驱动型公司协同开发工作流</title>
+    <link>https://sanchips.github.io/posts/2018-04/manage-different-company-work-flow/</link>
+    <pubDate>Wed, 11 Apr 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-04/manage-different-company-work-flow/</guid>
+    <description><![CDATA[<h2 id="公司开发驱动类型">公司开发驱动类型</h2>
+<p>️⚠️<strong>注意</strong>：在每一个公司都赴互联网化的道路上，首先要明确自己属于哪一种<strong>驱动模式</strong>。现列出以下几类，后续可作补充。</p>]]></description>
+</item><item>
+    <title>Jekyll Hello world!</title>
+    <link>https://sanchips.github.io/posts/2018-03/jekyll-hello-world/</link>
+    <pubDate>Mon, 19 Mar 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-03/jekyll-hello-world/</guid>
+    <description><![CDATA[<p>Hello world!</p>]]></description>
+</item></channel>
+</rss>

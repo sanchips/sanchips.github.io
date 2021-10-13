@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">一些后端问题解决方案整理 - Sanchi</title><meta name="Description" content="记录一些工作上的历程"><meta property="og:title" content="一些后端问题解决方案整理" />
+<meta property="og:description" content="一些后端问题解决方案整理。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sanchips.github.io/posts/2018-07/backend-solution-collection/" /><meta property="og:image" content="https://sanchips.github.io/logo.svg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-07-20T00:00:00+08:00" />
+<meta property="article:modified_time" content="2018-07-20T00:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sanchips.github.io/logo.svg"/>
+
+<meta name="twitter:title" content="一些后端问题解决方案整理"/>
+<meta name="twitter:description" content="一些后端问题解决方案整理。"/>
+<meta name="application-name" content="Sanchi">
+<meta name="apple-mobile-web-app-title" content="Sanchi">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://sanchips.github.io/posts/2018-07/backend-solution-collection/" /><link rel="prev" href="https://sanchips.github.io/posts/2018-07/hexo-resource-reference/" /><link rel="next" href="https://sanchips.github.io/posts/2018-07/backend-springmvc-swagger-setting/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "一些后端问题解决方案整理",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sanchips.github.io\/posts\/2018-07\/backend-solution-collection\/"
+        },"genre": "posts","keywords": "后端","wordcount":  12692 ,
+        "url": "https:\/\/sanchips.github.io\/posts\/2018-07\/backend-solution-collection\/","datePublished": "2018-07-20T00:00:00+08:00","dateModified": "2018-07-20T00:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Sanchi","logo": "https:\/\/sanchips.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Sanchi"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fas fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/posts/"><i class='fas fa-archive fa-fw'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fas fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fas fa-th-list fa-fw'></i> 分类 </a><a class="menu-item" href="/tools/"><i class='fas fa-globe fa-fw'></i> 工具 </a><a class="menu-item" href="/about/"><i class='fas fa-user-secret fa-fw'></i> 关于 </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/" title=""><i class='fas fa-home fa-fw'></i>首页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-archive fa-fw'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fas fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fas fa-th-list fa-fw'></i>分类</a><a class="menu-item" href="/tools/" title=""><i class='fas fa-globe fa-fw'></i>工具</a><a class="menu-item" href="/about/" title=""><i class='fas fa-user-secret fa-fw'></i>关于</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">一些后端问题解决方案整理</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sanchi</a>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/%E5%90%8E%E7%AB%AF/"><i class="far fa-folder fa-fw"></i>后端</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-07-20">2018-07-20</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2018-07-20">2018-07-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 12692 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 26 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>一些后端问题解决方案整理。</p>
+<ol>
+<li>
+<p><a href="https://www.cnblogs.com/pikaqiucode/p/8277313.html" target="_blank" rel="noopener noreffer">Cannot create JDBC driver of class '' for connect URL &lsquo;null&rsquo;</a>，从文章中得到启示，是tomcat没有配置数据库驱动信息，在<code>{tomcat_home}/conf/context.xml</code>中加入配置信息，如oracle配置信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;Resource</span>
+    <span class="na">name=</span><span class="s">&#34;jdbc/sanchi&#34;</span>
+    <span class="na">auth=</span><span class="s">&#34;Container&#34;</span>
+    <span class="na">type=</span><span class="s">&#34;javax.sql.DataSource&#34;</span>
+    <span class="na">driverClassName=</span><span class="s">&#34;oracle.jdbc.OracleDriver&#34;</span>
+    <span class="na">url=</span><span class="s">&#34;jdbc:oracle:thin:@ip.ip.ip.ip:port/orcl1&#34;</span>
+    <span class="na">username=</span><span class="s">&#34;username&#34;</span>
+    <span class="na">password=</span><span class="s">&#34;password&#34;</span>
+    <span class="na">maxActive=</span><span class="s">&#34;20&#34;</span>
+    <span class="na">maxIdle=</span><span class="s">&#34;10&#34;</span>
+    <span class="na">maxWait=</span><span class="s">&#34;10000&#34;</span> <span class="nt">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><a href="https://www.cnblogs.com/samwang88/p/072507ef1cd2c89d18ece5f39b06e28c.html" target="_blank" rel="noopener noreffer">Cannot load JDBC driver class &lsquo;oracle.jdbc.driver.OracleDriver&rsquo;</a>，从链接中文章得到启示，是缺失了oracle的驱动文件，网上找了半天，最后从<a href="http://www.java2s.com/Code/Jar/o/Downloadojdbc6jar.htm" target="_blank" rel="noopener noreffer">这个地方</a>下载到了驱动文件，放到<code>{tomcat_home}/lib</code>文件夹下，再次启动tomcat，运行正常。</p>
+</li>
+<li>
+<p>intellij idea运行项目正常，但是debug运行的时候卡在卡面这个地方：<code>[ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Library/Tomcat/webapps/manager]</code>。<a href="https://www.cnblogs.com/mycifeng/p/6972446.html" target="_blank" rel="noopener noreffer">一个解决方案</a>，<a href="https://serverfault.com/questions/658502/tomcat-8-hangs-on-startup-while-deploying-webapp-possibly-related-to-entropy-ge" target="_blank" rel="noopener noreffer">另一个说的解决方案</a>。但是神奇的是根据以上两篇文章进行修改之后并没有正常，过一会之后自动变正常了，总的来说问题未解决，困惑。</p>
+</li>
+<li>
+<p>很奇怪后端tomcat记录的访问者ip一直是<code>127.0.0.1</code>，无法获取到访问者的真实ip，查了一番是nginx反向代理导致，<a href="https://blog.csdn.net/shuimuz_j/article/details/10164311" target="_blank" rel="noopener noreffer">Tomcat Access Log记录X-Forwarded-For</a>，<a href="https://juejin.im/post/5b2cf79af265da596019661e" target="_blank" rel="noopener noreffer">使用Nginx后web服务器如何获得真实的用户IP</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;Valve
+    className=&#34;org.apache.catalina.valves.AccessLogValve&#34; directory=&#34;logs&#34;
+    prefix=&#34;localhost_access_log.&#34; suffix=&#34;.txt&#34;
+    pattern=&#34;%{X-Forwarded-For}i %h %l %u %t &#34;%r&#34; %s %b&#34; /&gt;
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">...</span>
+    <span class="s">location</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="kn">...</span>
+        <span class="s">proxy_set_header</span>    <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+        <span class="kn">proxy_set_header</span>    <span class="s">X-real-ip</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+        <span class="kn">proxy_set_header</span>    <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Oracle varchar2格式存储不了超过设定值的字符串长度了，想把字段修改为更大的clob，但是发现报错无法修改：<code>[99999][22858] ORA-22858: 数据类型的变更无效. and 1 duplicate reports</code>，经查询找到<a href="https://blog.csdn.net/idomyway/article/details/78044190" target="_blank" rel="noopener noreffer">这篇文章</a>，将<code>RP_TM_SHARE</code>表中<code>TM_ID_LIST</code>字段修改为clob格式，<code>Column_B</code>为中转字段。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">RP_TM_SHARE</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="n">Column_B</span><span class="w"> </span><span class="k">clob</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">update</span><span class="w"> </span><span class="n">RP_TM_SHARE</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">Column_B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TM_ID_LIST</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">RP_TM_SHARE</span><span class="w"> </span><span class="k">drop</span><span class="w"> </span><span class="k">column</span><span class="w"> </span><span class="n">TM_ID_LIST</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">RP_TM_SHARE</span><span class="w"> </span><span class="k">rename</span><span class="w"> </span><span class="k">column</span><span class="w"> </span><span class="n">Column_B</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">TM_ID_LIST</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><a href="http://httpbin.org/" target="_blank" rel="noopener noreffer">调试http协议应用的api接口</a>：<code>http://httpbin.org/</code></p>
+</li>
+<li>
+<p>获取客户端的真实ip，<a href="https://blog.csdn.net/wjrong_1/article/details/65223117" target="_blank" rel="noopener noreffer">参考文章</a>。但是在微信内置浏览器及其他tbsx5内核的浏览器上面用如上的后端方案总是无法获取，这部分浏览器貌似走了很多个代理导致每次获取到的真实ip都在变化。最后决定使用<a href="https://github.com/gnipbao/iblog/issues/18" target="_blank" rel="noopener noreffer">前端方案</a>，通过前端请求三方接口获取到该客户端的真实ip，再传到后端。如上方式使用了一段时间之后收到反馈：使用这个链接的页面在部分微信浏览器内核、qq浏览器、360浏览器、锤子浏览器等上面打不开，多方排查发现并不是打不开，而是打开时间很长，需要将近20s。之后怀疑是这个https请求走到国外的服务器，再回来的耗时导致。用pc浏览器调试发现打开正常的页面请求数据：<code>DNS Lookup:195.20ms; Initial connection:640.96ms; SSL:430.95ms; TTFB:327.07ms;</code>，且每次请求都在变动状态，耗时不稳定，猜测得到证实。只有部分手机不行的话，怀疑是不同手机内置webview对ssl的连接处理不同，导致耗时不同。最后替换为淘宝的真实ip获取链接：<code>https://www.taobao.com/help/getip.php</code>，问题机型上的页面恢复到可用状态</p>
+</li>
+<li>
+<p>tomcat在自动运行一段时间后（一般为十几个小时）会莫名其妙地自己关闭掉，经查询，发现<a href="https://my.oschina.net/xionghui/blog/498785" target="_blank" rel="noopener noreffer">hs_err_pid.log日志</a>，分析如下。更多的tomcat配置调优方案参考[tomcat配置调优](./[tomcat] tomcat配置调优.md)。最后使用jvisualvm监控之后发现是cmd中mybatis巨量打印字符串引起，在正式服关闭mybatis打印之后恢复正常，gc可正常回收内存。</p>
+<ol>
+<li><a href="https://blog.csdn.net/woshi74/article/details/37905879" target="_blank" rel="noopener noreffer">启用tomcat Apr模式以提高服务器性能</a></li>
+<li><a href="https://juejin.im/post/5a3b92def265da4319567218" target="_blank" rel="noopener noreffer">使用jvisualvm监控Java程序（本地和远程）</a></li>
+</ol>
+</li>
+<li>
+<p><a href="https://www.jianshu.com/p/d79bf8174196" target="_blank" rel="noopener noreffer">SpringMVC及前端页面对websocket的配置使用</a></p>
+</li>
+<li>
+<p>Spring升级，从4.x升级5.x问题</p>
+<ol>
+<li>
+<p>JSONP请求支持被彻底弃用，完全使用CORS进行跨域请求。因此项目中继承自<code>AbstractJsonpResponseBodyAdvice</code>的<code>@ControllerAdvice</code>注解文件需要被删除，新增如下CORS配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!-- 从Spring4.2开始支持CORS跨域访问；从Spring Framework 4.3.18开始，JSONP的支持被废弃了，而JSONP设计的主要目的是为了跨域访问，但是带来了不安全性 --&gt;</span>
+<span class="c">&lt;!-- 从Spring Framework 5.1开始，删除JSONP支持，全部转而使用CORS，因此无法使用AbstractJsonpResponseBodyAdvice --&gt;</span>
+<span class="c">&lt;!-- 跨域请求配置，[官方文档](http://spring.io/blog/2015/06/08/cors-support-in-spring-framework) --&gt;</span>
+<span class="nt">&lt;mvc:cors&gt;</span>
+    <span class="c">&lt;!-- 所有带`/cross/**`的请求都支持跨域访问，更多的配置参数参考官方文档 --&gt;</span>
+    <span class="nt">&lt;mvc:mapping</span> <span class="na">path=</span><span class="s">&#34;/cross/**&#34;</span> <span class="na">allowed-origins=</span><span class="s">&#34;&#34;</span> <span class="na">max-age=</span><span class="s">&#34;2500&#34;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/mvc:cors&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>AnnotationMethodHandlerAdapter</code>在4.x中被Deprecated，在5.x中被彻底弃用了，转而使用<code>RequestMappingHandlerAdapter</code>进行代替</p>
+</li>
+<li>
+<p>其他一些Annotation的报错（<code>org.apache.catalina.core.StandardContext.startInternal Context [] startup failed due to previous errors</code>）</p>
+<ol>
+<li>将<code>jackson-databind</code>升级到<code>2.9.5</code>（<code>jackson-databind</code>中包含<code>jackson-annotations</code>和<code>jackson-core</code>，因此无需再次引入），<del>并将spring版本升级到<code>5.1.1.RELEASE</code>之后就正常了，暂时推测为5.x中需要使用高版本的jackson，且jackson版本互相冲突引发该问题。</del></li>
+<li>一开始按照如上<del>划掉</del>的内容进行修改的时候正常了，后来在另一个项目中进行修改时，依然出现该报错，没有详细的报错信息，于是根据<a href="https://www.cnblogs.com/sxdcgaq8080/p/8005886.html" target="_blank" rel="noopener noreffer">这篇文章</a>中的信息在<code>resources</code>中添加日志打印控制，打印出了详细的报错信息：<code>Exception sending context initialized event to listener instance of class [org.springframework.web.context.ContextLoaderListener] java.lang.NoSuchMethodError: org.slf4j.spi.LocationAwareLogger.log(Lorg/slf4j/Marker;Ljava/lang/String;ILjava/lang/String;[Ljava/lang/Object;Ljava/lang/Throwable;)V</code>，初步排除应该是<a href="https://stackoverflow.com/questions/41846287/nosuchmethoderror-org-slf4j-spi-locationawarelogger" target="_blank" rel="noopener noreffer">库重复引用</a>的问题，根据<a href="https://blog.csdn.net/lkforce/article/details/62429998" target="_blank" rel="noopener noreffer">这篇文章</a>打印maven依赖树再搜索<code>org.slf4j.spi</code>，可以看到是一些库中重复引用了低版本的slf4j造成的，将slf4j的高版本依赖引用前置即可</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>服务器使用同一个tomcat容器启动两个项目，长时间运行时导致jvm内存不足而崩溃，因此配置了多tomcat容器，启动后一切正常，但是发现一个生成验证码图片的接口无法使用，报错信息为<code>javax.imageio.IIOException: Can't create output stream!</code>，经过一番<a href="https://stackoverflow.com/questions/21043313/imageio-write-method-javax-imageio-iioexception-cant-create-output-stream" target="_blank" rel="noopener noreffer">面对StackOverflow编程</a>之后发现原来是配置tomcat的时候手贱把根目录下的<code>temp</code>文件夹给删了，这个文件夹是用于存放临时文件的，但是系统不能自动生成，所以报错，奇葩的bug😂</p>
+</li>
+<li>
+<p>Spring项目中修改为统一使用jackson进行json解析，去除了重复引用的gson和json-lib库，同时手贱删除了mybatis mapper xml中的一个<code>requestMap</code>，这时候之后有一个接口报错：<code>Could not write content: Direct self-reference leading to cycle (through reference chain: java.util.HashMap[&quot;data&quot;]-&gt;java.util.HashMap[&quot;sameTradeMarkList&quot;]-&gt;java.util.ArrayList[0]-&gt;java.util.HashMap[&quot;same_type&quot;]-&gt;oracle.sql.CLOB[&quot;dbaccess&quot;]-&gt;oracle.jdbc.driver.T4CConnection[&quot;wrapper&quot;])</code>，一开始没明白这个报错是什么意思，查了<a href="https://stackoverflow.com/questions/48371763/direct-self-reference-leading-to-cycle-through-reference-chain-java-util-array" target="_blank" rel="noopener noreffer">一些资料</a>，再仔细看报错信息并debug，发现是接口返回的<code>same_type</code>字段是<code>clob</code>格式，jackson不支持解析返回该类型，于是报错，根据提示信息进行修改即可。但是如何修改着实费了一番功夫，尝试方案如下：</p>
+<ol>
+<li>方案一：<a href="http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html" target="_blank" rel="noopener noreffer">mybatis的resultMap使用bean对象代替map</a>，这样的好处是返回的数据是结构清晰，且易管理的，并且可进行<a href="https://blog.csdn.net/wuskzuo/article/details/79186144" target="_blank" rel="noopener noreffer">级联查询</a>，在bean对象中对clob类型数据进行代码转换<code>clob.getSubString(1, (int) clob.length());</code>（但是项目中全是map返回，修改为bean的成本太大了）</li>
+<li>方案二：沿用方案一，直接使用resultMap配置javaType和jdbcType，指定转换为java数据的格式，无需在bean对象中进行处理（遇到一个奇怪的问题，在resultMap中指定转换格式之后，前端这个字段莫名其妙就不返回了，查了好久，才发现<strong>resultMap中column的字段名称要和select语句中的查询字段大小写完全一致！！！</strong> 修改之后恢复正常，这是个大坑千万要注意。最后使用该方案）</li>
+<li>方案三：不在mapper xml中进行配置，而是在mybatis全局配置文件中指定<code>ObjectMapper</code>，将返回数据中的所有指定格式统一转换为指定的格式，找到<a href="https://blog.csdn.net/fkbush/article/details/48682367" target="_blank" rel="noopener noreffer">一篇文章</a>，与我的构想非常接近，但是没找到更详细的资料，效果也有待验证，如果这个能实现将是最完美的方式</li>
+<li>方案四：在查询结束后，将返回值中的值手动进行转换，另外，一些int及long型的数据格式及精度转换也可以在这个地方进行。查到一个<a href="https://blog.csdn.net/z69183787/article/details/53128213" target="_blank" rel="noopener noreffer">使用fastjson进行格式转换的方案</a></li>
+</ol>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/lkforce/article/details/62429998" target="_blank" rel="noopener noreffer">查看maven依赖🌲并解决依赖冲突</a>：<code>mvn -Dverbose dependency:tree</code></p>
+</li>
+<li>
+<p>oracle数据库报错：<a href="https://www.jitendrazaa.com/blog/sql/resolve-error-ora-28000-the-account-is-locked/" target="_blank" rel="noopener noreffer">Resolve error – ORA-28000: the account is locked</a>
+使用admin权限运行如下命令，accountName是要解锁的帐号名称：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">alter</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="n">accountName</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">unlock</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="k">grant</span><span class="w"> </span><span class="k">connect</span><span class="p">,</span><span class="w"> </span><span class="n">resource</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">accountName</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>代码更新之后突然所有的后端接口都失效了，急忙打开命令行发现一直在报错：<code>Caused by: java.sql.SQLException: ORA-28001: the password has expired</code>。查询后发现是oracle密码过期了：<code>Oracle提示错误消息ORA-28001: the password has expired，是由于Oracle11G的新特性所致， Oracle11G创建用户时缺省密码过期限制是180天（即6个月）， 如果超过180天用户密码未做修改则该用户无法登录。 Oracle公司是为了数据库的安全性默认在11G中引入了这个默认功能，但是这个默认的功能很容易被DBA或者是开发人员给疏忽，一旦密码180天未修改过，就会出现这样的问题。</code><a href="https://blog.csdn.net/kylinsoong/article/details/18222113" target="_blank" rel="noopener noreffer">解决方案</a>。</p>
+</li>
+<li>
+<p>oracle默认null值为最大，在对包含null值的字段进行排序时，升序的话会排到最后，降序的话会排到最前。不过oracle提供了对<a href="https://www.lonery.com/article-view-5.html" target="_blank" rel="noopener noreffer">null值自定义排序</a>的关键字，需配合升降序关键字进行使用：<code>desc/asc nulls last/first</code>，不过如果要对null进行特殊处理的话，可以配合<code>nvl()</code>，将null值转换成指定的值进行排序</p>
+</li>
+<li>
+<p>windows服务器莫名其妙重启之后oracle数据库账户被锁。第二天早上服务器莫名其妙又卡死最后重启发现数据库又被锁，查了半天发现是有一个开机自启的tomcat，里面的db连接密码是错的，重试次数过多给锁账户了，删除这个错误配置的自启动tomcat之后恢复正常。另外附一些解决过程中的踩坑项</p>
+<ol>
+<li>
+<p>远程桌面到服务器，使用<code>SQL PLUS</code>登录oracle数据库<code>sys</code>账户，默认密码为<code>change_on_install as sysdba</code>。（<a href="https://blog.csdn.net/wanghai__/article/details/4791879" target="_blank" rel="noopener noreffer">各默认账户的权限与区别</a>）</p>
+</li>
+<li>
+<p>解锁指定的账户：<code>alert user 账户名称 account unlock;</code></p>
+</li>
+<li>
+<p>修改指定账户的密码：<code>alert user 账户名称 identify by &quot;新密码&quot;;</code></p>
+</li>
+<li>
+<p><a href="http://database.51cto.com/art/201005/197908.htm" target="_blank" rel="noopener noreffer">Oracle用户被锁的原因以及解决办法</a>：查看<code>$ORACLE_HOME/network/admin/log/listener.log</code>日志，因为配置不同该路径可能不同，因此使用everything全局检索<code>listener.log</code>即可。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>mybatis使用test语句判断<code>isPay == 'Y'</code>的时候一直报错<code>org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: ### Error querying database. Cause: java.lang.NumberFormatException</code>，但是检查了各种类型，没有任何问题，直到查到<a href="https://blog.csdn.net/shenzhenNBA/article/details/46673327" target="_blank" rel="noopener noreffer">这篇文章</a>，提到如果在mybatis中对字符串数字或者<code>'Y'</code>进行判断的时候要使用<code>isPay == 'Y'.toString()</code>；或者根据<a href="https://my.oschina.net/u/561367/blog/1499037" target="_blank" rel="noopener noreffer">这篇文章</a>中提到的，使用<code>&lt;if test='isPay == &quot;Y&quot;'&gt;not&lt;/if&gt;</code>这种写法</p>
+</li>
+<li>
+<p>前后端通信加密方案</p>
+<ul>
+<li><a href="https://blog.csdn.net/jw20082009jw/article/details/52806634" target="_blank" rel="noopener noreffer">一种安全的前后端数据交互方案</a></li>
+<li><a href="https://blog.csdn.net/houxuehan/article/details/51965968" target="_blank" rel="noopener noreffer">Java 前端加密传输后端解密以及验证码功能</a></li>
+</ul>
+</li>
+<li>
+<p>后端突然所有接口都无法使用，报错日志如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Caused by: org.apache.ibatis.exceptions.PersistenceException:
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: Listener refused the connection with the following error:
+ORA-12514, TNS:listener does not currently know of service requested in connect descriptor
+</code></pre></td></tr></table>
+</div>
+</div><p>查看发现是oracle连接报错了。远程桌面进入服务器，使用SQLPlus进入oracle，发现当前用户跟<code>sys</code>都登录不上，命令行报错：<code>ORA-12560: TNS: 协议适配器错误</code>，根据<a href="https://blog.csdn.net/idomyway/article/details/81211953" target="_blank" rel="noopener noreffer">这篇文章</a>，发现<code>OracleServiceORCL1</code>服务未启动，启动之后便可以用<code>sys</code>账号进行登录。但是用用户账号进行登录的时候依然提示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ERROR:
+ORA-01034: ORACLE not available
+ORA-27101: shared memory realm does not exist
+进程 ID: 0
+会话 ID: 0 序列号: 0
+</code></pre></td></tr></table>
+</div>
+</div><p>搜索到<a href="https://blog.csdn.net/drdairen/article/details/73647452" target="_blank" rel="noopener noreffer">这篇文章</a>，是oracle未完全启动导致，进行如下操作之后恢复正常：</p>
+<ol>
+<li>使用cmd进入命令行</li>
+<li><code>sqlplus /nolog</code></li>
+<li><code>conn / as sysdba</code></li>
+<li><code>startup</code></li>
+</ol>
+<p>附：<a href="https://blog.csdn.net/wwlhz/article/details/73296430" target="_blank" rel="noopener noreffer">Oracle Sqlplus命令登录的几种方式</a></p>
+</li>
+<li>
+<p>[2019.5.16] restful接口开发中有一个重要的概念叫做<a href="https://825635381.iteye.com/blog/2276077" target="_blank" rel="noopener noreffer">幂等</a>，就是同样的请求被执行一次与连续执行多次的效果是一样的，服务器的状态也是一样的，实际上就是接口的可重复调用（包括时间和空间上两个维度），于是研究了一下<a href="https://segmentfault.com/a/1190000015884659" target="_blank" rel="noopener noreffer">幂等的实现方案</a>，文章提到有三种方式</p>
+<ol>
+<li>多版本并发控制：这是乐观锁的一种实现，用于在数据库并发访问时的情况。当数据更新时需要去判断版本号是否一致，如果不一致，则无法对数据进行更新。例如请求支付接口进行扣款时: <code>update table_name set deposit = deposit-#{payment}, version = version + 1 where orderId = #{orderId} and version = #{version}</code>。这里orderId可进一步设为主键或唯一索引，因为这样是行锁，否则更新操作时会锁表。乐观锁在对已有数据进行更新时既能保证效率，又能保证幂等。</li>
+<li>数据库去重表：这是利用数据库表单的特性来实现幂等。以订单请求支付场景为例：将订单号orderId设为去重表的唯一索引，每次请求支付都根据订单号向去重表中插入一条数据，只有插入成功才继续执行支付操作，相当于在事务的开始阶段加锁。考虑两种失败的情况: 1. Insert去重表失败，事务回滚，无任何影响；2. Insert去重表成功，支付业务操作失败，事务回滚，删除之前插入去重表的记录，无任何影响；以上两种失败的情况下，事务的幂等性是可以保持的，避免了单个订单同时多次进行支付的情况。操作成功之后删除该orderId</li>
+<li>redis key+操作id 锁定：与去重表思路相同，只是将对数据库的的访问转移到了对缓存（如redis）的访问，提高了效率。具体操作如下：订单发起支付请求，支付系统会去redis缓存中查询是否存在该订单号orderId的key，如果不存在，则向redis增加key为订单号，然后开始实际支付操作；如果查询到存在该订单号的key，则不进行实际支付操作。无论支付操作成功或失败，在支付操作结果返回后，在缓存中删除该订单号key。</li>
+</ol>
+</li>
+<li>
+<p>[2019.5.21] 项目中写了一个工具类，从<code>import com.sun.istack.internal.NotNull;</code>包导入了<code>@NotNull</code>注解，本地运行良好，但是到服务器运行不起来，提示没有找到这个方法，后来发现本地jdk版本是<a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener noreffer">Java SE Development Kit 8</a>，运行<code>java -version</code>可以看到<code>java version &quot;1.8.0_201&quot; &lt;br&gt; Java(TM) SE Runtime Environment (build 1.8.0_201-b09) &lt;br&gt; Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)</code>，但是centOS服务器运行的是自带的Java版本：<code>openjdk version &quot;1.8.0_191&quot; &lt;br&gt; OpenJDK Runtime Environment (build 1.8.0_191-b12) &lt;br&gt; OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)</code>，建议保持本地与服务器jdk版本的一致。可同步安装<a href="https://adoptopenjdk.net/index.html" target="_blank" rel="noopener noreffer">AdoptOpenJDK</a>中对应的openjdk版本。</p>
+</li>
+<li>
+<p>[2019.5.29] 有try块放到了事务代码中，catch异常后，如果需要回滚事务，一定要注意手动回滚事务。</p>
+</li>
+<li>
+<p><a href="https://segmentfault.com/a/1190000005699862" target="_blank" rel="noopener noreffer">高并发技术还是要以优化代码为主，使用各种缓存工具为辅</a>，<a href="https://yq.aliyun.com/articles/328515" target="_blank" rel="noopener noreffer">亿级请求下多级缓存那些事</a></p>
+</li>
+<li>
+<p>[2019.7.19] 使用三方jar包发起api请求，将jar包放在本地的时候发起https请求可以在main函数中进行测试，不会报任何错误信息；但是将jar包放在远程maven仓库，再使用main函数进行测试的话发现有如下报错信息：<code>javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</code>
+尝试<a href="https://ningyu1.github.io/site/post/53-ssl-cert-3/" target="_blank" rel="noopener noreffer">暴力绕过校验</a>，代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * Trust every server - dont check for any certificate
+</span><span class="cm"> */</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">trustAllHosts</span><span class="o">()</span> <span class="o">{</span>
+
+    <span class="c1">// Create a trust manager that does not validate certificate chains
+</span><span class="c1"></span>    <span class="n">TrustManager</span><span class="o">[]</span> <span class="n">trustAllCerts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TrustManager</span><span class="o">[]{</span><span class="k">new</span> <span class="n">X509TrustManager</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">java</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">cert</span><span class="o">.</span><span class="na">X509Certificate</span><span class="o">[]</span> <span class="nf">getAcceptedIssuers</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">cert</span><span class="o">.</span><span class="na">X509Certificate</span><span class="o">[]{};</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkClientTrusted</span><span class="o">(</span><span class="n">X509Certificate</span><span class="o">[]</span> <span class="n">chain</span><span class="o">,</span> <span class="n">String</span> <span class="n">authType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkServerTrusted</span><span class="o">(</span><span class="n">X509Certificate</span><span class="o">[]</span> <span class="n">chain</span><span class="o">,</span> <span class="n">String</span> <span class="n">authType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">}</span>
+    <span class="o">}};</span>
+
+    <span class="c1">// Install the all-trusting trust manager
+</span><span class="c1"></span>    <span class="c1">// 忽略HTTPS请求的SSL证书，必须在openConnection之前调用
+</span><span class="c1"></span>    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">SSLContext</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">SSLContext</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&#34;TLS&#34;</span><span class="o">);</span>
+        <span class="n">sc</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">trustAllCerts</span><span class="o">,</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">SecureRandom</span><span class="o">());</span>
+        <span class="n">HttpsURLConnection</span><span class="o">.</span><span class="na">setDefaultSSLSocketFactory</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">getSocketFactory</span><span class="o">());</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&#34;trustAllHosts is error&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面代码虽然可行，但是没有找到问题的根源，springboot项目使用controller-service方式调用之后可执行，问题待研究。</p>
+<ul>
+<li>后续更新：出现该问题为本地开发环境使用抓包工具如charls、fiddler等导致，关闭抓包工具后项目可正常运行</li>
+</ul>
+</li>
+<li>
+<p>[2019.9.3] 项目需求扩展，因此将订单导入功能拆分出来了，阿里云买了两台2核4G 8M带宽的ECS实例，并买了一个SLB负载均衡，绑定这两台订单服务器。原先的订单服务是嵌在应用主服务里面的，配置是SLB中20台8核16G ECS实例，部分机子是2M按固定带宽收费的，部分是8M按使用流量计费的。迁移到新的机组之后出现了两个问题：</p>
+<ol>
+<li>新的机组也是进行consul注册进行调用，并且都是内网访问，因此新的机组使用了一个新的安全策略组，打算进行调用区分，但是测试发现consul一直无法调用成功，报connect time out错误。阿里云工单咨询之后给出答复：部署consul集群时，需要注意client及server实例机器都在同一个安全策略组内，如果不在同一个安全策略组，那么需要互相进行放行彼此的地址，之后才能访问。内网访问时，如果是不同的安全策略组，也需要进行端口出入规则的配置。</li>
+<li>新的机组部署同步代码之后，python会定时进行订单文件的上传，但是发现一个类型的订单总是出现预警，文件大小为4m左右，springboot代码<code>MultipartFile.isEmpty()</code>总是true，提示上传了一个空文件。检查了新机组的nginx配置和springboot文件上传配置均没有问题，本地使用postman上传同样的文件也没问题，其他类型的订单都能上传成功，只有一个类型的订单上传不了，登录到部署爬虫代码的服务器上之后，使用<code>curl -X POST &quot;http://order-api.fenxianglife.com/order/thirdOrder/upload?orderSource=vipshop&quot; -H &quot;Content-Type: multipart/form-data&quot; -F &quot;file=@wph_test_20190808_20190809_1.csv;type=text/csv&quot;</code>上传也没问题，最后询问爬虫发现设置的请求超时时长为10s，改成30s之后文件上传正常了。最后得出结论：文件较大，爬虫服务器带宽较小，上传文件时超出了设置的超时时间，因为python的上传策略，文件没有传上去，但是发起了一次请求，最后到文件接收服务器之后提示空文件。那么有两个修复措施：1、修改爬虫的超时时长为60s；2、升级python爬虫服务器配置，从2M带宽升级到5M带宽。</li>
+</ol>
+</li>
+<li>
+<p>[2019.9.18] 项目需求扩展，将订单导入功能拆分出来了，之前淘宝订单没有进行切换，用的还是旧工程中的导入，这次把淘宝订单整个切换到新工程之后，服务器压力瞬间上来了。发现问题是因为爬虫上传的时候报502，到应用探针中看的时候发现一台机器上的服务挂掉了，挂之前CPU飙升到了100%，进程被系统自动kill了。重启服务之后升级配置到4核4G，发现内存还是会飙到很高，于是再次升级配置到8核8G。升级之后发现还是会出现内存到99%的情况，手动执行gc之后内存能够降下来，但是过一段时间还是会飙上去。最奇怪的是，按照正常情况来讲，要是真的负载比较高，两台机器的内存都会飙上去，但实际上只有一台到99%，另一台一直平稳在20%。dump了一个1G左右的文件，内存异常的具体原因待分析。内存99%时的症状是新生代堆内存占用高达4G，老年代堆内存只有100M左右，期间yonggc触发次数较少。最后发现每次不触发gc的原因是：新切出来的工程从旧工程中复制了一份部署脚本，旧工程的部署服务器是8核16G，设置的启动参数为<code>-Xmx13g</code>，新工程只有8G，最大堆内存设置为13G之后，根本就触发不了gc的阈值，因此调整部署参数为<code>-Xmx7g</code>。内存飙升的原因待查。
+排查过程中用到的一些命令：</p>
+<ol>
+<li><code>ps -ef | grep java</code>：查询进程id，使用该命令也能看到通过<code>java -jar</code>方式启动服务的参数。或使用<code>top</code>命令</li>
+<li><code>jmap -histo:live {进程id}</code>：手动进行一次fullgc</li>
+<li><code>jmap -dump:live,format=b,file=heap.bin {进程id}</code>：执行一次fullgc，并将gc之后的dump文件存储为<code>heap.bin</code>文件。<code>jmap -dump:format=b,file=heap.bin {进程id}</code>命令为不进行gc直接导出dump文件</li>
+<li><code>jmap -heap {进程id}</code>：查看进程堆信息</li>
+</ol>
+</li>
+<li>
+<p>[2019.9.18] 项目需求扩展，将订单导入功能拆分出来了，但是部分活动订单的处理还是在主工程中，依托consul的feign调用，将需要处理的活动订单数据提交到主工程进行处理。因此主工程提供了feign api供订单服务调用，在开发测试环境一切正常，但是到正式环境之后，调用方订单工程不停地报<code>feign.FeignException$NotFound: status 404 reading OrderSyncApi#pushJdRewardOrder(String)</code>，因为订单量较大，15分钟内报错可能高达2w+，但是订单依然提交成功，感觉非常奇怪。检查了consul注册中心，各服务正常；检查了consul及feign配置，一切ok，同样配置的consul调用其他例如佣金服务时没有任何问题。最后请教了架构师，检查线上consul之后发现，线上注册<code>sanchi-service-server</code>这个服务的consul有20台机器，但是其中两台机器用作他用，没有部署主应用代码，但是没有从consul中移除。所以当负载轮询调用到这两台机子的时候会报404，熔断ribbon重试之后调用到其他机器，数据就处理成功了，解决了困扰两天的难题，线上复杂环境总是能踩到各种坑😂</p>
+</li>
+<li>
+<p>[2019.9.20] 订单工程的内存优化策略：两台服务器，一开始都使用g1gc，发现内存上去之后就再也下不来了，于是对比之下将其中一台去掉了g1gc，使用默认gc，发现heap满之后会自动执行full gc将内存降下来，于是查询资料，美团<a href="https://tech.meituan.com/2016/09/23/g1.html" target="_blank" rel="noopener noreffer">Java Hotspot G1 GC的一些关键技术</a>中提到是SATB策略引起的。且<strong>G1是不提供full GC的</strong>。</p>
+<ol>
+<li>gc日志参数(备注：-Xloggc的目录需要提前建好)：<a href="https://my.oschina.net/Rayn/blog/1540479" target="_blank" rel="noopener noreffer">G1 垃圾收集器配置参数</a></li>
+<li><code>java -server -Xms5g -Xmx5g -Xmn2g -XX:+DisableExplicitGC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:$GC_DIR/gc.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=2 -XX:GCLogFileSize=2m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$GC_DIR -XX:OnOutOfMemoryError=$HOME/deploy-jar-prod.sh -jar $jarPath &gt;&gt; $LOG_DIR&quot;/order-console.log&quot; 2&gt;&amp;1 &amp;</code></li>
+<li><a href="https://tech.meituan.com/2017/12/29/jvm-optimize.html" target="_blank" rel="noopener noreffer">从实际案例聊聊Java应用的GC优化</a></li>
+<li><a href="https://www.jianshu.com/p/254717efe1f5" target="_blank" rel="noopener noreffer">Java8默认使用的GC类型</a></li>
+<li><a href="https://www.javazhiyin.com/34407.html" target="_blank" rel="noopener noreffer">谁是JDK8中最快的GC</a></li>
+<li><a href="https://www.cnblogs.com/shoufeng/p/9709464.html" target="_blank" rel="noopener noreffer">关于JVM的垃圾回收(GC) 这可能是你想了解的</a></li>
+<li><a href="https://cs.xieyonghui.com/java/jdk-g1-garbage-collector-chapter-1_9.html" target="_blank" rel="noopener noreffer">Java G1垃圾收集器(GC) 2018/08/05</a></li>
+<li><a href="https://cs.xieyonghui.com/java/java-jvm-performance_16.html" target="_blank" rel="noopener noreffer">JVM性能优化（调优）2018/09/06</a></li>
+<li><a href="https://blog.csdn.net/cxh5060/article/details/51866890" target="_blank" rel="noopener noreffer">JVM调优总结</a></li>
+<li><a href="https://lihuimintu.github.io/2019/02/19/gcLog/" target="_blank" rel="noopener noreffer">JVM 配置GC日志</a></li>
+<li><a href="https://blog.csdn.net/luzhensmart/article/details/82563734" target="_blank" rel="noopener noreffer">JVM老年代和新生代的比例</a></li>
+<li><a href="https://blog.csdn.net/snow_7/article/details/52291979" target="_blank" rel="noopener noreffer">JVM调优及参数设置</a></li>
+<li><a href="http://www.51gjie.com/java/551.html" target="_blank" rel="noopener noreffer">重要：Java JVM 参数设置大全</a></li>
+<li><a href="https://introspelliam.github.io/2017/09/10/Linux%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89/" target="_blank" rel="noopener noreffer">重要：Linux堆内存管理深入分析（上）</a></li>
+<li><a href="https://yq.aliyun.com/articles/227924" target="_blank" rel="noopener noreffer">重要：当Java虚拟机遇上Linux Arena内存池</a></li>
+<li><a href="https://www.jianshu.com/p/479a715d461e" target="_blank" rel="noopener noreffer">重要：Java应用Top命令RES内存占用高分析</a></li>
+<li><a href="https://blog.csdn.net/zl18310999566/article/details/78201492" target="_blank" rel="noopener noreffer">JAVA进程占用高内存原因分析与优化方法</a></li>
+<li><a href="https://www.analysys.cn/article/detail/20019016" target="_blank" rel="noopener noreffer">jvm疯狂吞占内存，罪魁祸首是谁？</a></li>
+<li><a href="https://www.cnblogs.com/fengjian2016/p/9728318.html" target="_blank" rel="noopener noreffer">Java程序在Linux上运行虚拟内存耗用很大</a></li>
+<li><a href="https://www.cnblogs.com/micrari/p/8831834.html" target="_blank" rel="noopener noreffer">GC Ergonomics间接引发的锁等待超时问题排查分析</a></li>
+</ol>
+</li>
+<li>
+<p>[2019.9.29] 项目原先是单module的，后来由于业务需求，拆分为多个module，将其中一个module打包为jar包供其他工程调用，但是拆分之后发现主运行module单元测试不通过。单元测试类是项目创建时自动生成的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="nd">@RunWith</span><span class="o">(</span><span class="n">SpringRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@SpringBootTest</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestServerApplicationTests</span> <span class="o">{}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>单元测试构建时报错：<code>java.lang.IllegalStateException: Failed to load ApplicationContext. Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'thirdOrderController' defined in file</code>。查询一番之后，发现将<code>@SpringBootTest</code>注解中类修改为确切的service之后单元测试就正常运行了。</p>
+<ol>
+<li><a href="https://blog.csdn.net/u013360850/article/details/71075565" target="_blank" rel="noopener noreffer">SpringBoot中Junit测试注入Bean失败的解决方法</a></li>
+<li><a href="https://cloud.tencent.com/developer/ask/180857" target="_blank" rel="noopener noreffer">如何解决java.lang.IllegalStateException：无法加载ApplicationContext Spring Boot + JUnit测试?</a></li>
+</ol>
+</li>
+<li>
+<p>[2019.9.30] 还是上面微服务和module拆分的问题：新拆出来的订单服务通过consul+feign为其他工程提供订单导入功能，feign接口中使用<code>@RequestBody</code>直接提供一个bean对象供调用，但是最后微服务间进行测试的时候，LocalDateTime解析报错，后来改为<code>@RequestParam</code>post方式提交字符串，使用json格式进行中转，最后再序列化解析为对象解决问题。</p>
+<ol>
+<li><a href="https://blog.csdn.net/junlovejava/article/details/78112240" target="_blank" rel="noopener noreffer">Spring Boot LocalDateTime格式处理</a></li>
+</ol>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/u012377333/article/details/84837359" target="_blank" rel="noopener noreffer">【Spring Boot问题】&ndash;Singleton bean creation not allowed while singletons of</a>，根据文章建议，需要创建一个bean的processor。不过线上出现一次这个状况，后面再没有出现类似的情况，后续停止关注这个问题。</p>
+<ul>
+<li><a href="https://segmentfault.com/q/1010000015454575/a-1020000015457570" target="_blank" rel="noopener noreffer">Spring bean 的创建问题?</a></li>
+</ul>
+</li>
+<li>
+<p>spring线程池ThreadPoolExecutor有若干配置参数，配置时需要注意：<code>corePoolSize &lt; queueCapacity &lt; maxPoolSize</code>；另外，注意不要在循环中一次性创建大量的线程，因为超出👈配置的边界大小之后，会有指定的抛弃策略，可能导致部分任务无法执行。如果有频繁创建线程的场景，需要根据实际线程处理情况来配置线程池，或者控制线程创建速度。</p>
+<ul>
+<li><a href="https://www.cnblogs.com/waytobestcoder/p/5323130.html" target="_blank" rel="noopener noreffer">ThreadPoolExecutor线程池参数设置技巧</a>/<a href="https://www.jianshu.com/p/6835b88e9c1f" target="_blank" rel="noopener noreffer">线程池ThreadPoolTaskExecutor 配置</a></li>
+</ul>
+</li>
+<li>
+<p>[2019.10.30] 现有订单同步策略为<code>下单--&gt;订单同步工程--解析处理为list数据--&gt;订单处理工程</code>，整个链路是微服务调用，测试时发现一个订单很长时间都未同步处理完成，下单时间是10:45:32，10:45:42同步到order工程，订单工程解析之后，10:46:15通过feign调用订单处理工程，中间并无较长的延时。根据请求去订单处理工程查询访问日志，该订单最早出现在10:59:47，拿着该traceId在order工程反查，发现这是10:59:47的一次调用，从10:46:15-10:59:47之间的几次consul请求订单处理工程没有收到。查看错误日志发现存在报错<code>feign.FeignException$BadRequest:status 400 reading OrderSyncApi#pushJdActivityOrder(String)</code>，检索找到<a href="https://www.bbsmax.com/A/LPdoAKkGJ3/" target="_blank" rel="noopener noreffer">Feign status 400 reading 问题分析</a>/<a href="https://community.pivotal.io/s/article/spring-boot-app-rejects-http-request-with-total-header-size-larger-than-8kb" target="_blank" rel="noopener noreffer">Spring Boot app rejects HTTP request with total header size larger than 8KB</a>/<a href="https://stackoverflow.com/questions/33232849/increase-http-post-maxpostsize-in-spring-boot" target="_blank" rel="noopener noreffer">Increase HTTP Post maxPostSize in Spring Boot</a>，文章中称<code>内嵌tomcat对参数的默认限制是8K，需要在在Feign接口提供端的微服务中配置参数</code>，可以得知是feign传递参数内容太长了，接收方的tomcat无法处理因此报错了。修改方案：1. 将订单的list批量提交方式修改为单个提交；2. 后续修改各微服务工程的<code>max-http-header-size</code>。更多关于springboot内嵌tomcat的参数配置参考<a href="https://www.baeldung.com/spring-boot-configure-tomcat" target="_blank" rel="noopener noreffer">How to Configure Spring Boot Tomcat</a>，以及springboot内嵌其他容器的说明<a href="https://www.cnblogs.com/duanxz/p/9337022.html" target="_blank" rel="noopener noreffer">Spring Boot 内嵌容器Undertow参数设置</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># 配置最大请求头大小为1m
+server.tomcat.max-http-header-size=1048576
+# 配置最大请求体大小为6m
+server.tomcat.max-http-post-size=6291456
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>[2019.11.18] 同事在进行sql处理时，有一个场景是执行如下操作：判断表中是否有唯一索引的值，如果有，则删除该记录并重新插入，在并发情况下出现了死锁的情况。问题原因及处理方案：<a href="https://my.oschina.net/hebaodan/blog/3033276" target="_blank" rel="noopener noreffer">并发delete+insert duplicate-key冲突导致死锁</a></p>
+<ul>
+<li><a href="https://blog.csdn.net/qq_39478853/article/details/80623575" target="_blank" rel="noopener noreffer">mysql 的S 锁和X锁的区别</a></li>
+<li><a href="https://segmentfault.com/a/1190000016780082" target="_blank" rel="noopener noreffer">mysql锁以及实践总结</a></li>
+</ul>
+</li>
+<li>
+<p>[2019.11.28] 前几日的时候其他部门的同事遇到一个问题：负载均衡上出现了很多请求超时情况，较长的有20s的请求，但是去看此时机器的并发数，及机器的健康状态的话，又没有任何问题。最后给出了一个<a href="http://jm.taobao.org/2017/05/25/525-1/" target="_blank" rel="noopener noreffer">阿里团队的解决方案</a>，关于tcp半连接队列和全连接队列引起的问题。</p>
+</li>
+<li>
+<p>[2019.11.29] 同事给过来一个SQL，<code>select * from tb_item where item_online_status in (1,2) and id &gt; 1000 and shop_type in ('J') order by id limit 500;</code>，使用id做分页查询判断，发现在MySQL 5.6中查询正常，在5.7中查询很慢。查询之后确定是索引问题，但奇怪的是使用id asc查询的时候很慢，但是使用id desc倒序查询的时候效率又很快，原因待查。</p>
+<ul>
+<li><a href="https://cloud.tencent.com/developer/article/1144242" target="_blank" rel="noopener noreffer">ORDER BY主键id加LIMIT限制走错索引</a></li>
+<li><a href="https://juejin.im/post/5d12f295f265da1bc14b3818" target="_blank" rel="noopener noreffer">一次mysql order by desc 慢的排查</a></li>
+</ul>
+</li>
+<li>
+<p>[2019.12.10] 使用consul+feign进行系统间api调用的时候，偶现传参中出现很多<code>\\u0000\\u0000</code>的情况，整个字符串可能到500多k的长度，其中大部分内容全是u0000，但是同样的环境和参数，第二次调用的时候就没有任何问题，感觉十分诡异。感觉是json序列化的问题，但是一直没有稳定的复现方式。feign内部使用jackson进行对象序列化，先改成使用fastjson进行序列化尝试一下。[2020.03.30 经测试自从修改为fastjson之后再未出现改问题，序列化问题解决]</p>
+<ul>
+<li><a href="https://my.oschina.net/u/3419586/blog/2964047" target="_blank" rel="noopener noreffer">修改Feign数据解析，由jackson改为fastjson，同时解决fastjson中Content-Type问题</a></li>
+<li><a href="https://www.itread01.com/p/851382.html" target="_blank" rel="noopener noreffer">spring-webmvc-4.1.6 介面返回json資料 中文出現/u0000/u0000/u0000/u0000</a></li>
+</ul>
+</li>
+<li>
+<p>[2020.03.30] <a href="https://blog.csdn.net/qq_34021712/article/details/75949779" target="_blank" rel="noopener noreffer">spring的service类调用自己方法事务无效</a>，<a href="https://www.cnblogs.com/jamaler/p/11398149.html" target="_blank" rel="noopener noreffer">SpringBoot 内部方法调用，事务不起作用的原因及解决办法</a>。三个解决方法如下：</p>
+<ol>
+<li>[方案一] 引入自身bean：在类内部通过<code>@Autowired @Lazy</code>将本身bean引入，然后通过调用自身bean，从而实现使用AOP代理操作</li>
+<li>[方案二] 通过ApplicationContext引入bean：通过ApplicationContext获取bean，通过bean调用内部方法，就使用了bean的代理类。<code>@Autowired ApplicationContext applicationContext; ((UserService)applicationContext.getBean(&quot;userService&quot;)).invokeInsertUser(user);</code></li>
+<li>[方案三] 添加<code>@EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)</code>启用<a href="https://www.cnblogs.com/foreveravalon/p/8489907.html" target="_blank" rel="noopener noreffer">cglib代理</a>，并修改为<code>((AcRefundOrderDetailThirdService) AopContext.currentProxy()).dealRefundOrder(refundOrder);</code>调用方式之后可以进行正常调用。不过有文章提到使用cglib之后如果频繁创建动态代理类，可能会引起pem区的内存溢出，<a href="https://blog.csdn.net/pange1991/article/details/81941597" target="_blank" rel="noopener noreffer">JDK 1.8 JVM内部结构改变_元空间(Metaspace)取代永久代(PermGen)</a>，for循环10w次调用监控Metaspace及loadclass数量发现并无异常情况</li>
+</ol>
+</li>
+<li>
+<p>[2020.03.31] 使用<code>ThreadPoolTaskExecutor</code>异步处理一些任务时，注意对异常的try-catch。一些情况下任务可能抛出异常并且退出了，但是没有自动拦截到任何错误日志，添加try-catch之后才会记录错误日志</p>
+</li>
+<li>
+<p>[2020.06.29] linux上查看服务被kill掉的原因：<code>dmesg | egrep -i -B100 'killed process'</code>，查看日志输出如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">[14409.960167] Out of memory: Killed process 4259 (java) total-vm:7100116kB, anon-rss:3221416kB, file-rss:0kB, shmem-rss:0kB
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2018-07-20</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%90%8E%E7%AB%AF/">后端</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2018-07/hexo-resource-reference/" class="prev" rel="prev" title="hexo资源引用"><i class="fas fa-angle-left fa-fw"></i>hexo资源引用</a>
+            <a href="/posts/2018-07/backend-springmvc-swagger-setting/" class="next" rel="next" title="SpringMVC&#43;Swagger配置使用踩坑">SpringMVC&#43;Swagger配置使用踩坑<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sanchi</a></span>&nbsp;|&nbsp;<span class="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/css/custom.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-119399604-2', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-119399604-2" async></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["sanchips"],"clientID":"2ede82b0a7198c45ce3e","clientSecret":"52dffb46d64ec3b2d5a6e6586b759ac9a70965c2","id":"2018-07-20T00:00:00+08:00","owner":"sanchips","repo":"sanchips.github.io","title":"一些后端问题解决方案整理"}}};</script><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"></div>
+</body>
+
+</html>

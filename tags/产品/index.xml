@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>产品 - 标签 - Sanchi</title>
+        <link>https://sanchips.github.io/tags/%E4%BA%A7%E5%93%81/</link>
+        <description>产品 - 标签 - Sanchi</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sanchi.zhang@gmail.com (Sanchi)</managingEditor>
+            <webMaster>sanchi.zhang@gmail.com (Sanchi)</webMaster><lastBuildDate>Tue, 17 Apr 2018 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://sanchips.github.io/tags/%E4%BA%A7%E5%93%81/" rel="self" type="application/rss+xml" /><item>
+    <title>产品之路初探</title>
+    <link>https://sanchips.github.io/posts/2018-04/pm-find-the-way-of-pm/</link>
+    <pubDate>Tue, 17 Apr 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-04/pm-find-the-way-of-pm/</guid>
+    <description><![CDATA[<blockquote>
+<p>本文是记录某位程序猿走向产品之路的一些探索和心得。因为是刚开始接触，仅有一些初步的认知，后续会对产品之路中所见所闻进行持续的补充。</p>
+</blockquote>]]></description>
+</item></channel>
+</rss>

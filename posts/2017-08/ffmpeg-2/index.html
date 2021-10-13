@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">[2][概念] FFmpeg比特率帧率文件大小 - Sanchi</title><meta name="Description" content="记录一些工作上的历程"><meta property="og:title" content="[2][概念] FFmpeg比特率帧率文件大小" />
+<meta property="og:description" content="帧率（Frame rate/frequency） 定义：每秒编码进视频文件的帧数（fps：frames per second）。人眼看起来的连续场景最低" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sanchips.github.io/posts/2017-08/ffmpeg-2/" /><meta property="og:image" content="https://sanchips.github.io/logo.svg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2017-08-28T00:00:00+08:00" />
+<meta property="article:modified_time" content="2017-08-28T00:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sanchips.github.io/logo.svg"/>
+
+<meta name="twitter:title" content="[2][概念] FFmpeg比特率帧率文件大小"/>
+<meta name="twitter:description" content="帧率（Frame rate/frequency） 定义：每秒编码进视频文件的帧数（fps：frames per second）。人眼看起来的连续场景最低"/>
+<meta name="application-name" content="Sanchi">
+<meta name="apple-mobile-web-app-title" content="Sanchi">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://sanchips.github.io/posts/2017-08/ffmpeg-2/" /><link rel="prev" href="https://sanchips.github.io/posts/2017-08/ffmpeg-1/" /><link rel="next" href="https://sanchips.github.io/posts/2017-08/ffmpeg-3/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "[2][概念] FFmpeg比特率帧率文件大小",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sanchips.github.io\/posts\/2017-08\/ffmpeg-2\/"
+        },"genre": "posts","keywords": "ffmpeg","wordcount":  1325 ,
+        "url": "https:\/\/sanchips.github.io\/posts\/2017-08\/ffmpeg-2\/","datePublished": "2017-08-28T00:00:00+08:00","dateModified": "2017-08-28T00:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Sanchi","logo": "https:\/\/sanchips.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Sanchi"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fas fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/posts/"><i class='fas fa-archive fa-fw'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fas fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fas fa-th-list fa-fw'></i> 分类 </a><a class="menu-item" href="/tools/"><i class='fas fa-globe fa-fw'></i> 工具 </a><a class="menu-item" href="/about/"><i class='fas fa-user-secret fa-fw'></i> 关于 </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/" title=""><i class='fas fa-home fa-fw'></i>首页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-archive fa-fw'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fas fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fas fa-th-list fa-fw'></i>分类</a><a class="menu-item" href="/tools/" title=""><i class='fas fa-globe fa-fw'></i>工具</a><a class="menu-item" href="/about/" title=""><i class='fas fa-user-secret fa-fw'></i>关于</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">[2][概念] FFmpeg比特率帧率文件大小</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sanchi</a>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/ffmpeg/"><i class="far fa-folder fa-fw"></i>ffmpeg</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-08-28">2017-08-28</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2017-08-28">2017-08-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1325 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#帧率frame-ratefrequency">帧率（Frame rate/frequency）</a></li>
+    <li><a href="#比特率bitdata-rate">比特率（bit/data rate）</a></li>
+    <li><a href="#设置输出文件的最大大小">设置输出文件的最大大小</a></li>
+    <li><a href="#文件大小计算">文件大小计算</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="帧率frame-ratefrequency">帧率（Frame rate/frequency）</h2>
+<ol>
+<li>定义：每秒编码进视频文件的帧数（fps：frames per second）。人眼看起来的连续场景最低是15FPS。</li>
+<li>说明：关于fps还有一个p和i的说法，i=interlaced，即隔行扫描的；p=progressive，即逐行扫描的。说一个视频是1080p的，那它的fps就是实打实的1080，如果是1080i，那么它的fps就是1080/2=540。</li>
+<li>FFmpeg中的frame rate设置：<code>ffmpeg -i input -r fps output</code>。使用<code>-r</code>命令来设置frame rate，如：<code>ffmpeg -i input.avi -r 30 output.mp4</code></li>
+<li>另一个设置frame rate的方法是<strong>使用fps过滤器（use an fps filter）</strong>
+<code><a class="lightgallery" href="/posts/2017-08/ffmpeg-2/ff_2_1.png" title="/posts/2017-08/ffmpeg-2/ff_2_1.png" data-thumbnail="/posts/2017-08/ffmpeg-2/ff_2_1.png">
+        <img
+            class="lazyload"
+            data-src="ff_2_1.png"
+            data-srcset="/posts/2017-08/ffmpeg-2/ff_2_1.png, ff_2_1.png 1.5x, /posts/2017-08/ffmpeg-2/ff_2_1.png 2x"
+            data-sizes="auto"
+            alt="/posts/2017-08/ffmpeg-2/ff_2_1.png"
+        />
+    </a></code>
+如：<code>ffmpeg -i clip.mpg -vf fps=fps=25 clip.webm</code>，是将clip.mpg文件的帧率转换为25</li>
+<li>帧率预定义的值
+<code><a class="lightgallery" href="/posts/2017-08/ffmpeg-2/ff_2_2.png" title="/posts/2017-08/ffmpeg-2/ff_2_2.png" data-thumbnail="/posts/2017-08/ffmpeg-2/ff_2_2.png">
+        <img
+            class="lazyload"
+            data-src="ff_2_2.png"
+            data-srcset="/posts/2017-08/ffmpeg-2/ff_2_2.png, ff_2_2.png 1.5x, /posts/2017-08/ffmpeg-2/ff_2_2.png 2x"
+            data-sizes="auto"
+            alt="/posts/2017-08/ffmpeg-2/ff_2_2.png"
+        />
+    </a></code>
+如上图，如果要设置帧率为29.97fps，以下几条命令等效：<code>ffmpeg -i input.avi -r 29.97 output.mpg</code>/<code>ffmpeg -i input.avi -r 30000/1001 output.mpg</code>/<code>ffmpeg -i input.avi -r ntsc output.mpg</code></li>
+</ol>
+<h2 id="比特率bitdata-rate">比特率（bit/data rate）</h2>
+<ol>
+<li>定义：比特率是确定一个音视频整体质量的参数。它说明了在单位时间内处理的比特数。在FFmpeg中比特率表示为比特每秒（bits/s）
+<code><a class="lightgallery" href="/posts/2017-08/ffmpeg-2/ff_2_3.png" title="/posts/2017-08/ffmpeg-2/ff_2_3.png" data-thumbnail="/posts/2017-08/ffmpeg-2/ff_2_3.png">
+        <img
+            class="lazyload"
+            data-src="ff_2_3.png"
+            data-srcset="/posts/2017-08/ffmpeg-2/ff_2_3.png, ff_2_3.png 1.5x, /posts/2017-08/ffmpeg-2/ff_2_3.png 2x"
+            data-sizes="auto"
+            alt="/posts/2017-08/ffmpeg-2/ff_2_3.png"
+        />
+    </a></code>
+如上图，比特率分为平均比特率（ABR）、常量比特率（CBR）、可变比特率（VBR）。</li>
+<li>比特率确定了编码流中1s存储了多少bit的数据，使用<code>-b</code>命令去设置。为了区分视频和音频流，推荐使用<code>-b:v</code>或者<code>-b:a</code>的形式。如<code>ffmpeg -i film.avi -b 1.5M film.mp4</code>表示全部设置每秒比特率为1.5M。ffmpeg通常通过降低比特率并且利用先进的编解码使相应的输出文件保持非常好的质量，如<code>ffmpeg -i input.avi -b:v 1500k output.mp4</code>表示设置视频比特率为1500K。</li>
+<li>CBR：CBR的实例如在线视频，其转换数据不会被缓存。<strong>设置输出的CBR时，三个参数必须要相同：<code>-b</code>、<code>-minrate</code>、<code>-maxrate</code></strong>。设置最大最小比率的参数可以添加一个流操作符，<code>-maxrate</code>指令需要一个<code>-bufsize</code>指令（设置比率控制buffer的大小）。如<code>ffmpeg -i in.avi -b 0.5M -minrate 0.5M -maxrate 0.5M -bufsize 1M out.mkv</code>表示设置CBR为0.5M/s。</li>
+</ol>
+<h2 id="设置输出文件的最大大小">设置输出文件的最大大小</h2>
+<p>为了保证输出文件在确定的大小，我们使用<code>-fs</code>指令来指定（file size的缩写），单位是<code>bytes</code>字节。如<code>ffmpeg -i in.avi -fs 10MB out.mp4</code>表示设置输出文件最大为10MB。</p>
+<h2 id="文件大小计算">文件大小计算</h2>
+<p>编码后输出文件的最终大小是音视频流的和：<strong><code>video_size = video_bitrate * time_in_seconds / 8</code></strong>，如上为视频流大小转换为字节的公式，除以8是为了将比特转换为字节。 如果音频是未压缩的，其大小计算公式为：<strong><code>audio_size = sampling_rate * bit_depth * channels * time_in_seconds / 8</code></strong>；如果音频流是压缩过的，我们需要知道其比特率去计算大小，公式为：<strong><code>audio_size = bitrate * time_in_seconds / 8</code></strong>。 例，我们来计算一个1500kbits/s视频比特率和128kbits/s音频比特率的10分钟视频的最终大小：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">file_size = video_size + audio_size
+file_size = (video_bitrate + audio_bitrate) * time_in_seconds / 8
+file_size = (1500 kbit/s + 128 kbits/s) * 600 s
+file_size = 1628 kbit/s * 600 s
+file_size = 976800 kb = 976800000 b / 8 = 122100000 B / 1024 = 119238.28125 KB
+file_size = 119238.28125 KB / 1024 = 116.443634033203125 MB ≈ 116.44 MB
+</code></pre></td></tr></table>
+</div>
+</div><p>实际大小稍微大于计算出的结果，因为视频文件包含一个描述音视频流排布的头信息和元数据（because included is a muxing overhead and the file metadata.）。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2017-08-28</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/ffmpeg/">ffmpeg</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2017-08/ffmpeg-1/" class="prev" rel="prev" title="[1][原理] FFmpeg基础命令"><i class="fas fa-angle-left fa-fw"></i>[1][原理] FFmpeg基础命令</a>
+            <a href="/posts/2017-08/ffmpeg-3/" class="next" rel="next" title="[3][使用] FFmpeg调整文件尺寸">[3][使用] FFmpeg调整文件尺寸<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sanchi</a></span>&nbsp;|&nbsp;<span class="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/css/custom.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-119399604-2', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-119399604-2" async></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["sanchips"],"clientID":"2ede82b0a7198c45ce3e","clientSecret":"52dffb46d64ec3b2d5a6e6586b759ac9a70965c2","id":"2017-08-28T00:00:00+08:00","owner":"sanchips","repo":"sanchips.github.io","title":"[2][概念] FFmpeg比特率帧率文件大小"}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"></div>
+</body>
+
+</html>

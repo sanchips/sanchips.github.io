@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">[3][使用] FFmpeg调整文件尺寸 - Sanchi</title><meta name="Description" content="记录一些工作上的历程"><meta property="og:title" content="[3][使用] FFmpeg调整文件尺寸" />
+<meta property="og:description" content="调整视频的尺寸和缩放（ Resizing and Scaling Video ） 调整视频尺寸（resize）在FFmpeg中表示调整它的宽高，缩放（scale）表示使用缩放滤镜调整帧的尺寸" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sanchips.github.io/posts/2017-08/ffmpeg-3/" /><meta property="og:image" content="https://sanchips.github.io/logo.svg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2017-08-29T00:00:00+08:00" />
+<meta property="article:modified_time" content="2017-08-29T00:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sanchips.github.io/logo.svg"/>
+
+<meta name="twitter:title" content="[3][使用] FFmpeg调整文件尺寸"/>
+<meta name="twitter:description" content="调整视频的尺寸和缩放（ Resizing and Scaling Video ） 调整视频尺寸（resize）在FFmpeg中表示调整它的宽高，缩放（scale）表示使用缩放滤镜调整帧的尺寸"/>
+<meta name="application-name" content="Sanchi">
+<meta name="apple-mobile-web-app-title" content="Sanchi">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://sanchips.github.io/posts/2017-08/ffmpeg-3/" /><link rel="prev" href="https://sanchips.github.io/posts/2017-08/ffmpeg-2/" /><link rel="next" href="https://sanchips.github.io/posts/2017-08/ffmpeg-4/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "[3][使用] FFmpeg调整文件尺寸",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sanchips.github.io\/posts\/2017-08\/ffmpeg-3\/"
+        },"genre": "posts","keywords": "ffmpeg","wordcount":  1328 ,
+        "url": "https:\/\/sanchips.github.io\/posts\/2017-08\/ffmpeg-3\/","datePublished": "2017-08-29T00:00:00+08:00","dateModified": "2017-08-29T00:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Sanchi","logo": "https:\/\/sanchips.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Sanchi"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fas fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/posts/"><i class='fas fa-archive fa-fw'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fas fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fas fa-th-list fa-fw'></i> 分类 </a><a class="menu-item" href="/tools/"><i class='fas fa-globe fa-fw'></i> 工具 </a><a class="menu-item" href="/about/"><i class='fas fa-user-secret fa-fw'></i> 关于 </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/" title=""><i class='fas fa-home fa-fw'></i>首页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-archive fa-fw'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fas fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fas fa-th-list fa-fw'></i>分类</a><a class="menu-item" href="/tools/" title=""><i class='fas fa-globe fa-fw'></i>工具</a><a class="menu-item" href="/about/" title=""><i class='fas fa-user-secret fa-fw'></i>关于</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">[3][使用] FFmpeg调整文件尺寸</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sanchi</a>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/ffmpeg/"><i class="far fa-folder fa-fw"></i>ffmpeg</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-08-29">2017-08-29</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2017-08-29">2017-08-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1328 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#调整视频的尺寸和缩放-resizing-and-scaling-video-">调整视频的尺寸和缩放（ Resizing and Scaling Video ）</a></li>
+    <li><a href="#一些尺寸调整的滤镜">一些尺寸调整的滤镜</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="调整视频的尺寸和缩放-resizing-and-scaling-video-">调整视频的尺寸和缩放（ Resizing and Scaling Video ）</h2>
+<p>调整视频尺寸（resize）在FFmpeg中表示调整它的宽高，缩放（scale）表示使用缩放滤镜调整帧的尺寸。这些操作提供了高级特性。</p>
+<ul>
+<li>
+<p>我们使用<code>-s</code>命令去调整输出视频的宽高，分辨率使用**<code>w</code>x<code>h</code>**的输入格式，例如想要调整初始分辨率为320*240，可以使用命令：<code>ffmpeg -i input_file -s 320x240 output_file</code>。</p>
+</li>
+<li>
+<p>预定义的帧尺寸
+FFmpeg提供了一些预定义的尺寸，来避免每次都需要输入确切的尺寸值。
+<code><a class="lightgallery" href="/posts/2017-08/ffmpeg-3/ff_3_1.png" title="/posts/2017-08/ffmpeg-3/ff_3_1.png" data-thumbnail="/posts/2017-08/ffmpeg-3/ff_3_1.png">
+        <img
+            class="lazyload"
+            data-src="ff_3_1.png"
+            data-srcset="/posts/2017-08/ffmpeg-3/ff_3_1.png, ff_3_1.png 1.5x, /posts/2017-08/ffmpeg-3/ff_3_1.png 2x"
+            data-sizes="auto"
+            alt="/posts/2017-08/ffmpeg-3/ff_3_1.png"
+        />
+    </a></code>
+按照这些预定义参数，如下两条命令就是等效的：<code>ffmpeg -i input.avi -s 640x480 output.avi</code>和<code>ffmpeg -i input.avi -s vga output.avi</code>。</p>
+</li>
+<li>
+<p>尺寸调节时需要考虑的问题：<strong>奈奎斯特采样定理</strong>（Nyquist sampling theorem）
+视频通常调整为比源文件更小的尺寸，方便移动设备和网络传输等使用。我们需要着重考虑的一点就是：小尺寸通常会丢失一些细节，这就是采样定理。为了不失真地恢复模拟信号，采样频率应该不小于模拟信号频谱中最高频率的2倍。这表示为了保持降阶视频的细节，它的源文件大小必须比缩放比例除以2更高。（这段网上找的定理翻译，英文太专业，看得不是太懂）
+那么举个栗子，我们有一个800x600 (SVGA)分辨率的视频，它有一个2px宽的细节，当转换成640x480(VGA)分辨率时，缩放比率是0.8，这个2px的细节再次被转换成2px，计算过程如下：<code>640 pixels / 800 pixels = 0.8，2 pixels * 0.8 = 1.6 ≈ 2 pixels</code>。但是当这个视频转换成160x120 (QQVGA)分辨率时，这个2px的细节就丢失了：<code>160 pixels / 800 pixels = 0.2，2 pixels * 0.2 = 0.4 ≈ 0 pixels</code>。这意味着降阶之后与源文件有着至少3px的可见差。</p>
+</li>
+</ul>
+<h2 id="一些尺寸调整的滤镜">一些尺寸调整的滤镜</h2>
+<ul>
+<li>特别的放大滤镜（super2xsai）
+将视频帧尺寸调大的需求相对较少，因为这个函数支持几乎所有的媒体播放器，但是返回的帧图像有时候不清晰，尤其是当源文件的分辨率非常小的时候。这个能平滑放大源文件的特殊滤镜就是：<code>super2xsai</code>滤镜。
+<code><a class="lightgallery" href="/posts/2017-08/ffmpeg-3/ff_3_2.png" title="/posts/2017-08/ffmpeg-3/ff_3_2.png" data-thumbnail="/posts/2017-08/ffmpeg-3/ff_3_2.png">
+        <img
+            class="lazyload"
+            data-src="ff_3_2.png"
+            data-srcset="/posts/2017-08/ffmpeg-3/ff_3_2.png, ff_3_2.png 1.5x, /posts/2017-08/ffmpeg-3/ff_3_2.png 2x"
+            data-sizes="auto"
+            alt="/posts/2017-08/ffmpeg-3/ff_3_2.png"
+        />
+    </a></code>
+例如，要将一个128x96的视频放大为256x192像素分辨率，可以使用如下命令：<code>ffmpeg -i phone_video.3gp -vf super2xsai output.mp4</code></li>
+<li>缩放的特性
+当使用<code>-s</code>命令用来调整视频帧尺寸时，实际上一个<code>scale</code>滤镜被插入到相关的滤镜视图之后。为了位置管理，当一个缩放进程开始的时候，<code>scale</code>滤镜能被直接使用。
+<code><a class="lightgallery" href="/posts/2017-08/ffmpeg-3/ff_3_3.png" title="/posts/2017-08/ffmpeg-3/ff_3_3.png" data-thumbnail="/posts/2017-08/ffmpeg-3/ff_3_3.png">
+        <img
+            class="lazyload"
+            data-src="ff_3_3.png"
+            data-srcset="/posts/2017-08/ffmpeg-3/ff_3_3.png, ff_3_3.png 1.5x, /posts/2017-08/ffmpeg-3/ff_3_3.png 2x"
+            data-sizes="auto"
+            alt="/posts/2017-08/ffmpeg-3/ff_3_3.png"
+        />
+    </a></code>
+直接使用缩放滤镜的优势是能够使用上表中的额外描述参数。 如下的两条命令就是等效的：<code>ffmpeg -i input.mpg -s 320x240 output.mp4</code>和<code>ffmpeg -i input.mpg -vf scale=320:240 output.mp4</code></li>
+<li>等比缩放视频
+不必知道输入文件帧的大小，我们能通过<code>scale</code>滤镜的<code>iw</code>和<code>ih</code>参数来直接等比缩放输入视频。 例如以下几条缩放指令：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ffmpeg -i input.mpg -vf scale=iw/2:ih/2 output.mp4    //等比缩放1/2
+ffmpeg -i input.mpg -vf scale=iw*0.9:ih*0.9 output.mp4    //等比缩放90%
+ffmpeg -i input.mpg -vf scale=iw/PHI:ih/PHI output.mp4    //以黄金比例缩放：PHI=1.61803398874989484820...
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>缩放成预定义的宽或高
+当输出视频需要确定的宽或高，且输入视频的尺寸和比例未知的时候，第二个参数能够通过<code>aspect</code>参数指定。 例如，如下指令指定输出宽度为400px，高度等比缩放：<code>ffmpeg -i input.mpg -vf scale=400:400/a</code>；如下指令指定输出高度为300px，宽度等比缩放：<code>ffmpeg -i input.mpg -vf scale=300/a:300 output.mp4</code>。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2017-08-29</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/ffmpeg/">ffmpeg</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2017-08/ffmpeg-2/" class="prev" rel="prev" title="[2][概念] FFmpeg比特率帧率文件大小"><i class="fas fa-angle-left fa-fw"></i>[2][概念] FFmpeg比特率帧率文件大小</a>
+            <a href="/posts/2017-08/ffmpeg-4/" class="next" rel="next" title="[4][使用] FFmpeg视频裁剪">[4][使用] FFmpeg视频裁剪<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sanchi</a></span>&nbsp;|&nbsp;<span class="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/css/custom.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-119399604-2', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-119399604-2" async></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["sanchips"],"clientID":"2ede82b0a7198c45ce3e","clientSecret":"52dffb46d64ec3b2d5a6e6586b759ac9a70965c2","id":"2017-08-29T00:00:00+08:00","owner":"sanchips","repo":"sanchips.github.io","title":"[3][使用] FFmpeg调整文件尺寸"}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"></div>
+</body>
+
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">apk反编译工具Jadx的使用 - Sanchi</title><meta name="Description" content="记录一些工作上的历程"><meta property="og:title" content="apk反编译工具Jadx的使用" />
+<meta property="og:description" content="在github上瞎逛的时候找见了一个新的反编译工具Jadx，使用简单，命令行直接搞定，感觉比之前用的apktool&#43;dex2jar&#43;jd-g" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sanchips.github.io/posts/2016-03/android-apk-decompiled-jadx/" /><meta property="og:image" content="https://sanchips.github.io/logo.svg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2016-03-04T00:00:00+08:00" />
+<meta property="article:modified_time" content="2016-03-04T00:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sanchips.github.io/logo.svg"/>
+
+<meta name="twitter:title" content="apk反编译工具Jadx的使用"/>
+<meta name="twitter:description" content="在github上瞎逛的时候找见了一个新的反编译工具Jadx，使用简单，命令行直接搞定，感觉比之前用的apktool&#43;dex2jar&#43;jd-g"/>
+<meta name="application-name" content="Sanchi">
+<meta name="apple-mobile-web-app-title" content="Sanchi">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://sanchips.github.io/posts/2016-03/android-apk-decompiled-jadx/" /><link rel="prev" href="https://sanchips.github.io/posts/2016-02/android-gif-image-create/" /><link rel="next" href="https://sanchips.github.io/posts/2016-08/android-circular-cover-view/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "apk反编译工具Jadx的使用",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sanchips.github.io\/posts\/2016-03\/android-apk-decompiled-jadx\/"
+        },"genre": "posts","keywords": "Android","wordcount":  745 ,
+        "url": "https:\/\/sanchips.github.io\/posts\/2016-03\/android-apk-decompiled-jadx\/","datePublished": "2016-03-04T00:00:00+08:00","dateModified": "2016-03-04T00:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Sanchi","logo": "https:\/\/sanchips.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Sanchi"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fas fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/posts/"><i class='fas fa-archive fa-fw'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fas fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fas fa-th-list fa-fw'></i> 分类 </a><a class="menu-item" href="/tools/"><i class='fas fa-globe fa-fw'></i> 工具 </a><a class="menu-item" href="/about/"><i class='fas fa-user-secret fa-fw'></i> 关于 </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/" title=""><i class='fas fa-home fa-fw'></i>首页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-archive fa-fw'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fas fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fas fa-th-list fa-fw'></i>分类</a><a class="menu-item" href="/tools/" title=""><i class='fas fa-globe fa-fw'></i>工具</a><a class="menu-item" href="/about/" title=""><i class='fas fa-user-secret fa-fw'></i>关于</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">apk反编译工具Jadx的使用</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sanchi</a>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/android/"><i class="far fa-folder fa-fw"></i>Android</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2016-03-04">2016-03-04</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2016-03-04">2016-03-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 745 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#运行">运行</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>在github上瞎逛的时候找见了一个新的反编译工具<code>Jadx</code>，使用简单，命令行直接搞定，感觉比之前用的<code>apktool</code>+<code>dex2jar</code>+<code>jd-gui</code>方式要方便很多。可以直接反编译<code>.apk</code>文件，也可以反编译解压出的<code>classes.dex</code>文件。特此记录使用过程。</p>
+<blockquote>
+<p><a href="https://github.com/skylot/jadx" target="_blank" rel="noopener noreffer">github-jadx</a></p>
+</blockquote>
+<p>反编译之后的GUI代码查看面板：</p>
+<p><code><a class="lightgallery" href="https://camo.githubusercontent.com/2b504e792e3ddb1d95094b44e01ab21e101b6f56/68747470733a2f2f692e696d6775722e636f6d2f6839313749425a2e706e67" title="https://camo.githubusercontent.com/2b504e792e3ddb1d95094b44e01ab21e101b6f56/68747470733a2f2f692e696d6775722e636f6d2f6839313749425a2e706e67" data-thumbnail="https://camo.githubusercontent.com/2b504e792e3ddb1d95094b44e01ab21e101b6f56/68747470733a2f2f692e696d6775722e636f6d2f6839313749425a2e706e67">
+        <img
+            class="lazyload"
+            data-src="https://camo.githubusercontent.com/2b504e792e3ddb1d95094b44e01ab21e101b6f56/68747470733a2f2f692e696d6775722e636f6d2f6839313749425a2e706e67"
+            data-srcset="https://camo.githubusercontent.com/2b504e792e3ddb1d95094b44e01ab21e101b6f56/68747470733a2f2f692e696d6775722e636f6d2f6839313749425a2e706e67, https://camo.githubusercontent.com/2b504e792e3ddb1d95094b44e01ab21e101b6f56/68747470733a2f2f692e696d6775722e636f6d2f6839313749425a2e706e67 1.5x, https://camo.githubusercontent.com/2b504e792e3ddb1d95094b44e01ab21e101b6f56/68747470733a2f2f692e696d6775722e636f6d2f6839313749425a2e706e67 2x"
+            data-sizes="auto"
+            alt="https://camo.githubusercontent.com/2b504e792e3ddb1d95094b44e01ab21e101b6f56/68747470733a2f2f692e696d6775722e636f6d2f6839313749425a2e706e67"
+        />
+    </a></code></p>
+<h2 id="安装">安装</h2>
+<p>按照作者指定的安装步骤进行安装，我用的是<code>git bash</code>命令行工具，全部在命令行完成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/skylot/jadx.git
+cd jadx
+./gradlew dist
+</code></pre></td></tr></table>
+</div>
+</div><p><code><a class="lightgallery" href="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemkts8d7j30p90by759.jpg" title="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemkts8d7j30p90by759.jpg" data-thumbnail="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemkts8d7j30p90by759.jpg">
+        <img
+            class="lazyload"
+            data-src="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemkts8d7j30p90by759.jpg"
+            data-srcset="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemkts8d7j30p90by759.jpg, http://ww1.sinaimg.cn/large/006dvlfWgy1fvemkts8d7j30p90by759.jpg 1.5x, http://ww1.sinaimg.cn/large/006dvlfWgy1fvemkts8d7j30p90by759.jpg 2x"
+            data-sizes="auto"
+            alt="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemkts8d7j30p90by759.jpg"
+        />
+    </a></code></p>
+<p>作者说：<code>on Windows, use gradlew.bat instead of ./gradlew</code>，在windows上用<code>gradlew.bat</code>代替<code>./gradlew</code>，但是我在<code>git bash</code>中运行的时候只认<code>./gradlew</code>。</p>
+<p>等上面的gradlew命令执行完之后，便可以进行反编译操作了。</p>
+<h2 id="运行">运行</h2>
+<p>作者的说明文档中给出了一个使用的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">cd build/jadx/
+bin/jadx -d out lib/jadx-core-*.jar
+#or
+bin/jadx-gui lib/jadx-core-*.jar
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>说明</strong>：先进入jadx文件夹，第一个命令<code>bin/jadx -d out lib/jadx-core-*.jar</code>的意思是在该文件夹下创建<code>out</code>目录，将<code>lib</code>文件夹下的<code>jadx-core-*.jar</code>文件进行反编译。反编译出的文件存放在<code>out</code>目录中。
+第二个命令<code>bin/jadx-gui lib/jadx-core-*.jar</code>的意思是将<code>lib</code>文件夹下的<code>jadx-core-*.jar</code>文件进行反编译并用自带的GUI打开，效果如上图。</p>
+<p>那么按照这个思路，我们来进行apk的反编译。
+我在工程中新建了一个文件夹<code>jadx\build\jadx\input</code>来存放我需要反编译的apk，然后执行命令：<code>bin/jadx-gui input/app-debug-unaligned.apk</code></p>
+<p><code><a class="lightgallery" href="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemld3jeij30lf022t8p.jpg" title="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemld3jeij30lf022t8p.jpg" data-thumbnail="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemld3jeij30lf022t8p.jpg">
+        <img
+            class="lazyload"
+            data-src="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemld3jeij30lf022t8p.jpg"
+            data-srcset="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemld3jeij30lf022t8p.jpg, http://ww1.sinaimg.cn/large/006dvlfWgy1fvemld3jeij30lf022t8p.jpg 1.5x, http://ww1.sinaimg.cn/large/006dvlfWgy1fvemld3jeij30lf022t8p.jpg 2x"
+            data-sizes="auto"
+            alt="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemld3jeij30lf022t8p.jpg"
+        />
+    </a></code></p>
+<p>就开始打印反编译的log，同时打开了GUI。等GUI左下角的loading走完之后，表示反编译已经完成了。</p>
+<p><code><a class="lightgallery" href="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemlr6exyj30bt07lq33.jpg" title="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemlr6exyj30bt07lq33.jpg" data-thumbnail="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemlr6exyj30bt07lq33.jpg">
+        <img
+            class="lazyload"
+            data-src="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemlr6exyj30bt07lq33.jpg"
+            data-srcset="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemlr6exyj30bt07lq33.jpg, http://ww1.sinaimg.cn/large/006dvlfWgy1fvemlr6exyj30bt07lq33.jpg 1.5x, http://ww1.sinaimg.cn/large/006dvlfWgy1fvemlr6exyj30bt07lq33.jpg 2x"
+            data-sizes="auto"
+            alt="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemlr6exyj30bt07lq33.jpg"
+        />
+    </a></code></p>
+<p>可以看到反编译出的代码以及资源文件。如果apk是混淆过的，就会看到一系列<code>abcd....</code>表示的包以及文件。</p>
+<p><code><a class="lightgallery" href="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemm07x14j308z09c74c.jpg" title="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemm07x14j308z09c74c.jpg" data-thumbnail="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemm07x14j308z09c74c.jpg">
+        <img
+            class="lazyload"
+            data-src="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemm07x14j308z09c74c.jpg"
+            data-srcset="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemm07x14j308z09c74c.jpg, http://ww1.sinaimg.cn/large/006dvlfWgy1fvemm07x14j308z09c74c.jpg 1.5x, http://ww1.sinaimg.cn/large/006dvlfWgy1fvemm07x14j308z09c74c.jpg 2x"
+            data-sizes="auto"
+            alt="http://ww1.sinaimg.cn/large/006dvlfWgy1fvemm07x14j308z09c74c.jpg"
+        />
+    </a></code></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2016-03-04</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/android/">Android</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2016-02/android-gif-image-create/" class="prev" rel="prev" title="android使用多张图片合成gif文件"><i class="fas fa-angle-left fa-fw"></i>android使用多张图片合成gif文件</a>
+            <a href="/posts/2016-08/android-circular-cover-view/" class="next" rel="next" title="android圆角遮罩view">android圆角遮罩view<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sanchi</a></span>&nbsp;|&nbsp;<span class="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/css/custom.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-119399604-2', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-119399604-2" async></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["sanchips"],"clientID":"2ede82b0a7198c45ce3e","clientSecret":"52dffb46d64ec3b2d5a6e6586b759ac9a70965c2","id":"2016-03-04T00:00:00+08:00","owner":"sanchips","repo":"sanchips.github.io","title":"apk反编译工具Jadx的使用"}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"></div>
+</body>
+
+</html>

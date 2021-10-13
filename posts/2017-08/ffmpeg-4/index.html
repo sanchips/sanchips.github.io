@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">[4][使用] FFmpeg视频裁剪 - Sanchi</title><meta name="Description" content="记录一些工作上的历程"><meta property="og:title" content="[4][使用] FFmpeg视频裁剪" />
+<meta property="og:description" content="视频裁剪就是选中你想要的矩形区域并只输出这个区域，去污不残留。裁剪通常和大小调整，填充和其他操作一起使用。 基本裁切内容 老版本的FFmpeg有" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sanchips.github.io/posts/2017-08/ffmpeg-4/" /><meta property="og:image" content="https://sanchips.github.io/logo.svg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2017-08-30T00:00:00+08:00" />
+<meta property="article:modified_time" content="2017-08-30T00:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sanchips.github.io/logo.svg"/>
+
+<meta name="twitter:title" content="[4][使用] FFmpeg视频裁剪"/>
+<meta name="twitter:description" content="视频裁剪就是选中你想要的矩形区域并只输出这个区域，去污不残留。裁剪通常和大小调整，填充和其他操作一起使用。 基本裁切内容 老版本的FFmpeg有"/>
+<meta name="application-name" content="Sanchi">
+<meta name="apple-mobile-web-app-title" content="Sanchi">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://sanchips.github.io/posts/2017-08/ffmpeg-4/" /><link rel="prev" href="https://sanchips.github.io/posts/2017-08/ffmpeg-3/" /><link rel="next" href="https://sanchips.github.io/posts/2017-08/ffmpeg-5/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "[4][使用] FFmpeg视频裁剪",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sanchips.github.io\/posts\/2017-08\/ffmpeg-4\/"
+        },"genre": "posts","keywords": "ffmpeg","wordcount":  1091 ,
+        "url": "https:\/\/sanchips.github.io\/posts\/2017-08\/ffmpeg-4\/","datePublished": "2017-08-30T00:00:00+08:00","dateModified": "2017-08-30T00:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Sanchi","logo": "https:\/\/sanchips.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Sanchi"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fas fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/posts/"><i class='fas fa-archive fa-fw'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fas fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fas fa-th-list fa-fw'></i> 分类 </a><a class="menu-item" href="/tools/"><i class='fas fa-globe fa-fw'></i> 工具 </a><a class="menu-item" href="/about/"><i class='fas fa-user-secret fa-fw'></i> 关于 </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/" title=""><i class='fas fa-home fa-fw'></i>首页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-archive fa-fw'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fas fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fas fa-th-list fa-fw'></i>分类</a><a class="menu-item" href="/tools/" title=""><i class='fas fa-globe fa-fw'></i>工具</a><a class="menu-item" href="/about/" title=""><i class='fas fa-user-secret fa-fw'></i>关于</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">[4][使用] FFmpeg视频裁剪</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sanchi</a>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/ffmpeg/"><i class="far fa-folder fa-fw"></i>ffmpeg</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-08-30">2017-08-30</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2017-08-30">2017-08-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1091 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基本裁切内容">基本裁切内容</a></li>
+    <li><a href="#中心裁剪">中心裁剪</a></li>
+    <li><a href="#裁剪区域的自动检测">裁剪区域的自动检测</a></li>
+    <li><a href="#裁切计时器">裁切计时器</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>视频裁剪就是选中你想要的矩形区域并只输出这个区域，去污不残留。裁剪通常和大小调整，填充和其他操作一起使用。</p>
+<h2 id="基本裁切内容">基本裁切内容</h2>
+<p>老版本的FFmpeg有<code>cropbottom</code>、<code>cropleft</code>、<code>cropright</code>、<code>croptop</code>几个指令，但是现在过时了。裁剪操作现在使用下表描述的<code>crop</code>滤镜。</p>
+<p><code><a class="lightgallery" href="/posts/2017-08/ffmpeg-4/ff_4_1.png" title="/posts/2017-08/ffmpeg-4/ff_4_1.png" data-thumbnail="/posts/2017-08/ffmpeg-4/ff_4_1.png">
+        <img
+            class="lazyload"
+            data-src="ff_4_1.png"
+            data-srcset="/posts/2017-08/ffmpeg-4/ff_4_1.png, ff_4_1.png 1.5x, /posts/2017-08/ffmpeg-4/ff_4_1.png 2x"
+            data-sizes="auto"
+            alt="/posts/2017-08/ffmpeg-4/ff_4_1.png"
+        />
+    </a></code></p>
+<p><code>ow</code>的值能够通过<code>oh</code>的值推导得出，反之亦然。但是不能通过<code>x</code>和<code>y</code>推导得出，因为它们是在<code>ow</code>和<code>oh</code>之后进行求值的。另外<code>x</code>能够通过<code>y</code>推导得出，反之亦然。
+好懵逼。先看人家举的栗子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ffmpeg -i input -vf crop=iw/3:ih:0:0 output
+ffmpeg -i input -vf crop=iw/3:ih:iw/3:0 output
+ffmpeg -i input -vf crop=iw/3:ih:iw/3*2:0 output  
+</code></pre></td></tr></table>
+</div>
+</div><p>结果还是没明白人家什么意思。再看个图：</p>
+<p><code><a class="lightgallery" href="/posts/2017-08/ffmpeg-4/ff_4_2.jpg" title="/posts/2017-08/ffmpeg-4/ff_4_2.jpg" data-thumbnail="/posts/2017-08/ffmpeg-4/ff_4_2.jpg">
+        <img
+            class="lazyload"
+            data-src="ff_4_2.jpg"
+            data-srcset="/posts/2017-08/ffmpeg-4/ff_4_2.jpg, ff_4_2.jpg 1.5x, /posts/2017-08/ffmpeg-4/ff_4_2.jpg 2x"
+            data-sizes="auto"
+            alt="/posts/2017-08/ffmpeg-4/ff_4_2.jpg"
+        />
+    </a></code></p>
+<h2 id="中心裁剪">中心裁剪</h2>
+<p>当我们进行中心裁剪操作时，可以跳过<code>crop</code>滤镜<code>x</code>和<code>y</code>参数的输入。默认<code>x</code>和<code>y</code>的值分别是：<code>x_default = ( input width - output width)/2</code>，<code>y_default = ( input height - output height)/2</code>
+这意味着中心裁剪时默认值是自动设置的。那么裁剪中心区域的语法是：<code>ffmpeg -i input_file -vf crop=w:h output_file</code>
+例如<code>ffmpeg -i input.mpg -vf crop=iw/2:ih/2 output.mp4</code>表示以中心裁剪的方式裁出宽高为原视频一半的视频。</p>
+<h2 id="裁剪区域的自动检测">裁剪区域的自动检测</h2>
+<p>这个功能很牛逼啊，它表示能够通过<code>cropdetect</code>滤镜监测没有黑边的区域并进行裁切。参数描述见下表：</p>
+<p><code><a class="lightgallery" href="/posts/2017-08/ffmpeg-4/ff_4_3.png" title="/posts/2017-08/ffmpeg-4/ff_4_3.png" data-thumbnail="/posts/2017-08/ffmpeg-4/ff_4_3.png">
+        <img
+            class="lazyload"
+            data-src="ff_4_3.png"
+            data-srcset="/posts/2017-08/ffmpeg-4/ff_4_3.png, ff_4_3.png 1.5x, /posts/2017-08/ffmpeg-4/ff_4_3.png 2x"
+            data-sizes="auto"
+            alt="/posts/2017-08/ffmpeg-4/ff_4_3.png"
+        />
+    </a></code></p>
+<p>黑边通常出现在分辨率转换之后，如4：3&lt;&mdash;&gt;16：9。
+限制参数指定在输出时选中了多少黑色，参数0表示只有纯黑色会被裁剪。比如我们可以使用<code>ffmpeg -i input.mp4 -vf cropdetect=limit=0 output.mp4</code>命令裁切没有黑色的输出。</p>
+<h2 id="裁切计时器">裁切计时器</h2>
+<p>媒体播放器通常拥有一个进度条来展示播放时间，但是通常只有在鼠标划过时经过一个特殊的时间短展示或消失。
+ffmpeg内置了一个名为<code>testsrc</code>的视频，我们可以通过<code>ffplay -f lavfi -i testsrc</code>命令来播放它。他的默认大小为320x240像素，初始计时器的数字0大小为29x52像素，且他的位置距左上角在水平方向的距离为256像素，竖直方向上的距离为94像素。我们可以通过<code>ffmpeg -f lavfi -i testsrc -vf crop=29:52:256:94 -t 10 timer1.mpg</code>命令来裁切一位数字。
+那么同理，我们要裁切更多位数的话，可以根据单个数字的宽高适当调节参数，例如要裁切一个三位数的计时器：<code>ffmpeg -f lavfi -i testsrc -vf crop=93:52:192:94 -t 1000 timer1.mpg</code>。
+如果想要裁切出的数字比52px更高，我们可以指定一个testsrc更大的输出尺寸(如：<code>-i testsrc=size=vga</code>)并且相应的调整裁切区域。
+另外可以使用定义在<code>Color Corrections</code>章节中的<code>lut</code>滤镜来调整数字的颜色和背景色。创建出来的计时器会用于示例中的视频遮盖（Created timers will be used in examples for the video overlay.这句没明白是怎么个应用法）。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2017-08-30</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/ffmpeg/">ffmpeg</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2017-08/ffmpeg-3/" class="prev" rel="prev" title="[3][使用] FFmpeg调整文件尺寸"><i class="fas fa-angle-left fa-fw"></i>[3][使用] FFmpeg调整文件尺寸</a>
+            <a href="/posts/2017-08/ffmpeg-5/" class="next" rel="next" title="[5][使用] FFmpeg视频间距">[5][使用] FFmpeg视频间距<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sanchi</a></span>&nbsp;|&nbsp;<span class="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/css/custom.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-119399604-2', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-119399604-2" async></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["sanchips"],"clientID":"2ede82b0a7198c45ce3e","clientSecret":"52dffb46d64ec3b2d5a6e6586b759ac9a70965c2","id":"2017-08-30T00:00:00+08:00","owner":"sanchips","repo":"sanchips.github.io","title":"[4][使用] FFmpeg视频裁剪"}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"></div>
+</body>
+
+</html>

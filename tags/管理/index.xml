@@ -1,0 +1,46 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>管理 - 标签 - Sanchi</title>
+        <link>https://sanchips.github.io/tags/%E7%AE%A1%E7%90%86/</link>
+        <description>管理 - 标签 - Sanchi</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sanchi.zhang@gmail.com (Sanchi)</managingEditor>
+            <webMaster>sanchi.zhang@gmail.com (Sanchi)</webMaster><lastBuildDate>Sat, 11 May 2019 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://sanchips.github.io/tags/%E7%AE%A1%E7%90%86/" rel="self" type="application/rss+xml" /><item>
+    <title>有效的会议</title>
+    <link>https://sanchips.github.io/posts/2019-05/manage-effective-meeting/</link>
+    <pubDate>Sat, 11 May 2019 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2019-05/manage-effective-meeting/</guid>
+    <description><![CDATA[<p>之所以有这篇文章，是因为有段时间开了一堆拖沓无用的会议：目标不明确，讨论无意义，未得出有效结论，占用了大量时间。对这种会议方式深恶痛绝，正好看到<a href="https://36kr.com/p/5137083.html" target="_blank" rel="noopener noreffer">这篇文章</a>，于是思考了一下如何改进现有的会议进程。从流程上避免冗余，拖沓，推诿的会议。</p>]]></description>
+</item><item>
+    <title>浅谈企业管理</title>
+    <link>https://sanchips.github.io/posts/2018-05/manage-company-simple-talk/</link>
+    <pubDate>Fri, 18 May 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-05/manage-company-simple-talk/</guid>
+    <description><![CDATA[<blockquote>
+<p>五月中旬的时候boss抛给我一个问题：<code>给你安排家庭作业，认真阅读调查内容，然后总结分析，谈你个人的观念，假如你是他们的领导者，针对各自的思维方式及个性，你如何去施展管理？能让这批成员在快乐中去奋斗，创造价值实现梦想？</code></p>
+</blockquote>]]></description>
+</item><item>
+    <title>不同驱动型公司协同开发工作流</title>
+    <link>https://sanchips.github.io/posts/2018-04/manage-different-company-work-flow/</link>
+    <pubDate>Wed, 11 Apr 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-04/manage-different-company-work-flow/</guid>
+    <description><![CDATA[<h2 id="公司开发驱动类型">公司开发驱动类型</h2>
+<p>️⚠️<strong>注意</strong>：在每一个公司都赴互联网化的道路上，首先要明确自己属于哪一种<strong>驱动模式</strong>。现列出以下几类，后续可作补充。</p>]]></description>
+</item><item>
+    <title>一个项目奖金计算方案</title>
+    <link>https://sanchips.github.io/posts/2018-03/manage-project-award-calculate/</link>
+    <pubDate>Mon, 19 Mar 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-03/manage-project-award-calculate/</guid>
+    <description><![CDATA[<p>在部门内构思了一个项目奖金分配方案，实行记录如下。</p>]]></description>
+</item><item>
+    <title>关于技术部门并行开发的几点思考</title>
+    <link>https://sanchips.github.io/posts/2018-03/manage-thinking-of-parallel-develop/</link>
+    <pubDate>Mon, 19 Mar 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-03/manage-thinking-of-parallel-develop/</guid>
+    <description><![CDATA[<p>首先，明确我们的痛点在于<strong>无法并行开发多个版本的app</strong>。关于技术部门的应对方式，现思考解决方案如下：</p>]]></description>
+</item></channel>
+</rss>

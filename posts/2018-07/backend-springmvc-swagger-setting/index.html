@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">SpringMVC&#43;Swagger配置使用踩坑 - Sanchi</title><meta name="Description" content="记录一些工作上的历程"><meta property="og:title" content="SpringMVC&#43;Swagger配置使用踩坑" />
+<meta property="og:description" content="背景 接口写完之后手写接口文档太痛苦了，于是搜索一番自动生成api文档的工具，最后get到了神器Swagger和它的图形化工具Swagger-" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sanchips.github.io/posts/2018-07/backend-springmvc-swagger-setting/" /><meta property="og:image" content="https://sanchips.github.io/logo.svg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-07-20T00:00:00+08:00" />
+<meta property="article:modified_time" content="2018-07-20T00:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sanchips.github.io/logo.svg"/>
+
+<meta name="twitter:title" content="SpringMVC&#43;Swagger配置使用踩坑"/>
+<meta name="twitter:description" content="背景 接口写完之后手写接口文档太痛苦了，于是搜索一番自动生成api文档的工具，最后get到了神器Swagger和它的图形化工具Swagger-"/>
+<meta name="application-name" content="Sanchi">
+<meta name="apple-mobile-web-app-title" content="Sanchi">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://sanchips.github.io/posts/2018-07/backend-springmvc-swagger-setting/" /><link rel="prev" href="https://sanchips.github.io/posts/2018-07/backend-solution-collection/" /><link rel="next" href="https://sanchips.github.io/posts/2019-05/manage-effective-meeting/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "SpringMVC+Swagger配置使用踩坑",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sanchips.github.io\/posts\/2018-07\/backend-springmvc-swagger-setting\/"
+        },"genre": "posts","keywords": "后端, SpringMVC, Swagger","wordcount":  2265 ,
+        "url": "https:\/\/sanchips.github.io\/posts\/2018-07\/backend-springmvc-swagger-setting\/","datePublished": "2018-07-20T00:00:00+08:00","dateModified": "2018-07-20T00:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Sanchi","logo": "https:\/\/sanchips.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Sanchi"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fas fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/posts/"><i class='fas fa-archive fa-fw'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fas fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fas fa-th-list fa-fw'></i> 分类 </a><a class="menu-item" href="/tools/"><i class='fas fa-globe fa-fw'></i> 工具 </a><a class="menu-item" href="/about/"><i class='fas fa-user-secret fa-fw'></i> 关于 </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/" title=""><i class='fas fa-home fa-fw'></i>首页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-archive fa-fw'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fas fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fas fa-th-list fa-fw'></i>分类</a><a class="menu-item" href="/tools/" title=""><i class='fas fa-globe fa-fw'></i>工具</a><a class="menu-item" href="/about/" title=""><i class='fas fa-user-secret fa-fw'></i>关于</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">SpringMVC&#43;Swagger配置使用踩坑</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sanchi</a>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/%E5%90%8E%E7%AB%AF/"><i class="far fa-folder fa-fw"></i>后端</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-07-20">2018-07-20</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2018-07-20">2018-07-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2265 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#最终配置及踩坑过程">最终配置及踩坑过程</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="背景">背景</h2>
+<p>接口写完之后手写接口文档太痛苦了，于是搜索一番自动生成api文档的工具，最后get到了神器<a href="https://swagger.io/" target="_blank" rel="noopener noreffer">Swagger</a>和它的图形化工具<a href="https://swagger.io/tools/swagger-ui/" target="_blank" rel="noopener noreffer">Swagger-UI</a>。</p>
+<p>从Android前端到Java后端的话语言方面没什么问题，框架使用的是SpringMVC，依赖注入和控制反转有点类似Android的<a href="https://google.github.io/dagger/" target="_blank" rel="noopener noreffer">Dagger2</a>项目，但是在配置方面有一些坑还是踩了一遍，归根结底是自己对SpringMVC的框架体系没有理解，且是赶鸭子上架临时上手一梭子。老项目，如果是新开项目可以使用官方推荐的SpringBoot框架，配置使用更加简单舒爽。</p>
+<p>那么先来波文档回味一下什么是SpringMVC：</p>
+<ul>
+<li><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/" target="_blank" rel="noopener noreffer">官方文档：Spring框架文档</a></li>
+<li><a href="https://www.jianshu.com/p/42620a0a2c33" target="_blank" rel="noopener noreffer">Spring，Spring MVC及Spring Boot区别</a></li>
+<li><a href="http://wiki.jikexueyuan.com/project/spring/web-mvc-framework.html" target="_blank" rel="noopener noreffer">SpringMVC中文教程（极客学院）</a></li>
+</ul>
+<p>了解完毕之后我们通过<a href="http://springfox.github.io/springfox/" target="_blank" rel="noopener noreffer">SpringFox</a>来添加配置Swagger。</p>
+<p>若干大神写文章讲Swagger配置文档的使用，我也来讲讲自己使用过程中踩的坑吧，此文仅为踩坑记录，如有谬误请指出。</p>
+<h2 id="最终配置及踩坑过程">最终配置及踩坑过程</h2>
+<ol>
+<li>
+<p>maven库导入。注意：我使用的是<code>springfox 2.9.2</code>最新版本，添加springfox自身即可，如果启动项目时出现<code>com/fasterxml/jackson/databind/ObjectMapper</code>类找不到,请额外添加Jackson的依赖。(有教程说2.7.0版本的springfox有bug不建议使用，我未进行验证)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;version.jackson&gt;</span>2.9.6<span class="nt">&lt;/version.jackson&gt;</span>
+
+<span class="c">&lt;!-- jackson用于将springfox返回的文档对象转换成JSON字符串 --&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>jackson-annotations<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${version.jackson}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>jackson-databind<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${version.jackson}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>jackson-core<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${version.jackson}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+
+<span class="c">&lt;!-- ========swagger2 api自动生成工具 start======== --&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.springfox<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>springfox-swagger2<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.9.2<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.springfox<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>springfox-swagger-ui<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.9.2<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="c">&lt;!-- ========swagger2 api自动生成工具 end======== --&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>swagger java配置文件，注意两个类注解的添加</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">springfox.documentation.builders.ApiInfoBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">springfox.documentation.builders.PathSelectors</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">springfox.documentation.builders.RequestHandlerSelectors</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">springfox.documentation.service.ApiInfo</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">springfox.documentation.spi.DocumentationType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">springfox.documentation.spring.web.plugins.Docket</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">springfox.documentation.swagger2.annotations.EnableSwagger2</span><span class="o">;</span>
+
+<span class="cm">/**
+</span><span class="cm">* Swagger配置文件。
+</span><span class="cm">* [Springfox官方集成文档](http://springfox.github.io/springfox/docs/current/)
+</span><span class="cm">* [Swagger注解官方文档](https://github.com/swagger-api/swagger-core/wiki/Annotations-1.5.X)
+</span><span class="cm">* &lt;p&gt;
+</span><span class="cm">* 配置注意事项：
+</span><span class="cm">* 1. swagger及swagger-ui的添加，注意版本
+</span><span class="cm">* 2. 该config文件的注解添加，@Configuration与@EnableSwagger2为必须添加
+</span><span class="cm">* 3. 配置servlet-mapping为&#34;/&#34;，因为会生成静态文件，因此需要注意路径穿透
+</span><span class="cm">*
+</span><span class="cm">* @author sanchi
+</span><span class="cm">*/</span>
+<span class="nd">@Configuration</span>
+<span class="nd">@EnableSwagger2</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SwaggerConfig</span> <span class="o">{</span>
+
+    <span class="cm">/**
+</span><span class="cm">    * 根据配置读取是否开启swagger文档，针对测试与生产环境采用不同的配置
+</span><span class="cm">    */</span>
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">&#34;${swagger.enable}&#34;</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">isSwaggerEnable</span><span class="o">;</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">Docket</span> <span class="nf">createRestApi</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">Docket</span><span class="o">(</span><span class="n">DocumentationType</span><span class="o">.</span><span class="na">SWAGGER_2</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">groupName</span><span class="o">(</span><span class="s">&#34;sanchi&#34;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">enable</span><span class="o">(</span><span class="n">isSwaggerEnable</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">apiInfo</span><span class="o">(</span><span class="n">apiInfo</span><span class="o">()).</span><span class="na">select</span><span class="o">()</span>
+                <span class="c1">// 对所有该包下的Api进行监控，如果想要监控所有的话可以改成any()
+</span><span class="c1"></span>                <span class="o">.</span><span class="na">apis</span><span class="o">(</span><span class="n">RequestHandlerSelectors</span><span class="o">.</span><span class="na">basePackage</span><span class="o">(</span><span class="s">&#34;com.sanchi.test&#34;</span><span class="o">))</span>
+                <span class="c1">// 对所有路径进行扫描
+</span><span class="c1"></span>                <span class="o">.</span><span class="na">paths</span><span class="o">(</span><span class="n">PathSelectors</span><span class="o">.</span><span class="na">any</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">    * @return 生成文档说明信息
+</span><span class="cm">    */</span>
+    <span class="kd">private</span> <span class="n">ApiInfo</span> <span class="nf">apiInfo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">ApiInfoBuilder</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">title</span><span class="o">(</span><span class="s">&#34;Sanchi test API文档&#34;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">description</span><span class="o">(</span><span class="s">&#34;接口文档&#34;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">termsOfServiceUrl</span><span class="o">(</span><span class="s">&#34;http://sanchips.github.io&#34;</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">version</span><span class="o">(</span><span class="s">&#34;1.0.0&#34;</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>检查<code>dispatcherServlet</code>的mapping映射规则，是否为转发所有的请求。也是<strong>我本次配置最坑的地方</strong>，因为是个老项目，映射处只配置了对<code>.php</code>和<code>.do</code>的转发，没有配置为<code>/</code>，导致<code>swagger-ui.html</code>根本访问不到，访问对应路径时循环弹窗提示url路径不对。打开页面浏览器控制台时发现有报错：<code>swagger-resources/configuration/ui 404 (not found)</code>，对于这个十分困惑，检索了好多文字都没有找到答案，直到找到<a href="https://blog.csdn.net/MikeLC7/article/details/72884859" target="_blank" rel="noopener noreffer">这篇文章</a>对于servlet静态资源穿透的说明才恍然大悟，老手们应该不会犯这么低级的错误吧😂</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!-- servlet处理所有请求，配合&lt;mvc:default-servlet-handler /&gt;进行静态资源转发 --&gt;</span>
+<span class="nt">&lt;servlet-mapping&gt;</span>
+    <span class="nt">&lt;servlet-name&gt;</span>dispatcherServlet<span class="nt">&lt;/servlet-name&gt;</span>
+    <span class="nt">&lt;url-pattern&gt;</span>/<span class="nt">&lt;/url-pattern&gt;</span>
+<span class="nt">&lt;/servlet-mapping&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其他一些配置内容，这部分内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!-- 静态资源请求转发 --&gt;</span>
+<span class="nt">&lt;mvc:default-servlet-handler/&gt;</span>
+<span class="c">&lt;!-- 启动注解 --&gt;</span>
+<span class="nt">&lt;mvc:annotation-driven/&gt;</span>
+<span class="c">&lt;!-- 自动注入，使系统能够识别相应的注解，使用&lt;context:component-scan/&gt;手动扫描后可以省略该配置 --&gt;</span>
+<span class="nt">&lt;context:annotation-config/&gt;</span>
+<span class="c">&lt;!-- 配置全局使用的k-v文件路径，添加控制参数，区分测试与正式环境觉得是否启用swagger api文档 --&gt;</span>
+<span class="nt">&lt;context:property-placeholder</span> <span class="na">location=</span><span class="s">&#34;classpath*:context-sanchi.properties&#34;</span> <span class="na">file-encoding=</span><span class="s">&#34;UTF-8&#34;</span><span class="nt">/&gt;</span>
+
+<span class="c">&lt;!-- 添加Swagger2的java config作为SpringMVC的bean --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&#34;com.sanchi.test.config.SwaggerConfig&#34;</span><span class="nt">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>context-sanchi.properties</code>文件中添加控制参数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># ======swagger是否启用配置字段======
+swagger.enable=true
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>上面也提到了区分测试与正式环境觉得是否启用swagger api文档，有人提到了根据正式或者测试环境是否引用<code>&lt;bean class=&quot;com.sanchi.test.config.SwaggerConfig&quot;/&gt;</code>，觉得这种方式不太友好，找到<a href="https://www.cnblogs.com/woshimrf/p/disable-swagger.html" target="_blank" rel="noopener noreffer">这篇文章</a>，发现swagger在配置的时候有提供一个<code>enable</code>的方法，于是使用<code>properties</code>参数配置的方式，见上面内容☝</p>
+</li>
+</ol>
+<p>至此，运行项目，打开swagger-ui页面，熟悉的界面出现，列出了所有controller下的接口信息，按照步骤添加api注解注释即可。配置结束，前期的坑也踩完了。</p>
+<p>PS：发现一个彩蛋，<code>SwaggerConfig</code>文件添加<code>@EnableWebMvc</code>注解之后打开的ui界面跟不加不同，暂未做深究😛</p>
+<p><img
+        class="lazyload"
+        data-src="/images/doge.gif"
+        data-srcset="/images/doge.gif, /images/doge.gif 1.5x, /images/doge.gif 2x"
+        data-sizes="auto"
+        alt="/images/doge.gif"
+        title="doge"
+    /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2018-07-20</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%90%8E%E7%AB%AF/">后端</a>,&nbsp;<a href="/tags/springmvc/">SpringMVC</a>,&nbsp;<a href="/tags/swagger/">Swagger</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2018-07/backend-solution-collection/" class="prev" rel="prev" title="一些后端问题解决方案整理"><i class="fas fa-angle-left fa-fw"></i>一些后端问题解决方案整理</a>
+            <a href="/posts/2019-05/manage-effective-meeting/" class="next" rel="next" title="有效的会议">有效的会议<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sanchi</a></span>&nbsp;|&nbsp;<span class="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/css/custom.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-119399604-2', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-119399604-2" async></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["sanchips"],"clientID":"2ede82b0a7198c45ce3e","clientSecret":"52dffb46d64ec3b2d5a6e6586b759ac9a70965c2","id":"2018-07-20T00:00:00+08:00","owner":"sanchips","repo":"sanchips.github.io","title":"SpringMVC+Swagger配置使用踩坑"}}};</script><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"></div>
+</body>
+
+</html>

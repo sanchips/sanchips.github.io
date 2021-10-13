@@ -1,0 +1,45 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Android - 标签 - Sanchi</title>
+        <link>https://sanchips.github.io/tags/android/</link>
+        <description>Android - 标签 - Sanchi</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sanchi.zhang@gmail.com (Sanchi)</managingEditor>
+            <webMaster>sanchi.zhang@gmail.com (Sanchi)</webMaster><lastBuildDate>Thu, 27 Apr 2017 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://sanchips.github.io/tags/android/" rel="self" type="application/rss+xml" /><item>
+    <title>一个NoClassDefFoundError的解决过程</title>
+    <link>https://sanchips.github.io/posts/2017-04/android-no-class-def-found/</link>
+    <pubDate>Thu, 27 Apr 2017 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2017-04/android-no-class-def-found/</guid>
+    <description><![CDATA[<p>内含分析过程，如寻找答案，直接查看<a href="#%e8%a7%a3%e5%86%b3%e6%96%b9%e5%bc%8f" rel="">解决方式</a>。</p>]]></description>
+</item><item>
+    <title>android圆角遮罩view</title>
+    <link>https://sanchips.github.io/posts/2016-08/android-circular-cover-view/</link>
+    <pubDate>Thu, 11 Aug 2016 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2016-08/android-circular-cover-view/</guid>
+    <description><![CDATA[<h2 id="思路">思路</h2>
+<p>项目开发过程中会用到一些圆角控件，但是每次有想单独添加圆角的控件的时候，又得自定义这个控件，于是想找个一劳永逸的方式来解决这个问题。</p>]]></description>
+</item><item>
+    <title>apk反编译工具Jadx的使用</title>
+    <link>https://sanchips.github.io/posts/2016-03/android-apk-decompiled-jadx/</link>
+    <pubDate>Fri, 04 Mar 2016 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2016-03/android-apk-decompiled-jadx/</guid>
+    <description><![CDATA[在github上瞎逛的时候找见了一个新的反编译工具Jadx，使用简单，命令行直接搞定，感觉比之前用的apktool+dex2jar+jd-g]]></description>
+</item><item>
+    <title>android使用多张图片合成gif文件</title>
+    <link>https://sanchips.github.io/posts/2016-02/android-gif-image-create/</link>
+    <pubDate>Mon, 29 Feb 2016 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2016-02/android-gif-image-create/</guid>
+    <description><![CDATA[之前有遇到过一个要用多张图片合成gif图的场景，当时是搜索了好久，也没有发现有相关的使用记录。后来找到了实现方式，特此记录。 使用了Githu]]></description>
+</item><item>
+    <title>Android中WebView页面交互</title>
+    <link>https://sanchips.github.io/posts/2015-12/android-webview-interact/</link>
+    <pubDate>Tue, 15 Dec 2015 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2015-12/android-webview-interact/</guid>
+    <description><![CDATA[<h2 id="代码">代码</h2>
+<p>在android内打开一个网页的时候，有时我们会要求与网页有一些交互。而这些交互是在基于javaScript的基础上。</p>]]></description>
+</item></channel>
+</rss>

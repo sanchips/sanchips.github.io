@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">产品之路初探 - Sanchi</title><meta name="Description" content="记录一些工作上的历程"><meta property="og:title" content="产品之路初探" />
+<meta property="og:description" content="
+本文是记录某位程序猿走向产品之路的一些探索和心得。因为是刚开始接触，仅有一些初步的认知，后续会对产品之路中所见所闻进行持续的补充。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sanchips.github.io/posts/2018-04/pm-find-the-way-of-pm/" /><meta property="og:image" content="https://sanchips.github.io/logo.svg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-04-17T00:00:00+08:00" />
+<meta property="article:modified_time" content="2018-04-17T00:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sanchips.github.io/logo.svg"/>
+
+<meta name="twitter:title" content="产品之路初探"/>
+<meta name="twitter:description" content="
+本文是记录某位程序猿走向产品之路的一些探索和心得。因为是刚开始接触，仅有一些初步的认知，后续会对产品之路中所见所闻进行持续的补充。
+"/>
+<meta name="application-name" content="Sanchi">
+<meta name="apple-mobile-web-app-title" content="Sanchi">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://sanchips.github.io/posts/2018-04/pm-find-the-way-of-pm/" /><link rel="prev" href="https://sanchips.github.io/posts/2018-04/manage-different-company-work-flow/" /><link rel="next" href="https://sanchips.github.io/posts/2018-05/manage-company-simple-talk/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "产品之路初探",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sanchips.github.io\/posts\/2018-04\/pm-find-the-way-of-pm\/"
+        },"genre": "posts","keywords": "产品","wordcount":  2498 ,
+        "url": "https:\/\/sanchips.github.io\/posts\/2018-04\/pm-find-the-way-of-pm\/","datePublished": "2018-04-17T00:00:00+08:00","dateModified": "2018-04-17T00:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Sanchi","logo": "https:\/\/sanchips.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Sanchi"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fas fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/posts/"><i class='fas fa-archive fa-fw'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fas fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fas fa-th-list fa-fw'></i> 分类 </a><a class="menu-item" href="/tools/"><i class='fas fa-globe fa-fw'></i> 工具 </a><a class="menu-item" href="/about/"><i class='fas fa-user-secret fa-fw'></i> 关于 </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/" title=""><i class='fas fa-home fa-fw'></i>首页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-archive fa-fw'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fas fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fas fa-th-list fa-fw'></i>分类</a><a class="menu-item" href="/tools/" title=""><i class='fas fa-globe fa-fw'></i>工具</a><a class="menu-item" href="/about/" title=""><i class='fas fa-user-secret fa-fw'></i>关于</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">产品之路初探</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sanchi</a>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/%E4%BA%A7%E5%93%81/"><i class="far fa-folder fa-fw"></i>产品</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-04-17">2018-04-17</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2018-04-17">2018-04-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2498 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#如何成为一只产品狗">如何成为一只产品狗</a></li>
+    <li><a href="#产品经理相关资源推荐">产品经理相关资源推荐</a>
+      <ul>
+        <li><a href="#常见数据收集sdk分析比对">常见数据收集sdk分析比对</a></li>
+        <li><a href="#用户体验及设计相关推荐">用户体验及设计相关推荐</a></li>
+        <li><a href="#产品知识储备">产品知识储备</a></li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>本文是记录某位程序猿走向产品之路的一些探索和心得。因为是刚开始接触，仅有一些初步的认知，后续会对产品之路中所见所闻进行持续的补充。</p>
+</blockquote>
+<h2 id="如何成为一只产品狗">如何成为一只产品狗</h2>
+<p>之前身份还是一只纯种程序猿的时候，产品狗简直一生之敌：不考虑产品设计大环境，产品设计没有逻辑性，不考虑实现难易程度以及时间成本，随意改需求，甚至部分产品🐶做出来的东西用户体验也跟💩一样，当然以上内容是来自敌军猿族的吐槽，各位产品大神请忽略。那么作为一直猿打入敌军的时候应该具备哪些素质，我们基于以上几条吐槽开始逐条分析。</p>
+<ol>
+<li>
+<p><strong>产品大环境</strong>：作为产品要对整个市场具有敏感性。什么方向可以做，有哪些爆点，当前所负责的产品在整个大环境中处于什么位置，主要竞争力是什么，同时有什么风险。基于这一点可以扩散出很多内容，当然也是一个产品🐶最基本的素养</p>
+</li>
+<li>
+<p><strong>产品逻辑关联性</strong>：所负责设计的产品不应该存在逻辑漏洞以及前后功能存在冲突的地方，这个问题经常出现在有多个产品经理负责同一个产品但没有互相了解对方动机及设计理念的时候。及时有效的部门内沟通方式可避免此问题的出现。但要是只有一个人在负责这个项目，那么在设计完成的时候尽量多做几遍检查，可以避免大部分的漏洞。如果公司的工作流包含需求评审阶段，这步流程也能发现一些隐藏的问题。如果以上都没有做到，并且程序猿在执行的时候没有发现或者提出异议，那么我替他们的老板感到担心&hellip; 希望线上不会造成什么损失😓。最后还有一点，在设计一个功能的时候不要为了设计而设计，要考虑到后续功能扩展，能发散扩展到什么程度就看你的本事了。（参考微信，从公众号/订阅号-&gt;小程序-&gt;小游戏，这一套很令人叹服）</p>
+</li>
+<li>
+<p><strong>用户体验</strong>：很多产品都在讲用户体验，其实这一点是很难去主观评判的，很多时候要辅以一定的用户反馈以及数据分析才能得出结论，这些我们下条再讲，这里先对一些主流意义上的用户体验做一个简要的分析。这个按钮放在这个地方好不好点，用户会不会手滑产生一个误操作？我们的主要功能用户在使用的时候是否过程太过繁琐？这些内容感兴趣的话可以自行查阅，很多公开分享的内容。总的来说在做一个产品的时候首先要做到主要功能的易用性，吸引人用你的东西才是正经，不然其他都是白扯。</p>
+</li>
+<li>
+<p><strong>数据汇总分析</strong>：个人觉得这部分的素养决定了一个产品经理的发展，从入门到大神，必然要经历数据的洗炼。上一条也提到了需要通过数据去分析用户体验改良产品，在实际操作过程中，可以通过漏斗模型分析，或者转化、留存等一系列指标进行判断，其他更高级或者更加适用于自家产品的指标需要根据当前产品类别来进行判断选用。总之一句话，自家的产品肯定是自家人最清楚，需要什么指标来分析自己判断就行了。市面上的数据分析sdk千千万，最适合自己的还是自建的分析模组，有这个开发能力的话可以自己来做，没有的话先用三方的凑合下，后续根据发展情况再说。关于三方sdk的选用分析见下文。</p>
+</li>
+<li>
+<p><strong>产品进度把控</strong>：比如改需求，这个是最头疼的一点，产品🐶们乐此不疲，程序猿们深恶痛绝。出现的原因有很多，但归根结底就三条：一是来自领导层的压力，尤其是不懂开发流程乱指挥的部分领导（关于协同开发流程可以参见<a href="./manage-%e4%b8%8d%e5%90%8c%e9%a9%b1%e5%8a%a8%e5%9e%8b%e5%85%ac%e5%8f%b8%e5%8d%8f%e5%90%8c%e5%bc%80%e5%8f%91%e5%b7%a5%e4%bd%9c%e6%b5%81.md" rel="">我的上次分享</a>）；二是来源于线上数据的压力，有可能线上的产品出了紧急状况，需要加急进行产品逻辑调整；三是产品经理的素养，很多时候一个逻辑没理清楚就扔出去进入开发流程了，等回过神来发现这个地方要改，发现已经开发一半了。那么这三条内容除了第二条无法避免，第一条可以找领导进行沟通，讲清楚利害关系，看改动能否延后到下个版本。一切理解都建立在良好的沟通基础上嘛，沟通都做不好还做什么产品经理，万一人老板通情达理或者有自己的考虑呢？如果实在是独断专行的老板，连你的建议都不听，那么考虑跳槽吧。第三条内容只能各位在工作过程中逐步地去改善，人总有粗心的时候，仔细检查能够避免的。</p>
+</li>
+</ol>
+<p>以上这些基本素养是我按照自己理解的主次程度进行排序的，各位可以进行简单的参考。除此之外，再来一些内容推荐吧。</p>
+<h2 id="产品经理相关资源推荐">产品经理相关资源推荐</h2>
+<h3 id="常见数据收集sdk分析比对">常见数据收集sdk分析比对</h3>
+<p>常用产品分析，排名不分先后，没有最好的，只有最适合自己的，还是那句话，根据自家的情况进行选用就行。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">sdk</th>
+<th>简要分析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://www.umeng.com/" target="_blank" rel="noopener noreffer">友盟</a></td>
+<td>老牌数据分析工具，免费，自从跟CNZZ合并之后感觉越来越差，部分页面报错且打开缓慢，不推荐使用</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://tongji.baidu.com/" target="_blank" rel="noopener noreffer">百度统计</a></td>
+<td>除一些高级功能如漏斗分析等需要收费使用外，其他基本功能都是免费的，足够使用了。并且如果是在百度进行广告投放等，肯定是他们自家的统计最有优势了</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.growingio.com/" target="_blank" rel="noopener noreffer">GorwingIO</a></td>
+<td>数据面板比较好看，用户体验比较好，支持线上圈选事件指标等。基础版本收费6w/年，根据DAU数据阶梯收费，高级版本支持数据导出分析</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.shujike.com/" target="_blank" rel="noopener noreffer">数极客</a></td>
+<td>cookie有效期有点短，动不动就要重新登录。支持可视化埋点。基础版本收费4w/年，根据DAU数据阶梯收费。支持数据导出分析</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.talkingdata.com/" target="_blank" rel="noopener noreffer">TalkingData</a></td>
+<td>分析功能免费，不过没有ip黑白名单功能，有一些想被排除在外的ip会对数据产生影响，沟通之后说会添加这些功能</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://zhugeio.com/" target="_blank" rel="noopener noreffer">诸葛IO</a></td>
+<td>无可视化埋点功能。支持数据导出及在线SQL查询。基础版本8w/年</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.sensorsdata.cn/" target="_blank" rel="noopener noreffer">神策数据</a></td>
+<td>没有体验过暂时不做评价</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.analysys.cn/" target="_blank" rel="noopener noreffer">易观数据</a></td>
+<td>没有体验过暂时不做评价</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.google.com/analytics/" target="_blank" rel="noopener noreffer">Google Analytics</a></td>
+<td>查看报告的时候需要翻出去，该博客使用的就是GA统计，可分析的维度比较广</td>
+</tr>
+</tbody>
+</table>
+<p>其他更多的分析sdk参考<a href="https://www.jianshu.com/p/601e9644a51e" target="_blank" rel="noopener noreffer">这篇文章</a>或者自行检索。</p>
+<h3 id="用户体验及设计相关推荐">用户体验及设计相关推荐</h3>
+<p>作为产品经理，提高自己的审美还是很有必要的。现根据我的收集列举如下，其他自行检索</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">网站</th>
+<th>简要分析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://www.pinterest.com/" target="_blank" rel="noopener noreffer">pinterest</a></td>
+<td>最好用的素材收集、设计参考网站，不过被墙，需带梯</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://huaban.com/" target="_blank" rel="noopener noreffer">花瓣网</a></td>
+<td>国内最好使的素材收集、设计参考网站</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.uplabs.com/" target="_blank" rel="noopener noreffer">uplabs</a></td>
+<td>非常好的一个ui交互设计参考网站</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://shijue.me/" target="_blank" rel="noopener noreffer">视觉中国设计师社区</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.uisdc.com/" target="_blank" rel="noopener noreffer">优设</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.shejipi.com/" target="_blank" rel="noopener noreffer">设计癖</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://arting365.com/" target="_blank" rel="noopener noreffer">arting365</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.xiusheji.com/" target="_blank" rel="noopener noreffer">秀设计</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.iamue.com/" target="_blank" rel="noopener noreffer">IAMUE</a></td>
+<td>UE设计社区</td>
+</tr>
+</tbody>
+</table>
+<h3 id="产品知识储备">产品知识储备</h3>
+<p>列出一些产品经理相关的社区。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">网站</th>
+<th>简要分析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="http://www.woshipm.com/" target="_blank" rel="noopener noreffer">人人都是产品经理</a></td>
+<td>问答分享类，现在是个人都能做产品经理😂</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://36kr.com/" target="_blank" rel="noopener noreffer">36氪</a></td>
+<td>资讯类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.geekpark.net/" target="_blank" rel="noopener noreffer">极客公园</a></td>
+<td>资讯类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.huxiu.com/" target="_blank" rel="noopener noreffer">虎嗅网</a></td>
+<td>资讯类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.zaodula.com/" target="_blank" rel="noopener noreffer">互联网早读课</a></td>
+<td>资讯类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://www.pmcaff.com/" target="_blank" rel="noopener noreffer">pmcaff社区</a></td>
+<td>问答分享类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.chanpin100.com/" target="_blank" rel="noopener noreffer">产品壹佰</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.yixieshi.com/" target="_blank" rel="noopener noreffer">互联网的一些事</a></td>
+<td>参考</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://index.baidu.com/" target="_blank" rel="noopener noreffer">百度指数</a></td>
+<td>数据观测类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://index.1688.com/" target="_blank" rel="noopener noreffer">阿里指数</a></td>
+<td>数据观测类</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://compass.umeng.com/" target="_blank" rel="noopener noreffer">友盟全域罗盘</a></td>
+<td>数据观测类</td>
+</tr>
+</tbody>
+</table>
+<h2 id="总结">总结</h2>
+<p>刚成为产品狗一个月，以上是我的初步总结。当然每个人对一件事的认知不同，同一个人对某件事的认知也会随时间进行变化，如有谬误，欢迎指出，希望大家共同沟通进步。</p>
+<p><img
+        class="lazyload"
+        data-src="/images/doge.gif"
+        data-srcset="/images/doge.gif, /images/doge.gif 1.5x, /images/doge.gif 2x"
+        data-sizes="auto"
+        alt="/images/doge.gif"
+        title="doge"
+    /></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2018-04-17</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E4%BA%A7%E5%93%81/">产品</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2018-04/manage-different-company-work-flow/" class="prev" rel="prev" title="不同驱动型公司协同开发工作流"><i class="fas fa-angle-left fa-fw"></i>不同驱动型公司协同开发工作流</a>
+            <a href="/posts/2018-05/manage-company-simple-talk/" class="next" rel="next" title="浅谈企业管理">浅谈企业管理<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sanchi</a></span>&nbsp;|&nbsp;<span class="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/css/custom.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-119399604-2', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-119399604-2" async></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["sanchips"],"clientID":"2ede82b0a7198c45ce3e","clientSecret":"52dffb46d64ec3b2d5a6e6586b759ac9a70965c2","id":"2018-04-17T00:00:00+08:00","owner":"sanchips","repo":"sanchips.github.io","title":"产品之路初探"}}};</script><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"></div>
+</body>
+
+</html>

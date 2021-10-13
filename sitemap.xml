@@ -1,144 +1,52 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/tags/index.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.772Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/categories/index.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.771Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/about/index.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.481Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-04-17-pm-%E4%BA%A7%E5%93%81%E4%B9%8B%E8%B7%AF%E5%88%9D%E6%8E%A2.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.480Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-05-18-manage-%E6%B5%85%E8%B0%88%E4%BC%81%E4%B8%9A%E7%AE%A1%E7%90%86.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.479Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-04-11-manage-%E4%B8%8D%E5%90%8C%E9%A9%B1%E5%8A%A8%E5%9E%8B%E5%85%AC%E5%8F%B8%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.479Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-03-19-manage-award-calculate.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.478Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-03-19-manage-thinking_develop.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.478Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-03-19-jekyll-hello-world.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.478Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-07-18-hexo-hello-world.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.477Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-07-19-hexo-hexo%E8%B5%84%E6%BA%90%E5%BC%95%E7%94%A8.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.477Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-03-27-ffmpeg-5-%E4%BD%BF%E7%94%A8-FFmpeg%E8%A7%86%E9%A2%91%E9%97%B4%E8%B7%9D.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.476Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-03-27-ffmpeg-4-%E4%BD%BF%E7%94%A8-FFmpeg%E8%A7%86%E9%A2%91%E8%A3%81%E5%89%AA.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.475Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-03-27-ffmpeg-3-%E4%BD%BF%E7%94%A8-FFmpeg%E8%B0%83%E6%95%B4%E6%96%87%E4%BB%B6%E5%B0%BA%E5%AF%B8.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.474Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-03-27-ffmpeg-2-%E6%A6%82%E5%BF%B5-%E5%B8%A7%E7%8E%87%E6%AF%94%E7%89%B9%E7%8E%87%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.472Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-03-27-ffmpeg-1-%E5%8E%9F%E7%90%86-FFmpeg%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.472Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-06-16-be-%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.471Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-06-16-fe-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.471Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/404.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.470Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sanchi.forkroad.xyz/post/2018-07-20-be-SpringMVC+Swagger%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8%E8%B8%A9%E5%9D%91.html</loc>
-    
-    <lastmod>2019-05-05T11:57:29.470Z</lastmod>
-    
-  </url>
-  
-</urlset>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    ><url>
+            <loc>https://sanchips.github.io/about/</loc><lastmod>2021-10-12T11:04:49&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://sanchips.github.io/categories/</loc><lastmod>2021-10-12T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://sanchips.github.io/tags/hugo/</loc><lastmod>2021-10-12T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://sanchips.github.io/categories/hugo/</loc><lastmod>2021-10-12T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2021-10/hugo-hello-world/</loc><lastmod>2021-10-12T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://sanchips.github.io/posts/</loc><lastmod>2021-10-12T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://sanchips.github.io/</loc><lastmod>2021-10-12T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://sanchips.github.io/tags/</loc><lastmod>2021-10-12T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2019-05/manage-effective-meeting/</loc><lastmod>2019-05-11T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/tags/%E7%AE%A1%E7%90%86/</loc><lastmod>2019-06-18T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/categories/%E7%AE%A1%E7%90%86/</loc><lastmod>2019-06-18T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/tags/springmvc/</loc><lastmod>2018-07-20T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2018-07/backend-springmvc-swagger-setting/</loc><lastmod>2018-07-20T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/tags/swagger/</loc><lastmod>2018-07-20T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2018-07/backend-solution-collection/</loc><lastmod>2018-07-20T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/tags/%E5%90%8E%E7%AB%AF/</loc><lastmod>2018-07-20T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/categories/%E5%90%8E%E7%AB%AF/</loc><lastmod>2018-07-20T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/tags/hexo/</loc><lastmod>2018-07-19T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/categories/hexo/</loc><lastmod>2018-07-19T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2018-07/hexo-resource-reference/</loc><lastmod>2018-07-19T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2018-06/front-solution-collection/</loc><lastmod>2018-06-16T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/tags/%E5%89%8D%E7%AB%AF/</loc><lastmod>2018-06-16T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/categories/%E5%89%8D%E7%AB%AF/</loc><lastmod>2018-06-16T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2018-05/manage-company-simple-talk/</loc><lastmod>2019-06-18T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/tags/%E4%BA%A7%E5%93%81/</loc><lastmod>2018-04-17T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/categories/%E4%BA%A7%E5%93%81/</loc><lastmod>2018-04-17T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2018-04/pm-find-the-way-of-pm/</loc><lastmod>2018-04-17T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2018-04/manage-different-company-work-flow/</loc><lastmod>2018-04-11T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/tags/jekyll/</loc><lastmod>2018-03-19T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/categories/jekyll/</loc><lastmod>2018-03-19T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2018-03/jekyll-hello-world/</loc><lastmod>2018-03-19T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2018-03/manage-project-award-calculate/</loc><lastmod>2018-03-19T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2018-03/manage-thinking-of-parallel-develop/</loc><lastmod>2018-03-19T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2017-08/ffmpeg-5/</loc><lastmod>2017-08-31T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/tags/ffmpeg/</loc><lastmod>2017-08-31T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/categories/ffmpeg/</loc><lastmod>2017-08-31T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2017-08/ffmpeg-4/</loc><lastmod>2017-08-30T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2017-08/ffmpeg-3/</loc><lastmod>2017-08-29T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2017-08/ffmpeg-2/</loc><lastmod>2017-08-28T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2017-08/ffmpeg-1/</loc><lastmod>2017-08-27T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/tags/android/</loc><lastmod>2017-04-27T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/categories/android/</loc><lastmod>2017-04-27T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2017-04/android-no-class-def-found/</loc><lastmod>2017-04-27T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2016-08/android-circular-cover-view/</loc><lastmod>2016-08-11T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2016-03/android-apk-decompiled-jadx/</loc><lastmod>2016-03-04T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2016-02/android-gif-image-create/</loc><lastmod>2016-02-29T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/posts/2015-12/android-webview-interact/</loc><lastmod>2015-12-15T00:00:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://sanchips.github.io/tools/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

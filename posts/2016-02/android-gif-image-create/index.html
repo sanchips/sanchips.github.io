@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">android使用多张图片合成gif文件 - Sanchi</title><meta name="Description" content="记录一些工作上的历程"><meta property="og:title" content="android使用多张图片合成gif文件" />
+<meta property="og:description" content="之前有遇到过一个要用多张图片合成gif图的场景，当时是搜索了好久，也没有发现有相关的使用记录。后来找到了实现方式，特此记录。 使用了Githu" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sanchips.github.io/posts/2016-02/android-gif-image-create/" /><meta property="og:image" content="https://sanchips.github.io/logo.svg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2016-02-29T00:00:00+08:00" />
+<meta property="article:modified_time" content="2016-02-29T00:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sanchips.github.io/logo.svg"/>
+
+<meta name="twitter:title" content="android使用多张图片合成gif文件"/>
+<meta name="twitter:description" content="之前有遇到过一个要用多张图片合成gif图的场景，当时是搜索了好久，也没有发现有相关的使用记录。后来找到了实现方式，特此记录。 使用了Githu"/>
+<meta name="application-name" content="Sanchi">
+<meta name="apple-mobile-web-app-title" content="Sanchi">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://sanchips.github.io/posts/2016-02/android-gif-image-create/" /><link rel="prev" href="https://sanchips.github.io/posts/2015-12/android-webview-interact/" /><link rel="next" href="https://sanchips.github.io/posts/2016-03/android-apk-decompiled-jadx/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "android使用多张图片合成gif文件",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sanchips.github.io\/posts\/2016-02\/android-gif-image-create\/"
+        },"genre": "posts","keywords": "Android","wordcount":  386 ,
+        "url": "https:\/\/sanchips.github.io\/posts\/2016-02\/android-gif-image-create\/","datePublished": "2016-02-29T00:00:00+08:00","dateModified": "2016-02-29T00:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Sanchi","logo": "https:\/\/sanchips.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Sanchi"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fas fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/posts/"><i class='fas fa-archive fa-fw'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fas fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fas fa-th-list fa-fw'></i> 分类 </a><a class="menu-item" href="/tools/"><i class='fas fa-globe fa-fw'></i> 工具 </a><a class="menu-item" href="/about/"><i class='fas fa-user-secret fa-fw'></i> 关于 </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/" title=""><i class='fas fa-home fa-fw'></i>首页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-archive fa-fw'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fas fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fas fa-th-list fa-fw'></i>分类</a><a class="menu-item" href="/tools/" title=""><i class='fas fa-globe fa-fw'></i>工具</a><a class="menu-item" href="/about/" title=""><i class='fas fa-user-secret fa-fw'></i>关于</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">android使用多张图片合成gif文件</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sanchi</a>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/android/"><i class="far fa-folder fa-fw"></i>Android</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2016-02-29">2016-02-29</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2016-02-29">2016-02-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 386 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>之前有遇到过一个要用多张图片合成gif图的场景，当时是搜索了好久，也没有发现有相关的使用记录。后来找到了实现方式，特此记录。
+使用了Github上该project：<a href="https://github.com/nbadal/android-gif-encoder" target="_blank" rel="noopener noreffer">android-gif-encoder</a>，代码链接见页尾。</p>
+<p>主要代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * 生成gif图
+</span><span class="cm"> *
+</span><span class="cm"> * @param file_name 保存文件名
+</span><span class="cm"> * @param delay     帧之间间隔的时间
+</span><span class="cm"> */</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">createGif</span><span class="o">(</span><span class="n">String</span> <span class="n">file_name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">delay</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ByteArrayOutputStream</span> <span class="n">baos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
+    <span class="n">AnimatedGifEncoder</span> <span class="n">localAnimatedGifEncoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AnimatedGifEncoder</span><span class="o">();</span>
+    <span class="n">localAnimatedGifEncoder</span><span class="o">.</span><span class="na">start</span><span class="o">(</span><span class="n">baos</span><span class="o">);</span><span class="c1">//start
+</span><span class="c1"></span>    <span class="n">localAnimatedGifEncoder</span><span class="o">.</span><span class="na">setRepeat</span><span class="o">(</span><span class="n">0</span><span class="o">);</span><span class="c1">//设置生成gif的开始播放时间。0为立即开始播放
+</span><span class="c1"></span>    <span class="n">localAnimatedGifEncoder</span><span class="o">.</span><span class="na">setDelay</span><span class="o">(</span><span class="n">delay</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">pics</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">localAnimatedGifEncoder</span><span class="o">.</span><span class="na">addFrame</span><span class="o">(</span><span class="n">BitmapFactory</span><span class="o">.</span><span class="na">decodeResource</span><span class="o">(</span><span class="n">getResources</span><span class="o">(),</span> <span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">pic_1</span><span class="o">));</span>
+        <span class="n">localAnimatedGifEncoder</span><span class="o">.</span><span class="na">addFrame</span><span class="o">(</span><span class="n">BitmapFactory</span><span class="o">.</span><span class="na">decodeResource</span><span class="o">(</span><span class="n">getResources</span><span class="o">(),</span> <span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">pic_2</span><span class="o">));</span>
+        <span class="n">localAnimatedGifEncoder</span><span class="o">.</span><span class="na">addFrame</span><span class="o">(</span><span class="n">BitmapFactory</span><span class="o">.</span><span class="na">decodeResource</span><span class="o">(</span><span class="n">getResources</span><span class="o">(),</span> <span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">pic_3</span><span class="o">));</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">pics</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="c1">// Bitmap localBitmap = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(pics.get(i)), 512, 512);
+</span><span class="c1"></span>            <span class="n">localAnimatedGifEncoder</span><span class="o">.</span><span class="na">addFrame</span><span class="o">(</span><span class="n">BitmapFactory</span><span class="o">.</span><span class="na">decodeFile</span><span class="o">(</span><span class="n">pics</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="n">localAnimatedGifEncoder</span><span class="o">.</span><span class="na">finish</span><span class="o">();</span><span class="c1">//finish
+</span><span class="c1"></span>
+    <span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">Environment</span><span class="o">.</span><span class="na">getExternalStorageDirectory</span><span class="o">().</span><span class="na">getPath</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;/GIFMakerDemo&#34;</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">file</span><span class="o">.</span><span class="na">exists</span><span class="o">())</span> <span class="n">file</span><span class="o">.</span><span class="na">mkdir</span><span class="o">();</span>
+    <span class="n">String</span> <span class="n">path</span> <span class="o">=</span> <span class="n">Environment</span><span class="o">.</span><span class="na">getExternalStorageDirectory</span><span class="o">().</span><span class="na">getPath</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;/GIFMakerDemo/&#34;</span> <span class="o">+</span> <span class="n">file_name</span> <span class="o">+</span> <span class="s">&#34;.gif&#34;</span><span class="o">;</span>
+    <span class="n">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&#34;createGif: ----&gt;&#34;</span> <span class="o">+</span> <span class="n">path</span><span class="o">);</span>
+
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">FileOutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">path</span><span class="o">);</span>
+        <span class="n">baos</span><span class="o">.</span><span class="na">writeTo</span><span class="o">(</span><span class="n">fos</span><span class="o">);</span>
+        <span class="n">baos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+        <span class="n">fos</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+        <span class="n">baos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">fos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="n">gif_image</span><span class="o">.</span><span class="na">setImageURI</span><span class="o">(</span><span class="n">Uri</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">path</span><span class="o">));</span>
+    <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">MainActivity</span><span class="o">.</span><span class="na">this</span><span class="o">,</span> <span class="s">&#34;Gif已生成。保存路径：\n&#34;</span> <span class="o">+</span> <span class="n">path</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_LONG</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        data-src="/images/doge.gif"
+        data-srcset="/images/doge.gif, /images/doge.gif 1.5x, /images/doge.gif 2x"
+        data-sizes="auto"
+        alt="/images/doge.gif"
+        title="doge"
+    /></p>
+<p>需要源码的同学看<a href="https://github.com/sanchips/GIFMakerDemo" target="_blank" rel="noopener noreffer"><strong>这里</strong></a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2016-02-29</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/android/">Android</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2015-12/android-webview-interact/" class="prev" rel="prev" title="Android中WebView页面交互"><i class="fas fa-angle-left fa-fw"></i>Android中WebView页面交互</a>
+            <a href="/posts/2016-03/android-apk-decompiled-jadx/" class="next" rel="next" title="apk反编译工具Jadx的使用">apk反编译工具Jadx的使用<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sanchi</a></span>&nbsp;|&nbsp;<span class="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/css/custom.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-119399604-2', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-119399604-2" async></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["sanchips"],"clientID":"2ede82b0a7198c45ce3e","clientSecret":"52dffb46d64ec3b2d5a6e6586b759ac9a70965c2","id":"2016-02-29T00:00:00+08:00","owner":"sanchips","repo":"sanchips.github.io","title":"android使用多张图片合成gif文件"}}};</script><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"></div>
+</body>
+
+</html>

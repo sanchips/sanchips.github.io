@@ -1,0 +1,43 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ffmpeg - 标签 - Sanchi</title>
+        <link>https://sanchips.github.io/tags/ffmpeg/</link>
+        <description>ffmpeg - 标签 - Sanchi</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sanchi.zhang@gmail.com (Sanchi)</managingEditor>
+            <webMaster>sanchi.zhang@gmail.com (Sanchi)</webMaster><lastBuildDate>Thu, 31 Aug 2017 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://sanchips.github.io/tags/ffmpeg/" rel="self" type="application/rss+xml" /><item>
+    <title>[5][使用] FFmpeg视频间距</title>
+    <link>https://sanchips.github.io/posts/2017-08/ffmpeg-5/</link>
+    <pubDate>Thu, 31 Aug 2017 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2017-08/ffmpeg-5/</guid>
+    <description><![CDATA[视频的padding属性说明见下图： ffmpeg中的padding滤镜见下表： 那么来一个栗子，如果要给一张图片添加一个30px宽的粉色边框，]]></description>
+</item><item>
+    <title>[4][使用] FFmpeg视频裁剪</title>
+    <link>https://sanchips.github.io/posts/2017-08/ffmpeg-4/</link>
+    <pubDate>Wed, 30 Aug 2017 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2017-08/ffmpeg-4/</guid>
+    <description><![CDATA[视频裁剪就是选中你想要的矩形区域并只输出这个区域，去污不残留。裁剪通常和大小调整，填充和其他操作一起使用。 基本裁切内容 老版本的FFmpeg有]]></description>
+</item><item>
+    <title>[3][使用] FFmpeg调整文件尺寸</title>
+    <link>https://sanchips.github.io/posts/2017-08/ffmpeg-3/</link>
+    <pubDate>Tue, 29 Aug 2017 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2017-08/ffmpeg-3/</guid>
+    <description><![CDATA[调整视频的尺寸和缩放（ Resizing and Scaling Video ） 调整视频尺寸（resize）在FFmpeg中表示调整它的宽高，缩放（scale）表示使用缩放滤镜调整帧的尺寸]]></description>
+</item><item>
+    <title>[2][概念] FFmpeg比特率帧率文件大小</title>
+    <link>https://sanchips.github.io/posts/2017-08/ffmpeg-2/</link>
+    <pubDate>Mon, 28 Aug 2017 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2017-08/ffmpeg-2/</guid>
+    <description><![CDATA[帧率（Frame rate/frequency） 定义：每秒编码进视频文件的帧数（fps：frames per second）。人眼看起来的连续场景最低]]></description>
+</item><item>
+    <title>[1][原理] FFmpeg基础命令</title>
+    <link>https://sanchips.github.io/posts/2017-08/ffmpeg-1/</link>
+    <pubDate>Sun, 27 Aug 2017 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2017-08/ffmpeg-1/</guid>
+    <description><![CDATA[FFmpeg学习资料 如何使用 FFmpeg 进行视频转码 本笔记的学习资料：FFmpegBasics.pdf windows下环境配置 首先下载开发工具。 然后将]]></description>
+</item></channel>
+</rss>

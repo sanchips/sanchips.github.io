@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">[5][使用] FFmpeg视频间距 - Sanchi</title><meta name="Description" content="记录一些工作上的历程"><meta property="og:title" content="[5][使用] FFmpeg视频间距" />
+<meta property="og:description" content="视频的padding属性说明见下图： ffmpeg中的padding滤镜见下表： 那么来一个栗子，如果要给一张图片添加一个30px宽的粉色边框，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sanchips.github.io/posts/2017-08/ffmpeg-5/" /><meta property="og:image" content="https://sanchips.github.io/logo.svg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2017-08-31T00:00:00+08:00" />
+<meta property="article:modified_time" content="2017-08-31T00:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sanchips.github.io/logo.svg"/>
+
+<meta name="twitter:title" content="[5][使用] FFmpeg视频间距"/>
+<meta name="twitter:description" content="视频的padding属性说明见下图： ffmpeg中的padding滤镜见下表： 那么来一个栗子，如果要给一张图片添加一个30px宽的粉色边框，"/>
+<meta name="application-name" content="Sanchi">
+<meta name="apple-mobile-web-app-title" content="Sanchi">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://sanchips.github.io/posts/2017-08/ffmpeg-5/" /><link rel="prev" href="https://sanchips.github.io/posts/2017-08/ffmpeg-4/" /><link rel="next" href="https://sanchips.github.io/posts/2018-03/manage-thinking-of-parallel-develop/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "[5][使用] FFmpeg视频间距",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sanchips.github.io\/posts\/2017-08\/ffmpeg-5\/"
+        },"genre": "posts","keywords": "ffmpeg","wordcount":  635 ,
+        "url": "https:\/\/sanchips.github.io\/posts\/2017-08\/ffmpeg-5\/","datePublished": "2017-08-31T00:00:00+08:00","dateModified": "2017-08-31T00:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Sanchi","logo": "https:\/\/sanchips.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Sanchi"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fas fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/posts/"><i class='fas fa-archive fa-fw'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fas fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fas fa-th-list fa-fw'></i> 分类 </a><a class="menu-item" href="/tools/"><i class='fas fa-globe fa-fw'></i> 工具 </a><a class="menu-item" href="/about/"><i class='fas fa-user-secret fa-fw'></i> 关于 </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/" title=""><i class='fas fa-home fa-fw'></i>首页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-archive fa-fw'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fas fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fas fa-th-list fa-fw'></i>分类</a><a class="menu-item" href="/tools/" title=""><i class='fas fa-globe fa-fw'></i>工具</a><a class="menu-item" href="/about/" title=""><i class='fas fa-user-secret fa-fw'></i>关于</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">[5][使用] FFmpeg视频间距</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sanchi</a>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/ffmpeg/"><i class="far fa-folder fa-fw"></i>ffmpeg</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-08-31">2017-08-31</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2017-08-31">2017-08-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 635 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>视频的padding属性说明见下图：</p>
+<p><code><a class="lightgallery" href="/posts/2017-08/ffmpeg-5/ff_5_2.png" title="/posts/2017-08/ffmpeg-5/ff_5_2.png" data-thumbnail="/posts/2017-08/ffmpeg-5/ff_5_2.png">
+        <img
+            class="lazyload"
+            data-src="ff_5_2.png"
+            data-srcset="/posts/2017-08/ffmpeg-5/ff_5_2.png, ff_5_2.png 1.5x, /posts/2017-08/ffmpeg-5/ff_5_2.png 2x"
+            data-sizes="auto"
+            alt="/posts/2017-08/ffmpeg-5/ff_5_2.png"
+        />
+    </a></code></p>
+<p>ffmpeg中的padding滤镜见下表：</p>
+<p><code><a class="lightgallery" href="/posts/2017-08/ffmpeg-5/ff_5_1.png" title="/posts/2017-08/ffmpeg-5/ff_5_1.png" data-thumbnail="/posts/2017-08/ffmpeg-5/ff_5_1.png">
+        <img
+            class="lazyload"
+            data-src="ff_5_1.png"
+            data-srcset="/posts/2017-08/ffmpeg-5/ff_5_1.png, ff_5_1.png 1.5x, /posts/2017-08/ffmpeg-5/ff_5_1.png 2x"
+            data-sizes="auto"
+            alt="/posts/2017-08/ffmpeg-5/ff_5_1.png"
+        />
+    </a></code></p>
+<p>那么来一个栗子，如果要给一张图片添加一个30px宽的粉色边框，可以使用命令：<code>ffmpeg -i photo.jpg -vf pad=860:660:30:30:pink framed_photo.jpg</code>。根据输出文件的大小设置边框，实际上是图片确定左上角，然后根据图片实际大小确定边框距离，输出大过图片尺寸的话其他地方全部用指定的颜色填充，小于图片实际尺寸的话会报错。</p>
+<ul>
+<li>
+<p>使用padding命令将4:3的视频转换为16:9</p>
+<p>试了几次上面的命令之后觉得如果能够按照图片实际比例来指定padding距离的话就不用关心输出文件的大小和报错了。接着往下翻果然有这个命令，不过是固定输出尺寸。它的应用场景是这样的：有些播放设备只支持16:9的尺寸，如果我们有一个4:3的视频，可以在水平方向去添加padding，竖直方向不用添加，输出一个16:9的视频出来，<code>ffmpeg -i input -vf pad=ih*16/9:ih:(ow-iw)/2:0:color output</code>，以上命令中:分割的几个参数含义分别为[输出文件的宽度为输入高度的16/9:输出高度等于输入高度:水平居中之后的两侧padding:竖直方向padding:padding填充颜色]如果不指定color的话默认为黑色填充。</p>
+</li>
+<li>
+<p>使用padding命令将16:9的视频转换为4:3</p>
+<p>既然上面将4:3的视频放大到了16:9，那么如何逆向操作，将16:9的视频转换为4:3？不慌，水平宽度不变，竖直高度变为原文件宽度的3/4即可。<code>ffmpeg -i input -vf pad=iw:iw*3/4:0:(oh-ih)/2:color output</code>。</p>
+</li>
+<li>
+<p>使用padding命令制作宽屏模式视频</p>
+<p>76页</p>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2017-08-31</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/ffmpeg/">ffmpeg</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2017-08/ffmpeg-4/" class="prev" rel="prev" title="[4][使用] FFmpeg视频裁剪"><i class="fas fa-angle-left fa-fw"></i>[4][使用] FFmpeg视频裁剪</a>
+            <a href="/posts/2018-03/manage-thinking-of-parallel-develop/" class="next" rel="next" title="关于技术部门并行开发的几点思考">关于技术部门并行开发的几点思考<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sanchi</a></span>&nbsp;|&nbsp;<span class="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/css/custom.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-119399604-2', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-119399604-2" async></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["sanchips"],"clientID":"2ede82b0a7198c45ce3e","clientSecret":"52dffb46d64ec3b2d5a6e6586b759ac9a70965c2","id":"2017-08-31T00:00:00+08:00","owner":"sanchips","repo":"sanchips.github.io","title":"[5][使用] FFmpeg视频间距"}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true}};</script><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"></div>
+</body>
+
+</html>

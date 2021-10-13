@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">Android中WebView页面交互 - Sanchi</title><meta name="Description" content="记录一些工作上的历程"><meta property="og:title" content="Android中WebView页面交互" />
+<meta property="og:description" content="代码
+在android内打开一个网页的时候，有时我们会要求与网页有一些交互。而这些交互是在基于javaScript的基础上。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sanchips.github.io/posts/2015-12/android-webview-interact/" /><meta property="og:image" content="https://sanchips.github.io/logo.svg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2015-12-15T00:00:00+08:00" />
+<meta property="article:modified_time" content="2015-12-15T00:00:00+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://sanchips.github.io/logo.svg"/>
+
+<meta name="twitter:title" content="Android中WebView页面交互"/>
+<meta name="twitter:description" content="代码
+在android内打开一个网页的时候，有时我们会要求与网页有一些交互。而这些交互是在基于javaScript的基础上。"/>
+<meta name="application-name" content="Sanchi">
+<meta name="apple-mobile-web-app-title" content="Sanchi">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://sanchips.github.io/posts/2015-12/android-webview-interact/" /><link rel="next" href="https://sanchips.github.io/posts/2016-02/android-gif-image-create/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Android中WebView页面交互",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/sanchips.github.io\/posts\/2015-12\/android-webview-interact\/"
+        },"genre": "posts","keywords": "Android","wordcount":  3869 ,
+        "url": "https:\/\/sanchips.github.io\/posts\/2015-12\/android-webview-interact\/","datePublished": "2015-12-15T00:00:00+08:00","dateModified": "2015-12-15T00:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "Sanchi","logo": "https:\/\/sanchips.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "Sanchi"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/"><i class='fas fa-home fa-fw'></i> 首页 </a><a class="menu-item" href="/posts/"><i class='fas fa-archive fa-fw'></i> 文章 </a><a class="menu-item" href="/tags/"><i class='fas fa-tags fa-fw'></i> 标签 </a><a class="menu-item" href="/categories/"><i class='fas fa-th-list fa-fw'></i> 分类 </a><a class="menu-item" href="/tools/"><i class='fas fa-globe fa-fw'></i> 工具 </a><a class="menu-item" href="/about/"><i class='fas fa-user-secret fa-fw'></i> 关于 </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sanchi"><span class="header-title-pre"><i class='fab fa-angellist'></i></span>Sanchi</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/" title=""><i class='fas fa-home fa-fw'></i>首页</a><a class="menu-item" href="/posts/" title=""><i class='fas fa-archive fa-fw'></i>文章</a><a class="menu-item" href="/tags/" title=""><i class='fas fa-tags fa-fw'></i>标签</a><a class="menu-item" href="/categories/" title=""><i class='fas fa-th-list fa-fw'></i>分类</a><a class="menu-item" href="/tools/" title=""><i class='fas fa-globe fa-fw'></i>工具</a><a class="menu-item" href="/about/" title=""><i class='fas fa-user-secret fa-fw'></i>关于</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Android中WebView页面交互</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">Sanchi</a>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/android/"><i class="far fa-folder fa-fw"></i>Android</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2015-12-15">2015-12-15</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2015-12-15">2015-12-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3869 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#代码">代码</a>
+      <ul>
+        <li><a href="#混淆打包">混淆打包</a></li>
+      </ul>
+    </li>
+    <li><a href="#测试分析">测试分析</a></li>
+    <li><a href="#附从浏览器网页打开应用">附：从浏览器网页打开应用</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="代码">代码</h2>
+<p>在android内打开一个网页的时候，有时我们会要求与网页有一些交互。而这些交互是在基于javaScript的基础上。</p>
+<p>那么我们来学习一下android如何与网页进行JS交互。完整代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">android.annotation.SuppressLint</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.os.Handler</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.support.v4.app.FragmentActivity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.text.TextUtils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.View</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.View.OnClickListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.webkit.CookieManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.webkit.CookieSyncManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.webkit.JavascriptInterface</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.webkit.URLUtil</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.webkit.WebChromeClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.webkit.WebView</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.webkit.WebViewClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.widget.ProgressBar</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.widget.TextView</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.widget.Toast</span><span class="o">;</span>
+
+<span class="cm">/**
+</span><span class="cm"> * 软件内通用打开网页的容器页面
+</span><span class="cm"> *
+</span><span class="cm"> * @author ZRP
+</span><span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CommonWebActivity</span> <span class="kd">extends</span> <span class="n">FragmentActivity</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">ProgressBar</span> <span class="n">progress_bar</span><span class="o">;</span>
+    <span class="kd">protected</span> <span class="n">CustomFrameLayout</span> <span class="n">customFrameLayout</span><span class="o">;</span>
+    <span class="kd">protected</span> <span class="n">TextView</span> <span class="n">titleText</span><span class="o">,</span> <span class="n">errorTxt</span><span class="o">;</span>
+    <span class="kd">protected</span> <span class="n">View</span> <span class="n">refresh</span><span class="o">;</span><span class="c1">// 刷新按钮
+</span><span class="c1"></span>    <span class="kd">protected</span> <span class="n">WebView</span> <span class="n">webView</span><span class="o">;</span>
+
+    <span class="kd">protected</span> <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span><span class="c1">// 网址url
+</span><span class="c1"></span>    <span class="kd">protected</span> <span class="n">String</span> <span class="n">param</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="o">;</span><span class="c1">// 交互参数，如json字符串
+</span><span class="c1"></span>
+    <span class="kd">protected</span> <span class="n">WebChromeClient</span> <span class="n">chromeClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WebChromeClient</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onProgressChanged</span><span class="o">(</span><span class="n">WebView</span> <span class="n">view</span><span class="o">,</span> <span class="kt">int</span> <span class="n">newProgress</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">newProgress</span> <span class="o">==</span> <span class="n">100</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">progress_bar</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">);</span>
+                <span class="c1">// 判断有无网络
+</span><span class="c1"></span>                <span class="k">if</span> <span class="o">(!</span><span class="n">NetUtils</span><span class="o">.</span><span class="na">isAvailable</span><span class="o">(</span><span class="n">CommonWebActivity</span><span class="o">.</span><span class="na">this</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">customFrameLayout</span><span class="o">.</span><span class="na">show</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">common_net_error</span><span class="o">);</span>
+                    <span class="n">refresh</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
+                    <span class="n">refresh</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+                        <span class="nd">@Override</span>
+                        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+                            <span class="n">webView</span><span class="o">.</span><span class="na">loadUrl</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+                        <span class="o">}</span>
+                    <span class="o">});</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="c1">// 判断网络请求网址是否有效
+</span><span class="c1"></span>                    <span class="k">if</span> <span class="o">(!</span><span class="n">URLUtil</span><span class="o">.</span><span class="na">isValidUrl</span><span class="o">(</span><span class="n">url</span><span class="o">))</span> <span class="o">{</span>
+                        <span class="n">customFrameLayout</span><span class="o">.</span><span class="na">show</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">common_net_error</span><span class="o">);</span>
+                        <span class="n">errorTxt</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">&#34;无效网址&#34;</span><span class="o">);</span>
+                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                        <span class="n">customFrameLayout</span><span class="o">.</span><span class="na">show</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">common_web</span><span class="o">);</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">progress_bar</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
+                <span class="n">progress_bar</span><span class="o">.</span><span class="na">setProgress</span><span class="o">(</span><span class="n">newProgress</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="c1">// 获取到url打开页面的标题
+</span><span class="c1"></span>        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onReceivedTitle</span><span class="o">(</span><span class="n">WebView</span> <span class="n">view</span><span class="o">,</span> <span class="n">String</span> <span class="n">title</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">titleText</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">title</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="c1">// js交互提示
+</span><span class="c1"></span>        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onJsAlert</span><span class="o">(</span><span class="n">WebView</span> <span class="n">view</span><span class="o">,</span> <span class="n">String</span> <span class="n">url</span><span class="o">,</span> <span class="n">String</span> <span class="n">message</span><span class="o">,</span> <span class="n">android</span><span class="o">.</span><span class="na">webkit</span><span class="o">.</span><span class="na">JsResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">onJsAlert</span><span class="o">(</span><span class="n">view</span><span class="o">,</span> <span class="n">url</span><span class="o">,</span> <span class="n">message</span><span class="o">,</span> <span class="n">result</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">getIntent</span><span class="o">().</span><span class="na">getStringExtra</span><span class="o">(</span><span class="s">&#34;url&#34;</span><span class="o">);</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="n">getIntent</span><span class="o">().</span><span class="na">getStringExtra</span><span class="o">(</span><span class="s">&#34;param&#34;</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">common_web_activity</span><span class="o">);</span>
+        <span class="n">initView</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@SuppressLint</span><span class="o">(</span><span class="s">&#34;SetJavaScriptEnabled&#34;</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">initView</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">back</span><span class="o">).</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">finish</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+
+        <span class="n">titleText</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">title</span><span class="o">);</span>
+        <span class="n">progress_bar</span> <span class="o">=</span> <span class="o">(</span><span class="n">ProgressBar</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">progress_bar</span><span class="o">);</span>
+        <span class="n">customFrameLayout</span> <span class="o">=</span> <span class="o">(</span><span class="n">CustomFrameLayout</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">web_fram</span><span class="o">);</span>
+        <span class="n">customFrameLayout</span><span class="o">.</span><span class="na">setList</span><span class="o">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">common_web</span><span class="o">,</span> <span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">common_net_error</span><span class="o">});</span>
+        <span class="n">refresh</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">error_btn</span><span class="o">);</span>
+        <span class="n">errorTxt</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">error_txt</span><span class="o">);</span>
+
+        <span class="n">webView</span> <span class="o">=</span> <span class="o">(</span><span class="n">WebView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">common_web</span><span class="o">);</span>
+        <span class="n">webView</span><span class="o">.</span><span class="na">getSettings</span><span class="o">().</span><span class="na">setDefaultTextEncodingName</span><span class="o">(</span><span class="s">&#34;utf-8&#34;</span><span class="o">);</span>
+        <span class="n">webView</span><span class="o">.</span><span class="na">getSettings</span><span class="o">().</span><span class="na">setJavaScriptEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">synCookies</span><span class="o">();</span><span class="c1">//格式化写入cookie，需写在setJavaScriptEnabled之后
+</span><span class="c1"></span>        <span class="n">webView</span><span class="o">.</span><span class="na">setWebChromeClient</span><span class="o">(</span><span class="n">chromeClient</span><span class="o">);</span>
+        <span class="n">webView</span><span class="o">.</span><span class="na">setWebViewClient</span><span class="o">(</span><span class="k">new</span> <span class="n">WebViewClient</span><span class="o">()</span> <span class="o">{</span><span class="c1">// 让webView内的链接在当前页打开，不调用系统浏览器
+</span><span class="c1"></span>            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">shouldOverrideUrlLoading</span><span class="o">(</span><span class="n">WebView</span> <span class="n">view</span><span class="o">,</span> <span class="n">String</span> <span class="n">url</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">view</span><span class="o">.</span><span class="na">loadUrl</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+        <span class="n">webView</span><span class="o">.</span><span class="na">addJavascriptInterface</span><span class="o">(</span><span class="k">new</span> <span class="n">JavaScriptInterface</span><span class="o">(),</span> <span class="s">&#34;zrp&#34;</span><span class="o">);</span>
+        <span class="n">webView</span><span class="o">.</span><span class="na">loadUrl</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+
+        <span class="k">new</span> <span class="n">Handler</span><span class="o">().</span><span class="na">postDelayed</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span><span class="c1">//异步传本地数据给网页
+</span><span class="c1"></span>            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">onNotifyListener</span><span class="o">(</span><span class="n">param</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">},</span> <span class="n">1000</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * CookieManager会将这个Cookie存入该应用程序/data/data/databases/目录下的webviewCookiesChromium.db数据库的cookies表中
+</span><span class="cm">     * 需要在当前用户退出登录的时候进行清除
+</span><span class="cm">     */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">synCookies</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">split</span> <span class="o">=</span> <span class="n">App</span><span class="o">.</span><span class="na">cookie</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&#34;;&#34;</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">split</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">createInstance</span><span class="o">(</span><span class="n">CommonWebActivity</span><span class="o">.</span><span class="na">this</span><span class="o">);</span>
+            <span class="n">CookieManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">setCookie</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">split</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+            <span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">sync</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 回调网页中的脚本接口。
+</span><span class="cm">     *
+</span><span class="cm">     * @param notify 传给网页的通知内容。
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onNotifyListener</span><span class="o">(</span><span class="n">String</span> <span class="n">notify</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">webView</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">webView</span><span class="o">.</span><span class="na">loadUrl</span><span class="o">(</span><span class="s">&#34;javascript:test(&#39;&#34;</span> <span class="o">+</span> <span class="n">notify</span> <span class="o">+</span> <span class="s">&#34;&#39;)&#34;</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * android js交互实现：
+</span><span class="cm">     * - window.zrp.command(&#34;&#34;);//在网页的方法中添加该代码获取android内容
+</span><span class="cm">     * - webView.loadUrl(&#34;javascript:test(&#39;param&#39;)&#34;);//android给网页传值，须异步执行
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaScriptInterface</span> <span class="o">{</span>
+        
+        <span class="nd">@JavascriptInterface</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">command</span><span class="o">(</span><span class="n">String</span> <span class="n">jsonString</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">TextUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">jsonString</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">return</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="c1">//根据网页交互回传的json串进行操作
+</span><span class="c1"></span>            <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">CommonWebActivity</span><span class="o">.</span><span class="na">this</span><span class="o">,</span> <span class="n">jsonString</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_LONG</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>切记：需要设置联网权限与网络状态获取权限！</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.INTERNET&#34;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&#34;android.permission.ACCESS_NETWORK_STATE&#34;</span> <span class="nt">/&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其中CustomFrameLayout为界面切换控件，分别在无网络，网址错误等情况下进行提示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">android.content.Context</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.util.AttributeSet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.view.View</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.widget.FrameLayout</span><span class="o">;</span>
+
+<span class="cm">/**
+</span><span class="cm"> * 用于状态切换的布局，只显示1个状态
+</span><span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomFrameLayout</span> <span class="kd">extends</span> <span class="n">FrameLayout</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">list</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">CustomFrameLayout</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+        <span class="n">initView</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">CustomFrameLayout</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">AttributeSet</span> <span class="n">attrs</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">attrs</span><span class="o">);</span>
+        <span class="n">initView</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">CustomFrameLayout</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">AttributeSet</span> <span class="n">attrs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">defStyle</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">attrs</span><span class="o">,</span> <span class="n">defStyle</span><span class="o">);</span>
+        <span class="n">initView</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 设置子面板id数组
+</span><span class="cm">     *
+</span><span class="cm">     * @param list
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setList</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">list</span> <span class="o">=</span> <span class="n">list</span><span class="o">;</span>
+        <span class="n">show</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 显示某个面板
+</span><span class="cm">     *
+</span><span class="cm">     * @param id
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">show</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">list</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">getChildCount</span><span class="o">();</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">View</span> <span class="n">view</span> <span class="o">=</span> <span class="n">getChildAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+
+                <span class="k">if</span> <span class="o">(</span><span class="n">id</span> <span class="o">==</span> <span class="n">view</span><span class="o">.</span><span class="na">getId</span><span class="o">())</span> <span class="o">{</span>
+                    <span class="n">view</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">view</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">aList</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">View</span> <span class="n">item</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">aList</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">item</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">aList</span> <span class="o">==</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">item</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">item</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 隐藏所有面板
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">GoneAll</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">list</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">getChildCount</span><span class="o">();</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">View</span> <span class="n">view</span> <span class="o">=</span> <span class="n">getChildAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+                <span class="n">view</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">aList</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">View</span> <span class="n">item</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">aList</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">item</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">item</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 切换。
+</span><span class="cm">     *
+</span><span class="cm">     * @param index 布局在fram中的index
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showOfIndex</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">getChildCount</span><span class="o">();</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">View</span> <span class="n">view</span> <span class="o">=</span> <span class="n">getChildAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">view</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">view</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">initView</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>界面布局为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;RelativeLayout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:orientation=</span><span class="s">&#34;vertical&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;LinearLayout</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/back&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;50dp&#34;</span>
+        <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+        <span class="na">android:orientation=</span><span class="s">&#34;horizontal&#34;</span>
+        <span class="na">android:paddingLeft=</span><span class="s">&#34;10dp&#34;</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;ImageView</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;15dp&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;15dp&#34;</span>
+            <span class="na">android:src=</span><span class="s">&#34;@drawable/ic_back&#34;</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;TextView</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+            <span class="na">android:text=</span><span class="s">&#34;返回&#34;</span>
+            <span class="na">android:textSize=</span><span class="s">&#34;15sp&#34;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/LinearLayout&gt;</span>
+
+    <span class="nt">&lt;TextView</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/title&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;50dp&#34;</span>
+        <span class="na">android:gravity=</span><span class="s">&#34;center&#34;</span>
+        <span class="na">android:text=</span><span class="s">&#34;加载中&#34;</span>
+        <span class="na">android:textSize=</span><span class="s">&#34;15sp&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;View</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;1dp&#34;</span>
+        <span class="na">android:layout_below=</span><span class="s">&#34;@+id/title&#34;</span>
+        <span class="na">android:background=</span><span class="s">&#34;#666666&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;ProgressBar</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/progress_bar&#34;</span>
+        <span class="na">style=</span><span class="s">&#34;@style/update_progress&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;3dp&#34;</span>
+        <span class="na">android:layout_marginTop=</span><span class="s">&#34;51dp&#34;</span>
+        <span class="na">android:max=</span><span class="s">&#34;100&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;com.zrp.webviewdemo.web.CustomFrameLayout</span>
+        <span class="na">android:id=</span><span class="s">&#34;@+id/web_fram&#34;</span>
+        <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span>
+        <span class="na">android:layout_marginTop=</span><span class="s">&#34;51dp&#34;</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;WebView</span>
+            <span class="na">android:id=</span><span class="s">&#34;@+id/common_web&#34;</span>
+            <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+            <span class="na">android:layout_height=</span><span class="s">&#34;match_parent&#34;</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;include</span> <span class="na">layout=</span><span class="s">&#34;@layout/common_net_error&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;/com.zrp.webviewdemo.web.CustomFrameLayout&gt;</span>
+
+<span class="nt">&lt;/RelativeLayout&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="混淆打包">混淆打包</h3>
+<p>JavaScript是通过调用android中指定的方法名来进行值传递的，所以android部分的代码不能进行混淆，需要添加keep语句：<code>-keep class com.zrp.webviewdemo.web.CommonWebActivity$JavaScriptInterface {*;}</code></p>
+<h2 id="测试分析">测试分析</h2>
+<p>好了，这时候我们来添加一些数据进行测试：</p>
+<p>用上面的方法为web页面中的param赋值，在asset文件夹中放入要进行测试的html文件，url赋值为：<code>url = &quot;file:///android_asset/html.html&quot;;</code>
+如上html.html文件源码为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>测试容器调用<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;main&#34;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;test2()&#34;</span><span class="p">&gt;</span>获取网页的值<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span><span class="p">&gt;</span>
+
+           <span class="kd">function</span> <span class="nx">test</span><span class="p">(</span><span class="nx">json</span><span class="p">){</span>
+               <span class="nx">alert</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+           <span class="p">}</span>
+
+            <span class="kd">function</span> <span class="nx">test2</span><span class="p">(){</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;网页传值给android&#34;</span><span class="p">);</span>
+                <span class="nb">window</span><span class="p">.</span><span class="nx">zrp</span><span class="p">.</span><span class="nx">command</span><span class="p">(</span><span class="s2">&#34;{&#39;type&#39;:1,&#39;text&#39;:&#39;hello boy&#39;}&#34;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>**android传值给web：**可通过在java代码中异步执行<code>webView.loadUrl(&quot;javascript:test(&quot;这是需要传给网页的数据&quot;)&quot;);</code>来调用网页代码中的test()方法传值给web端。</p>
+</blockquote>
+<blockquote>
+<p>**web传值给android：**在网页代码中可以看到button的点击事件添加了<code>window.zrp.command(&quot;{'type':1,'text':'hello boy'}&quot;);</code>来回传一个json串给java页面，即js通过以上的方法调用了java的方法。</p>
+</blockquote>
+<p>如果webView展示页面的时候需要给网页传递cookie，即各种登录信息，则需要在调用webView.loadUrl(url)之前一句调用如下方法：<strong>注意！多个cookie值必须多次进行setCookie！</strong></p>
+<p><strong>设置cookie方法一</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * CookieManager会将这个Cookie存入该应用程序/data/data/databases/目录下的webviewCookiesChromium.db数据库的cookies表中
+</span><span class="cm"> * 需要在当前用户退出登录的时候进行清除
+</span><span class="cm"> */</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">synCookies</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">createInstance</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="n">CookieManager</span> <span class="n">cookieManager</span> <span class="o">=</span> <span class="n">CookieManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+    <span class="n">cookieManager</span><span class="o">.</span><span class="na">setAcceptCookie</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="n">cookieManager</span><span class="o">.</span><span class="na">removeSessionCookie</span><span class="o">();</span>
+
+    <span class="n">String</span><span class="o">[]</span> <span class="n">split</span> <span class="o">=</span> <span class="n">App</span><span class="o">.</span><span class="na">cookie</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&#34;;&#34;</span><span class="o">);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">split</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">cookieManager</span><span class="o">.</span><span class="na">setCookie</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">split</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+    <span class="o">}</span>
+    <span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">sync</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在当前用户退出登录的时候清除掉保存的cookie信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * 清除当前用户存储到cookies表中的所有数据
+</span><span class="cm"> */</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">removeCookie</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">createInstance</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="n">CookieManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">removeAllCookie</span><span class="o">();</span>
+    <span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">sync</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：<strong>在调用设置Cookie之后不能再设置如下的这类属性，否则设置cookie无效。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">webView</span><span class="o">.</span><span class="na">getSettings</span><span class="o">().</span><span class="na">setBuiltInZoomControls</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>  
+<span class="n">webView</span><span class="o">.</span><span class="na">getSettings</span><span class="o">().</span><span class="na">setJavaScriptEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p><em>但是！在如上设置cookie之后，每次设置cookie的时候都有延时，要是点击频率较快的时候，会出现cookie没有被设置进去的问题！</em></p>
+<p><strong>设置方法二：</strong>
+经过一番查找，找到如下两个解决办法：</p>
+<ol>
+<li><a href="http://blog.csdn.net/swust_chenpeng/article/details/37699841" target="_blank" rel="noopener noreffer">http://blog.csdn.net/swust_chenpeng/article/details/37699841</a>，这个是开了一个异步任务来进行等待，然后再次设置cookie，感觉没有从根源上解决这个问题啊。。。但是思路值得参考</li>
+<li><a href="http://stackoverflow.com/questions/22637409/android-how-to-pass-cookie-to-load-url-with-webview" target="_blank" rel="noopener noreffer">http://stackoverflow.com/questions/22637409/android-how-to-pass-cookie-to-load-url-with-webview</a>，按照第二个回答进行测试，可行。但是我用一个2.3.6的低版本手机去测的时候报错崩溃。<code>java.lang.IllegalStateException: CookieSyncManager::createInstance() needs to be called before CookieSyncManager::getInstance()</code>，按照提示加上如下代码之后正常。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * CookieManager会将这个Cookie存入该应用程序/data/data/databases/目录下的webviewCookiesChromium.db数据库的cookies表中
+</span><span class="cm"> * 需要在当前用户退出登录的时候进行清除
+</span><span class="cm"> */</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">synCookies</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">String</span><span class="o">[]</span> <span class="n">split</span> <span class="o">=</span> <span class="n">App</span><span class="o">.</span><span class="na">cookie</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&#34;;&#34;</span><span class="o">);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">split</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">createInstance</span><span class="o">(</span><span class="n">CommonWebActivity</span><span class="o">.</span><span class="na">this</span><span class="o">);</span>
+        <span class="n">CookieManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">setCookie</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">split</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+        <span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">sync</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>同时，在退出登录的时候清除cookie。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">createInstance</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<span class="n">CookieManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">removeAllCookie</span><span class="o">();</span>
+<span class="n">CookieSyncManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">sync</span><span class="o">();</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>清除当前用户存储到cookies表中的所有数据。</p>
+<h2 id="附从浏览器网页打开应用">附：从浏览器网页打开应用</h2>
+<p>这部分网上也有很多博客与笔记。此处仅作记录。</p>
+<p>添加步骤如下：</p>
+<ul>
+<li>在<code>AndroidMainfext.xml</code>中你需要接收跳转信息的<code>Activity</code>标签中添加如下代码，则该<code>Activity</code>可以接收和处理网页中类似于<code>zrp://zrp_test.net/</code>的链接：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;intent-filter&gt;</span>
+    <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">&#34;android.intent.action.VIEW&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">&#34;android.intent.category.DEFAULT&#34;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">&#34;android.intent.category.BROWSABLE&#34;</span> <span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;data</span>
+        <span class="na">android:host=</span><span class="s">&#34;zrp_test.net&#34;</span>
+        <span class="na">android:scheme=</span><span class="s">&#34;zrp&#34;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/intent-filter&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在你接收跳转信息的<code>activity</code>中添加数据接收的代码：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">initScheme</span><span class="o">(</span><span class="n">Intent</span> <span class="n">intent</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&#34;initScheme: ---DataString---&gt;&#34;</span> <span class="o">+</span> <span class="n">intent</span><span class="o">.</span><span class="na">getDataString</span><span class="o">());</span>
+    <span class="n">Uri</span> <span class="n">uri</span> <span class="o">=</span> <span class="n">intent</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">uri</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="s">&#34;zrp_test.net&#34;</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">uri</span><span class="o">.</span><span class="na">getHost</span><span class="o">()))</span> <span class="o">{</span>
+        <span class="n">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">&#34;initScheme: ---data---&gt;&#34;</span> <span class="o">+</span> <span class="n">uri</span><span class="o">.</span><span class="na">getQueryParameter</span><span class="o">(</span><span class="s">&#34;data&#34;</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>添加一个测试网页：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html PUBLIC &#34;-//W3C//DTD XHTML 1.0 Transitional//EN&#34; &#34;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&#34;&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">xmlns</span><span class="o">=</span><span class="s">&#34;http://www.w3.org/1999/xhtml&#34;</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;text/html; charset=utf-8&#34;</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;Content-Type&#34;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0&#34;</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>test<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>从浏览器打开应用的测试网址。<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">LANGUAGE</span><span class="o">=</span><span class="s">&#39;javascript&#39;</span><span class="p">&gt;</span>
+<span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;uid&#34;</span><span class="o">:</span><span class="mi">123456</span><span class="p">,</span><span class="s2">&#34;nickname&#34;</span><span class="o">:</span><span class="s2">&#34;sex lady&#34;</span><span class="p">,</span><span class="s2">&#34;sex&#34;</span><span class="o">:</span><span class="s2">&#34;female&#34;</span><span class="p">};</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s2">&#34;zrp://zrp_test.net?data=&#34;</span><span class="o">+</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>该网页文件我在云存储放了一份，大家可以通过访问这个网址来进行测试：<a href="http://sanchi.56ef923d5f32c.d01.nanoyun.com/blog_test/app_browser_test.html" target="_blank" rel="noopener noreffer">http://sanchi.56ef923d5f32c.d01.nanoyun.com/blog_test/app_browser_test.html</a></p>
+<ul>
+<li>通过浏览器网页打开应用之后，可查看控制台的打印输出：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">D/MainActivity: initScheme: ---DataString---&gt;zrp://zrp_test.net?data={&#34;uid&#34;:123456,&#34;nickname&#34;:&#34;sex lady&#34;,&#34;sex&#34;:&#34;female&#34;}
+D/MainActivity: initScheme: ---host---&gt;zrp_test.net
+D/MainActivity: initScheme: ---data---&gt;{&#34;uid&#34;:123456,&#34;nickname&#34;:&#34;sex lady&#34;,&#34;sex&#34;:&#34;female&#34;}
+</code></pre></td></tr></table>
+</div>
+</div><p>一切OK。</p>
+<p><img
+        class="lazyload"
+        data-src="/images/doge.gif"
+        data-srcset="/images/doge.gif, /images/doge.gif 1.5x, /images/doge.gif 2x"
+        data-sizes="auto"
+        alt="/images/doge.gif"
+        title="doge"
+    /></p>
+<p>需要源码的同学看<a href="https://github.com/sanchips/WebViewDemo" target="_blank" rel="noopener noreffer"><strong>这里</strong></a></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2015-12-15</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/android/">Android</a></section>
+        <section>
+            <span><a href="#" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/2016-02/android-gif-image-create/" class="next" rel="next" title="android使用多张图片合成gif文件">android使用多张图片合成gif文件<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.10"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Sanchi</a></span>&nbsp;|&nbsp;<span class="license"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/css/custom.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-119399604-2', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-119399604-2" async></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/custom.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["sanchips"],"clientID":"2ede82b0a7198c45ce3e","clientSecret":"52dffb46d64ec3b2d5a6e6586b759ac9a70965c2","id":"2015-12-15T00:00:00+08:00","owner":"sanchips","repo":"sanchips.github.io","title":"Android中WebView页面交互"}}};</script><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"></div>
+</body>
+
+</html>

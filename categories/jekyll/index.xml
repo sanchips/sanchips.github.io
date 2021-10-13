@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>jekyll - 分类 - Sanchi</title>
+        <link>https://sanchips.github.io/categories/jekyll/</link>
+        <description>jekyll - 分类 - Sanchi</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sanchi.zhang@gmail.com (Sanchi)</managingEditor>
+            <webMaster>sanchi.zhang@gmail.com (Sanchi)</webMaster><lastBuildDate>Mon, 19 Mar 2018 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://sanchips.github.io/categories/jekyll/" rel="self" type="application/rss+xml" /><item>
+    <title>Jekyll Hello world!</title>
+    <link>https://sanchips.github.io/posts/2018-03/jekyll-hello-world/</link>
+    <pubDate>Mon, 19 Mar 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-03/jekyll-hello-world/</guid>
+    <description><![CDATA[<p>Hello world!</p>]]></description>
+</item></channel>
+</rss>

@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>后端 - 标签 - Sanchi</title>
+        <link>https://sanchips.github.io/tags/%E5%90%8E%E7%AB%AF/</link>
+        <description>后端 - 标签 - Sanchi</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>sanchi.zhang@gmail.com (Sanchi)</managingEditor>
+            <webMaster>sanchi.zhang@gmail.com (Sanchi)</webMaster><lastBuildDate>Fri, 20 Jul 2018 00:00:00 &#43;0800</lastBuildDate><atom:link href="https://sanchips.github.io/tags/%E5%90%8E%E7%AB%AF/" rel="self" type="application/rss+xml" /><item>
+    <title>SpringMVC&#43;Swagger配置使用踩坑</title>
+    <link>https://sanchips.github.io/posts/2018-07/backend-springmvc-swagger-setting/</link>
+    <pubDate>Fri, 20 Jul 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-07/backend-springmvc-swagger-setting/</guid>
+    <description><![CDATA[背景 接口写完之后手写接口文档太痛苦了，于是搜索一番自动生成api文档的工具，最后get到了神器Swagger和它的图形化工具Swagger-]]></description>
+</item><item>
+    <title>一些后端问题解决方案整理</title>
+    <link>https://sanchips.github.io/posts/2018-07/backend-solution-collection/</link>
+    <pubDate>Fri, 20 Jul 2018 00:00:00 &#43;0800</pubDate><author>
+        <name>Sanchi</name>
+    </author><guid>https://sanchips.github.io/posts/2018-07/backend-solution-collection/</guid>
+    <description><![CDATA[<p>一些后端问题解决方案整理。</p>]]></description>
+</item></channel>
+</rss>
